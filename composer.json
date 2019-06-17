@@ -1,0 +1,23 @@
+{
+  "name": "carica/xslt-functions",
+  "description": "Provides XSLT2 like functions for PHPs ext/xslt",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Weinert",
+      "email": "thomas@weinert.info"
+    }
+  ],
+  "require": {
+    "php": ">= 7.2",
+    "ext-dom": "*",
+    "ext-intl": "*",
+    "ext-xsl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Carica\\XSLTFunctions\\": "src/"
+    }
+  }
+}
