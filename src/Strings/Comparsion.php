@@ -5,7 +5,7 @@ namespace Carica\XSLTFunctions\Strings {
 
   use Collator;
 
-  class Comparsion {
+  abstract class Comparsion {
 
     /**
      * @param string $input

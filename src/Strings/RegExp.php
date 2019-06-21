@@ -7,7 +7,7 @@ namespace Carica\XSLTFunctions\Strings {
   use DOMDocument;
   use DOMElement;
 
-  class RegExp {
+  abstract class RegExp {
 
     private const XMLNS_FUNCTIONS = 'http://www.w3.org/2005/xpath-functions';
 
