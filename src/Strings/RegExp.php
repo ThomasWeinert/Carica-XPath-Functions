@@ -6,6 +6,8 @@ namespace Carica\XSLTFunctions\Strings {
   use Carica\XSLTFunctions\XpathError;
   use DOMDocument;
   use DOMElement;
+  use ErrorException;
+  use Exception;
 
   abstract class RegExp {
 
@@ -171,9 +173,9 @@ namespace Carica\XSLTFunctions\Strings {
       $patternString = '('.$pattern.')u'.$flags;
       try {
         if (FALSE === preg_match($patternString, '')) {
-          throw new \ErrorException('Invalid PCRE Pattern.');
+          throw new ErrorException('Invalid PCRE Pattern.');
         }
-      } catch (\Exception $e) {
+      } catch (Exception $e) {
         throw new XpathError(
           'err:FORX0002',
           'Invalid regular expression.'
