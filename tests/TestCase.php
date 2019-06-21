@@ -42,5 +42,20 @@ namespace Carica\XSLTFunctions {
       $input->loadXML($xml);
       return $input;
     }
+
+    /**
+     * @param string $expected
+     * @param callable $trigger
+     * @throws XpathError
+     */
+    public function assertXpathErrorTriggeredBy(string $expected, callable $trigger): void {
+      $this->expectException(XpathError::class);
+      try {
+        $trigger();
+      } /** @noinspection PhpRedundantCatchClauseInspection */ catch (XpathError $exception) {
+        $this->assertSame($expected, $exception->getIdentifier());
+        throw $exception;
+      }
+    }
   }
 }

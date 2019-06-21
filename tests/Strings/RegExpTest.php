@@ -5,6 +5,7 @@ namespace Carica\XSLTFunctions\Strings {
   require_once __DIR__.'/../TestCase.php';
 
   use Carica\XSLTFunctions\TestCase;
+  use Carica\XSLTFunctions\XpathError;
   use Carica\XSLTFunctions\XSLTProcessor;
 
   /**
@@ -74,6 +75,30 @@ namespace Carica\XSLTFunctions\Strings {
     }
 
     /**
+     * @throws XpathError
+     */
+    public function testMatchesWithEmptyPatternExpectingException(): void {
+      $this->assertXpathErrorTriggeredBy(
+        'err:FORX0002',
+        static function() {
+          RegExp::replace('','', '');
+        }
+      );
+    }
+
+    /**
+     * @throws XpathError
+     */
+    public function testMatchesWithInvalidPatternExpectingException(): void {
+      $this->assertXpathErrorTriggeredBy(
+        'err:FORX0002',
+        static function() {
+          RegExp::replace('','(', '');
+        }
+      );
+    }
+
+    /**
      * @param string $expected
      * @param string $input
      * @param string $pattern
@@ -103,6 +128,22 @@ namespace Carica\XSLTFunctions\Strings {
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
       $this->assertSame($expected, $result->documentElement->textContent);
+    }
+
+    /**
+     * @param string $replacement
+     * @testWith
+     *   ["a$b"]
+     *   ["a\\b"]
+     * @throws XpathError
+     */
+    public function testReplaceWithInvalidReplacementExpectingException(string $replacement): void {
+      $this->assertXpathErrorTriggeredBy(
+        'err:FORX0004',
+        static function() use ($replacement) {
+          RegExp::replace('', '(.+)', $replacement);
+        }
+      );
     }
 
     public function testTokenizeWithoutPatternTroughStylesheet(): void {
