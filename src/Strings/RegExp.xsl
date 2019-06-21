@@ -34,4 +34,11 @@
     <func:result select="php:function($CALL, $MODULE, 'tokenize', string($input), $pattern, string($flags))/*"/>
   </func:function>
 
+  <func:function name="fn:analyze-string">
+    <xsl:param name="input"/>
+    <xsl:param name="pattern" select="false()"/>
+    <xsl:param name="flags" select="''"/>
+    <func:result select="php:function($CALL, $MODULE, 'analyzeString', string($input), $pattern, string($flags))"/>
+  </func:function>
+
 </xsl:stylesheet>

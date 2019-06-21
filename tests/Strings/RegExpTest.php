@@ -121,5 +121,99 @@ namespace Carica\XSLTFunctions\Strings {
 
       $this->assertSame('red - green - blue - ', $result->documentElement->textContent);
     }
+
+    public function testAnalyzeStringTroughStylesheet(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:copy-of select="fn:analyze-string(\'The cat sat on the mat.\', \'\\w+\')"/>'.
+          '</result>',
+        'Strings/RegExp'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result>
+          <analyze-string-result xmlns="http://www.w3.org/2005/xpath-functions">
+            <match>The</match>
+            <non-match> </non-match>
+            <match>cat</match>
+            <non-match> </non-match>
+            <match>sat</match>
+            <non-match> </non-match>
+            <match>on</match>
+            <non-match> </non-match>
+            <match>the</match>
+            <non-match> </non-match>
+            <match>mat</match>
+          </analyze-string-result>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testAnalyzeStringTroughStylesheetExpectingSingleMatchWithGroups(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:copy-of select="fn:analyze-string(\'2008-12-03\', \'^(\d+)\-(\d+)\-(\d+)$\')"/>'.
+          '</result>',
+        'Strings/RegExp'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result>
+          <analyze-string-result xmlns="http://www.w3.org/2005/xpath-functions">
+            <match><group nr="1">2008</group>-<group nr="2">12</group>-<group nr="3">03</group></match>
+          </analyze-string-result>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testAnalyzeStringTroughStylesheetExpectingMultipleMatchesWithGroups(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:copy-of select="fn:analyze-string(\'A1,C15,,D24, X50,\', \'([A-Z])([0-9]+)\')"/>'.
+          '</result>',
+        'Strings/RegExp'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result>
+          <analyze-string-result xmlns="http://www.w3.org/2005/xpath-functions">
+            <match>
+              <group nr="1">A</group>
+              <group nr="2">1</group>
+            </match>
+            <non-match>,</non-match>
+            <match>
+              <group nr="1">C</group>
+              <group nr="2">15</group>
+            </match>
+            <non-match>,,</non-match>
+            <match>
+              <group nr="1">D</group>
+              <group nr="2">24</group>
+            </match>
+            <non-match>, </non-match>
+            <match>
+              <group nr="1">X</group>
+              <group nr="2">50</group>
+            </match>
+          </analyze-string-result>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }
