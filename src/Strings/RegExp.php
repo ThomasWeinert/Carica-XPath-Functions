@@ -140,6 +140,12 @@ namespace Carica\XSLTFunctions\Strings {
           }
         }
       }
+      if ($offset < strlen($input)) {
+        $nonMatchNode = $document->documentElement->appendChild(
+          $document->createElementNS(self::XMLNS_FUNCTIONS, 'non-match')
+        );
+        $nonMatchNode->textContent = substr($input, $offset);
+      }
       return $document->documentElement;
     }
 
