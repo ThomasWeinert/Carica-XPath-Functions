@@ -14,7 +14,7 @@
     <xsl:param name="a"/>
     <xsl:param name="b"/>
     <xsl:param name="collation" select="''"/>
-    <func:result select="php:function($CALL, $MODULE, 'compare', $a, $b, $collation)"/>
+    <func:result select="php:function($CALL, $MODULE, 'compare', string($a), string($b), string($collation))"/>
   </func:function>
 
 </xsl:stylesheet>

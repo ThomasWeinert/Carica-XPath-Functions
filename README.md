@@ -4,10 +4,103 @@ This is project tries to add Xpath/XSLT 2.0 function to PHPs XSLTProcessor.
 
 How it works:
 
-1. Extend the `XSLTProcessor` as `Carica\XSLTFunctions\XSLTProcessor`
+1. Extend the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
 2. Implements a callback for the XSLTProcessor to call specific PHP functions
 3. Adds a stream wrapper to load XSLT templates that wrap callbacks as 
    Xpath functions using EXSLT.
+
+# Usage   
+   
+1. Import a module (EXSLT template) into your XSLT
+2. Call the Xpath function
+
+The goal is to allow the same function calls as in Xpath/XSLT 2.0.    
+
+## Examples
+
+### Use String Comparsion
+
+```php
+// import extended XSLTProcessor
+use Carica\XSLTFunctions\XSLTProcessor;
+
+$xslt = <<<'XSLT'
+<?xml version="1.0"?>
+<xsl:stylesheet 
+  version="1.0" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:fn="http://www.w3.org/2005/xpath-functions"
+  exclude-result-prefixes="fn">
+  <!-- ^- define the function namespace -->
+  
+  <!-- import the string comparsion module -->
+  <xsl:import href="xpath-functions://Strings/Comparsion"/>
+  <xsl:output indent="yes" method="xml"/>
+                
+  <xsl:template match="/names">
+    <html lang="en">
+      <body>
+        <div>
+          <header>Exactly</header>
+          <xsl:for-each select="name[fn:compare(., 'André') = 0]">
+            <span><xsl:value-of select="."/></span>
+          </xsl:for-each>
+        </div>
+        <div>
+          <header>Case Insensitive, Ignore Accents</header>
+          <xsl:variable name="collation">http://www.w3.org/2013/collation/UCA?strength=primary</xsl:variable>
+          <xsl:for-each select="name[fn:compare(., 'andre', $collation) = 0]">
+            <span><xsl:value-of select="."/></span>
+          </xsl:for-each>
+        </div>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+XSLT;
+
+$xml = <<<'XML'
+<?xml version="1.0"?>
+<names>
+  <name>Andreas</name>
+  <name>Andre</name>
+  <name>André</name>
+  <name>Andrè</name>
+</names>
+XML;
+
+$stylesheet = new DOMDocument();
+$stylesheet->loadXML($xslt);
+$input = new DOMDocument();
+$input->loadXML($xml);
+
+$processor = new XSLTProcessor();
+$processor->importStylesheet($stylesheet);
+
+echo $processor->transformToXml($input);
+```
+
+Output:
+
+```XML
+<?xml version="1.0"?>
+<html lang="en">
+  <body>
+    <div>
+      <header>Exactly</header>
+      <span>André</span>
+    </div>
+    <div>
+      <header>Case Insensitive, Ignore Accents</header>
+      <span>Andre</span>
+      <span>André</span>
+      <span>Andrè</span>
+    </div>
+  </body>
+</html>
+```
+
+### Wrap Parts Of Text Nodes Using RegExp 
    
 ```php
 // import extended XSLTProcessor
