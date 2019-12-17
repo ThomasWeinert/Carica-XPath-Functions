@@ -1,8 +1,8 @@
 <?php
-
-use Carica\XSLTFunctions\XSLTProcessor;
-
 require __DIR__.'/../../vendor/autoload.php';
+
+// import extended XSLTProcessor
+use Carica\XSLTFunctions\XSLTProcessor;
 
 $xslt = <<<'XSLT'
 <?xml version="1.0"?>
@@ -12,9 +12,11 @@ $xslt = <<<'XSLT'
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   exclude-result-prefixes="fn">
   
+  <!-- import RegExp functions -->
   <xsl:import href="xpath-functions://Strings/RegExp"/>
                 
   <xsl:template match="speak//text()">
+    <!-- use RegExp function -->
     <xsl:for-each select="fn:analyze-string(., '\d+')/*">
       <xsl:choose>
         <xsl:when test="local-name() = 'match'">

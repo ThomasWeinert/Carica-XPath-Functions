@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Carica\XSLTFunctions {
 
-
   use BadMethodCallException;
 
   class XSLTProcessor extends \XSLTProcessor {
@@ -20,6 +19,14 @@ namespace Carica\XSLTFunctions {
     public static function handleFunctionCall(string $module, string $function, ...$arguments) {
       $call = self::getCallback($module, $function);
       return $call(...$arguments);
+    }
+
+    public function registerPHPFunctions($restrict = NULL): void {
+      if (NULL === $restrict) {
+        throw new \LogicException('Please restrict the PHP functions that XSLT can call.');
+      }
+      $restrict[] = __CLASS__.'::handleFunctionCall';
+      parent::registerPHPFunctions($restrict);
     }
 
     private static function attachXpathFunctions(\XSLTProcessor $processor): void {

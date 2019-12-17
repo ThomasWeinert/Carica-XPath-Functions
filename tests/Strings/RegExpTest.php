@@ -189,6 +189,7 @@ namespace Carica\XSLTFunctions\Strings {
             <match>the</match>
             <non-match> </non-match>
             <match>mat</match>
+            <non-match>.</non-match>
           </analyze-string-result>
         </result>',
         $result->saveXML()
@@ -251,6 +252,7 @@ namespace Carica\XSLTFunctions\Strings {
               <group nr="1">X</group>
               <group nr="2">50</group>
             </match>
+            <non-match>,</non-match>
           </analyze-string-result>
         </result>',
         $result->saveXML()

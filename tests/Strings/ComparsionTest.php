@@ -35,5 +35,33 @@ namespace Carica\XSLTFunctions\Strings {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $a
+     * @param string $b
+     * @param string $collation
+     * @testWith
+     *   [-1, "Strasse", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   [0, "Strasse", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   [0, "strasse", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   [0, "strasse", "Strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   [-1, "strasse", "Strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=tertiary"]
+     *   [1, "Strassen", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     */
+    public function testCompareTroughStylesheetWithCollation(int $expected, string $a, string $b, string $collation): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:compare(\''.$a.'\', \''.$b.'\', \''.$collation.'\')"/>'.
+          '</result>',
+        'Strings/Comparsion'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
   }
 }
