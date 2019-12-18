@@ -8,6 +8,7 @@ namespace Carica\XSLTFunctions {
   class XSLTProcessor extends \XSLTProcessor {
 
     private static $_modules = [
+      'context' => Context::class,
       'strings/comparsion' => Strings\Comparsion::class,
       'strings/regexp' => Strings\RegExp::class
     ];

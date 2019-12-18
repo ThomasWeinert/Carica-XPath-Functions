@@ -23,5 +23,9 @@ namespace Carica\XSLTFunctions\Strings\Collators {
     public function compare(string $string1, string $string2): int {
       return $this->getIntlCollator()->compare($string1, $string2);
     }
+
+    public function getSortKey(string $string): string {
+      return $this->getIntlCollator()->getSortKey($string);
+    }
   }
 }

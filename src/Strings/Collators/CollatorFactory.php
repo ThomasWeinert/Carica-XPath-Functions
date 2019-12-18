@@ -15,9 +15,14 @@ namespace Carica\XSLTFunctions\Strings\Collators {
       ParameterizedCollator::URI => ParameterizedCollator::class,
     ];
 
-    public static function createFromURI(string $uri): XpathCollator {
+    private static $_collators = [];
+
+    public static function getByURI(string $uri): XpathCollator {
       if ('' === $uri) {
         $uri = self::getDefaultCollation();
+      }
+      if (isset(self::$_collators[$uri])) {
+        return self::$_collators[$uri];
       }
       $collatorClass = self::getCollatorClass($uri);
       if (
@@ -25,9 +30,14 @@ namespace Carica\XSLTFunctions\Strings\Collators {
         ($collator = new $collatorClass($uri)) &&
         $collator instanceof XpathCollator
       ) {
-        return $collator;
+        return self::$_collators[$uri] = $collator;
       }
       throw new \InvalidArgumentException('Unknown collation URI: '.$uri);
+    }
+
+    public static function reset(): void {
+      self::$_collators = [];
+      self::$_defaultCollation = UnicodeCodepointCollator::URI;
     }
 
     public static function setDefaultCollation(string $uri): void {

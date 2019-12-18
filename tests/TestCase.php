@@ -4,6 +4,7 @@ namespace Carica\XSLTFunctions {
 
   require_once __DIR__.'/../vendor/autoload.php';
 
+  use Carica\XSLTFunctions\Strings\Collators\CollatorFactory;
   use DOMDocument;
   use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
@@ -19,6 +20,11 @@ namespace Carica\XSLTFunctions {
       '  <xsl:template match="/">'."\n".
       '  </xsl:template>'."\n".
       '</xsl:stylesheet>';
+
+    public function tearDown(): void {
+      parent::tearDown();
+      CollatorFactory::reset();
+    }
 
     protected function prepareStylesheetDocument(string $template, string $import = NULL): DOMDocument {
       $stylesheet = new DOMDocument();

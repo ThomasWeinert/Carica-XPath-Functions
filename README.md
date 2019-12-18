@@ -14,7 +14,27 @@ How it works:
 1. Import a module (EXSLT template) into your XSLT
 2. Call the Xpath function
 
-The goal is to allow the same function calls as in Xpath/XSLT 2.0.    
+The goal is to allow the same function calls as in Xpath/XSLT 2.0.  
+
+## Implemented Functions
+
+| context |
+| -------------- | 
+| fn:default-collation() | 
+  
+| strings/comparsion |
+| -------------- | 
+| fn:compare() |  
+| fn:codepoint-equal() |  
+| fn:collation-key() |  
+| fn:contains-token() | 
+ 
+| strings/regexp |
+| -------------- | 
+| fn:matches() |  
+| fn:replace() |  
+| fn:tokenize() |  
+| fn:analyze-string() |  
 
 ## Examples
 

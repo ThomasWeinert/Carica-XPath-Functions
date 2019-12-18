@@ -4,26 +4,36 @@ declare(strict_types=1);
 namespace Carica\XSLTFunctions\Strings {
 
   use Carica\XSLTFunctions\Strings\Collators\CollatorFactory;
-  use Carica\XSLTFunctions\Strings\Collators\UnicodeCodepointCollator;
 
   abstract class Comparsion {
 
     /**
-     * @param string $input
-     * @param string $token
+     * @param string $a
+     * @param string $b
      * @param string $collationURI
      * @return int
      */
-    public static function compare(
-      string $input,
-      string $token,
-      string $collationURI = ''
-    ): int {
-      return self::createCollator($collationURI)->compare($input, $token);
+    public static function compare(string $a, string $b, string $collationURI = ''): int {
+      return self::getCollator($collationURI)->compare($a, $b);
     }
 
-    private static function createCollator(string $collationURI): XpathCollator {
-      return CollatorFactory::createFromURI($collationURI);
+    public static function collationKey(string $input, string $collationURI): string {
+      return self::getCollator($collationURI)->getSortKey($input);
+    }
+
+    public static function containsToken(string $input, string $token, string $collationURI): bool {
+      $token = preg_replace('(^\s*|\s*$)u', '', $token);
+      $collator = self::getCollator($collationURI);
+      foreach (preg_split('(\\s+)u', $input) as $tokenString) {
+        if ($tokenString === $token || 0 === $collator->compare($token, $tokenString)) {
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }
+
+    private static function getCollator(string $collationURI): XpathCollator {
+      return CollatorFactory::getByURI($collationURI);
     }
   }
 }

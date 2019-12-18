@@ -62,7 +62,7 @@ namespace Carica\XSLTFunctions\Strings {
      */
     public static function tokenize(string $input, $pattern = ' ', string $flags = ''): DOMElement {
       if ($pattern === FALSE) {
-        $pattern = '(\\s+)';
+        $pattern = '(\\s+)u';
         $input = trim($input);
       } else {
         $pattern = self::createPatternString($pattern, $flags);

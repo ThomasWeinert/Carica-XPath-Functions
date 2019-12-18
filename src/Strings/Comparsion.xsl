@@ -17,4 +17,29 @@
     <func:result select="php:function($CALL, $MODULE, 'compare', string($a), string($b), string($collation))"/>
   </func:function>
 
+  <func:function name="fn:codepoint-equal">
+    <xsl:param name="a"/>
+    <xsl:param name="b"/>
+    <xsl:variable name="collation">http://www.w3.org/2005/xpath-functions/collation/codepoint</xsl:variable>
+    <func:result select="php:function($CALL, $MODULE, 'compare', string($a), string($b), $collation)"/>
+  </func:function>
+
+  <func:function name="fn:collation-key">
+    <xsl:param name="key"/>
+    <xsl:param name="collation" select="''"/>
+    <func:result select="php:function($CALL, $MODULE, 'collation-key', string($key), string($collation))"/>
+  </func:function>
+
+  <func:function name="fn:contains-token">
+    <xsl:param name="value"/>
+    <xsl:param name="token"/>
+    <xsl:param name="collation" select="''"/>
+    <func:result select="php:function($CALL, $MODULE, 'contains-token', string($key), string($collation))"/>
+  </func:function>
+
+
+  <func:function name="fn:default-collation">
+    <func:result select="php:function($CALL, $MODULE, 'defaultCollation')"/>
+  </func:function>
+
 </xsl:stylesheet>
