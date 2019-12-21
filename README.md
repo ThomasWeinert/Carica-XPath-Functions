@@ -1,6 +1,9 @@
 # XSLT Functions
 
-This is project tries to add Xpath/XSLT 2.0 function to PHPs XSLTProcessor.
+This is project tries to add [Xpath 2.0 functions](https://www.w3.org/TR/xpath-functions-31) to PHPs XSLTProcessor.
+It does not aim for a complete implementation. Just for some useful features.
+
+If you have a function that you would like to have added please open an issue.
 
 How it works:
 
@@ -20,7 +23,12 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 
 | context |
 | -------------- | 
+| fn:current-dateTime() | 
+| fn:current-date() | 
+| fn:current-time() | 
+| fn:implicit-timezone() | 
 | fn:default-collation() | 
+| fn:default-language() | 
   
 | strings/comparsion |
 | -------------- | 
@@ -28,6 +36,11 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | fn:codepoint-equal() |  
 | fn:collation-key() |  
 | fn:contains-token() | 
+
+| strings/values |
+| -------------- | 
+| fn:upper-case() |  
+| fn:lower-case() |  
  
 | strings/regexp |
 | -------------- | 

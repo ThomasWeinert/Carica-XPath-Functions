@@ -10,7 +10,8 @@ namespace Carica\XSLTFunctions {
     private static $_modules = [
       'context' => Context::class,
       'strings/comparsion' => Strings\Comparsion::class,
-      'strings/regexp' => Strings\RegExp::class
+      'strings/regexp' => Strings\RegExp::class,
+      'strings/values' => Strings\Values::class
     ];
 
     public function __construct() {
