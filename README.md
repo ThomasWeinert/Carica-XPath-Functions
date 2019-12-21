@@ -29,6 +29,10 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | fn:implicit-timezone() | 
 | fn:default-collation() | 
 | fn:default-language() | 
+
+| numeric/values |
+| -------------- | 
+| fn:round-half-to-even() |
   
 | strings/comparsion |
 | -------------- | 

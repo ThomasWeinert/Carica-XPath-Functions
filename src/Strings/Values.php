@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Carica\XSLTFunctions\Strings {
 
-  use Carica\XSLTFunctions\Strings\Collators\CollatorFactory;
-
   abstract class Values {
 
     public static function upperCase(string $input): string {

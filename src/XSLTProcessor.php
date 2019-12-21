@@ -9,6 +9,7 @@ namespace Carica\XSLTFunctions {
 
     private static $_modules = [
       'context' => Context::class,
+      'numeric/values' => Numeric\Values::class,
       'strings/comparsion' => Strings\Comparsion::class,
       'strings/regexp' => Strings\RegExp::class,
       'strings/values' => Strings\Values::class
