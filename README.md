@@ -14,57 +14,9 @@ How it works:
 
 # Usage   
    
-1. Import a module (EXSLT template) into your XSLT
+1. Define the namespace for the function
+2. Import a module into your XSLT
 2. Call the Xpath function
-
-The goal is to allow the same function calls as in Xpath/XSLT 2.0.  
-
-## Implemented Functions
-
-| Function | Notes |
-| :------- | ----- |
-| **Context** |
-| fn:current-dateTime() | 
-| fn:current-date() | 
-| fn:current-time() | 
-| fn:implicit-timezone() | 
-| fn:default-collation() | 
-| fn:default-language() | 
-| **Numeric/Formatting** |
-| fn:format-integer() | partially | 
-| **Numeric/Math** |
-| math:pi() |
-| math:exp() |
-| math:exp10() |
-| math:log() |
-| math:log10() |
-| math:pow() |
-| math:sqrt() |
-| math:sin() |
-| math:cos() |
-| math:tan() |
-| math:asin() |
-| math:acos() |
-| math:atan() |
-| math:atan2() |
-| **Numeric/Values** |
-| fn:round-half-to-even() |
-| **Strings/Comparsion** |
-| fn:compare() |  
-| fn:codepoint-equal() |  
-| fn:collation-key() |  
-| fn:contains-token() | 
-| **Strings/Values** |
-| fn:upper-case() |  
-| fn:lower-case() |  
-| **Strings/RegExp** |
-| fn:matches() |  
-| fn:replace() |  
-| fn:tokenize() |  
-| fn:analyze-string() |  
-| **Duration/Components** |
-| fn:years-from-duration() |
-| fn:months-from-duration() |
 
 ## Examples
 
@@ -213,3 +165,49 @@ Output:
 <speak>The test number is <say-as interpret-as="characters">123456789</say-as>, and some further block of text.</speak>
 ```
 
+## Implemented Functions
+
+| Function | Notes |
+| :------- | ----- |
+| **Context** |
+| fn:current-dateTime() | 
+| fn:current-date() | 
+| fn:current-time() | 
+| fn:implicit-timezone() | 
+| fn:default-collation() | 
+| fn:default-language() | 
+| **Numeric/Formatting** |
+| fn:format-integer() | partially | 
+| **Numeric/Math** |
+| math:pi() |
+| math:exp() |
+| math:exp10() |
+| math:log() |
+| math:log10() |
+| math:pow() |
+| math:sqrt() |
+| math:sin() |
+| math:cos() |
+| math:tan() |
+| math:asin() |
+| math:acos() |
+| math:atan() |
+| math:atan2() |
+| **Numeric/Values** |
+| fn:round-half-to-even() |
+| **Strings/Comparsion** |
+| fn:compare() |  
+| fn:codepoint-equal() |  
+| fn:collation-key() |  
+| fn:contains-token() | 
+| **Strings/Values** |
+| fn:upper-case() |  
+| fn:lower-case() |  
+| **Strings/RegExp** |
+| fn:matches() |  
+| fn:replace() |  
+| fn:tokenize() |  
+| fn:analyze-string() |  
+| **Duration/Components** |
+| fn:years-from-duration() |
+| fn:months-from-duration() |
