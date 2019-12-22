@@ -33,13 +33,20 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | **numeric/formatting** |
 | fn:format-integer() | partially | 
 | **numeric/math** |
-| fn:pi() |
-| fn:exp() |
-| fn:exp10() |
-| fn:log() |
-| fn:log10() |
-| fn:pow() |
-| fn:sqrt() |
+| math:pi() |
+| math:exp() |
+| math:exp10() |
+| math:log() |
+| math:log10() |
+| math:pow() |
+| math:sqrt() |
+| math:sin() |
+| math:cos() |
+| math:tan() |
+| math:asin() |
+| math:acos() |
+| math:atan() |
+| math:atan2() |
 | **numeric/values** |
 | fn:round-half-to-even() |
 | **strings/comparsion** |

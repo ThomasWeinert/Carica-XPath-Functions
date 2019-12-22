@@ -45,4 +45,40 @@
     <func:result select="php:function($CALL, $MODULE, 'sqrt', number($input))"/>
   </func:function>
 
+  <func:function name="math:sin">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'sin', number($input))"/>
+  </func:function>
+
+  <func:function name="math:cos">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'cos', number($input))"/>
+  </func:function>
+
+  <func:function name="math:tan">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'tan', number($input))"/>
+  </func:function>
+
+  <func:function name="math:asin">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'asin', number($input))"/>
+  </func:function>
+
+  <func:function name="math:acos">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'acos', number($input))"/>
+  </func:function>
+
+  <func:function name="math:atan">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'atan', number($input))"/>
+  </func:function>
+
+  <func:function name="math:atan2">
+    <xsl:param name="y"/>
+    <xsl:param name="x"/>
+    <func:result select="php:function($CALL, $MODULE, 'atan2', number($y), number($x))"/>
+  </func:function>
+
 </xsl:stylesheet>
