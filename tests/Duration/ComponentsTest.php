@@ -137,5 +137,29 @@ namespace Carica\XSLTFunctions\Duration {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param float $expected
+     * @param string $duration
+     * @testWith
+     *   [12.5, "P3DT10H12.5S"]
+     *   [-16.0, "-PT256S"]
+     */
+    public function testSecondsFromDurationTroughStylesheet(
+      float $expected, string $duration
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:seconds-from-duration(\''.$duration.'\')"/>'.
+          '</result>',
+        'Duration/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
   }
 }

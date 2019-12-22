@@ -31,5 +31,10 @@ namespace Carica\XSLTFunctions\Duration {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->i * ($interval->invert ? -1 : 1);
     }
+
+    public static function secondsFromDuration(string $duration): float {
+      $interval = Duration::normalize(Duration::parse($duration));
+      return ($interval->s + $interval->f) * ($interval->invert ? -1 : 1);
+    }
   }
 }

@@ -13,12 +13,18 @@ namespace Carica\XSLTFunctions\Duration {
         $isNegative = TRUE;
         $duration = substr($duration, 1);
       }
+      $milliseconds = 0;
+      if (preg_match('((\.\d+)S)', $duration, $match)) {
+        $milliseconds = (float)('0'.$match[0]);
+        $duration = (string)preg_replace('((\.\d+)S)', 'S', $duration);
+      }
       try {
         $interval = new DateInterval($duration);
+        $interval->f = $milliseconds;
+        $interval->invert = $isNegative;
       } catch (\Exception $e) {
         $interval = new DateInterval('P0Y');
       }
-      $interval->invert = $isNegative;
       return $interval;
     }
 
