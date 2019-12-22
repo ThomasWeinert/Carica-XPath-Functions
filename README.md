@@ -214,3 +214,4 @@ Output:
 | fn:days-from-duration() |
 | fn:hours-from-duration() |
 | fn:minutes-from-duration() |
+| fn:seconds-from-duration() |

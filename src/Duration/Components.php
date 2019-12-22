@@ -8,33 +8,27 @@ namespace Carica\XSLTFunctions\Duration {
   abstract class Components {
 
     public static function yearsFromDuration(string $duration): int {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return $interval->y * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getYears();
     }
 
     public static function monthsFromDuration(string $duration): int {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return $interval->m * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getMonths();
     }
 
     public static function daysFromDuration(string $duration): int {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return $interval->d * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getDays();
     }
 
     public static function hoursFromDuration(string $duration): int {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return $interval->h * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getHours();
     }
 
     public static function minutesFromDuration(string $duration): int {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return $interval->i * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getMinutes();
     }
 
     public static function secondsFromDuration(string $duration): float {
-      $interval = Duration::normalize(Duration::parse($duration));
-      return ($interval->s + $interval->f) * ($interval->invert ? -1 : 1);
+      return (new Duration($duration))->normalize()->getSeconds();
     }
   }
 }
