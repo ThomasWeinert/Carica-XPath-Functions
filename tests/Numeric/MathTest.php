@@ -28,5 +28,53 @@ namespace Carica\XSLTFunctions\Numeric {
 
       $this->assertSame(M_PI, (float)$result->documentElement->textContent);
     }
+
+    /**
+     * @param float $expected
+     * @param float $input
+     * @testWith
+     *   [1.0e0, 0]
+     *   [2.7182818284590455e0, 1]
+     *   [7.38905609893065e0, 2]
+     *   [0.36787944117144233e0, -1]
+     */
+    public function testExpTroughStylesheet(float $expected, float $input): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.self::XMLNS_XSL.'" xmlns:math="'.self::XMLNS_MATH.'">'.
+          '<xsl:value-of select="math:exp('.$input.')"/>'.
+          '</result>',
+        'Numeric/Math'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param float $expected
+     * @param float $input
+     * @testWith
+     *   [1.0e0, 0]
+     *   [1.0e1, 1]
+     *   [3.1622776601683795e0, 0.5]
+     *   [1.0e-1, -1]
+     */
+    public function testExp10TroughStylesheet(float $expected, float $input): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.self::XMLNS_XSL.'" xmlns:math="'.self::XMLNS_MATH.'">'.
+          '<xsl:value-of select="math:exp10('.$input.')"/>'.
+          '</result>',
+        'Numeric/Math'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
   }
 }

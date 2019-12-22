@@ -34,6 +34,8 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | fn:format-integer()** | partially | 
 | **numeric/math** |
 | fn:pi() |
+| fn:exp() |
+| fn:exp10() |
 | **numeric/values** |
 | fn:round-half-to-even() |
 | **strings/comparsion** |

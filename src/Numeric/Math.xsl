@@ -14,4 +14,14 @@
     <func:result select="php:function($CALL, $MODULE, 'pi')"/>
   </func:function>
 
+  <func:function name="math:exp">
+    <xsl:param name="argument"/>
+    <func:result select="php:function($CALL, $MODULE, 'exp', number($argument))"/>
+  </func:function>
+
+  <func:function name="math:exp10">
+    <xsl:param name="argument"/>
+    <func:result select="php:function($CALL, $MODULE, 'exp10', number($argument))"/>
+  </func:function>
+
 </xsl:stylesheet>
