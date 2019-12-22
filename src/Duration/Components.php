@@ -12,14 +12,19 @@ namespace Carica\XSLTFunctions\Duration {
       return $interval->y * ($interval->invert ? -1 : 1);
     }
 
-    public static function  monthsFromDuration(string $duration): int {
+    public static function monthsFromDuration(string $duration): int {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->m * ($interval->invert ? -1 : 1);
     }
 
-    public static function  daysFromDuration(string $duration): int {
+    public static function daysFromDuration(string $duration): int {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->d * ($interval->invert ? -1 : 1);
+    }
+
+    public static function hoursFromDuration(string $duration): int {
+      $interval = Duration::normalize(Duration::parse($duration));
+      return $interval->h * ($interval->invert ? -1 : 1);
     }
   }
 }

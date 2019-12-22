@@ -212,3 +212,4 @@ Output:
 | fn:years-from-duration() |
 | fn:months-from-duration() |
 | fn:days-from-duration() |
+| fn:hours-from-duration() |
