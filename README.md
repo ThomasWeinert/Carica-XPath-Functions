@@ -23,16 +23,16 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 
 | Function | Notes |
 | :------- | ----- |
-| **context** |
+| **Context** |
 | fn:current-dateTime() | 
 | fn:current-date() | 
 | fn:current-time() | 
 | fn:implicit-timezone() | 
 | fn:default-collation() | 
 | fn:default-language() | 
-| **numeric/formatting** |
+| **Numeric/Formatting** |
 | fn:format-integer() | partially | 
-| **numeric/math** |
+| **Numeric/Math** |
 | math:pi() |
 | math:exp() |
 | math:exp10() |
@@ -47,21 +47,24 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | math:acos() |
 | math:atan() |
 | math:atan2() |
-| **numeric/values** |
+| **Numeric/Values** |
 | fn:round-half-to-even() |
-| **strings/comparsion** |
+| **Strings/Comparsion** |
 | fn:compare() |  
 | fn:codepoint-equal() |  
 | fn:collation-key() |  
 | fn:contains-token() | 
-| **strings/values** |
+| **Strings/Values** |
 | fn:upper-case() |  
 | fn:lower-case() |  
-| **strings/regexp** |
+| **Strings/RegExp** |
 | fn:matches() |  
 | fn:replace() |  
 | fn:tokenize() |  
 | fn:analyze-string() |  
+| **Duration/Components** |
+| fn:years-from-duration() |
+| fn:months-from-duration() |
 
 ## Examples
 
