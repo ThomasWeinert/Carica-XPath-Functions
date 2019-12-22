@@ -30,6 +30,10 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | fn:default-collation() | 
 | fn:default-language() | 
 
+| numeric/math |
+| -------------- | 
+| fn:pi() |
+
 | numeric/values |
 | -------------- | 
 | fn:round-half-to-even() |

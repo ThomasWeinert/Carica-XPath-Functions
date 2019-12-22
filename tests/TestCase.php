@@ -10,6 +10,8 @@ namespace Carica\XSLTFunctions {
 
   abstract class TestCase extends PHPUnitTestCase {
 
+    public const XMLNS_XSL = 'http://www.w3.org/1999/XSL/Transform';
+
     private const BASE_XSLT_TEMPLATE =
       '<?xml version="1.0" encoding="utf-8"?>'."\n".
       '<xsl:stylesheet'."\n".
