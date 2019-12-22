@@ -26,5 +26,10 @@ namespace Carica\XSLTFunctions\Duration {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->h * ($interval->invert ? -1 : 1);
     }
+
+    public static function minutesFromDuration(string $duration): int {
+      $interval = Duration::normalize(Duration::parse($duration));
+      return $interval->i * ($interval->invert ? -1 : 1);
+    }
   }
 }

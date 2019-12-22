@@ -30,4 +30,9 @@
     <func:result select="php:function($CALL, $MODULE, 'hoursFromDuration', string($duration))"/>
   </func:function>
 
+  <func:function name="fn:minutes-from-duration">
+    <xsl:param name="duration"/>
+    <func:result select="php:function($CALL, $MODULE, 'minutesFromDuration', string($duration))"/>
+  </func:function>
+
 </xsl:stylesheet>
