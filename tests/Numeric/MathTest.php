@@ -76,5 +76,50 @@ namespace Carica\XSLTFunctions\Numeric {
 
       $this->assertSame($expected, (float)$result->documentElement->textContent);
     }
+
+    /**
+     * @param float $expected
+     * @param float $input
+     * @testWith
+     *   [-6.907755278982137e0, 1.0e-3]
+     *   [0.6931471805599453e0, 2]
+     */
+    public function testLogTroughStylesheet(float $expected, float $input): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.self::XMLNS_XSL.'" xmlns:math="'.self::XMLNS_MATH.'">'.
+          '<xsl:value-of select="math:log('.$input.')"/>'.
+          '</result>',
+        'Numeric/Math'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param float $expected
+     * @param float $input
+     * @testWith
+     *   [3.0e0, 1.0e3]
+     *   [-3.0e0, 1.0e-3]
+     *   [0.3010299956639812e0, 2]
+     */
+    public function testLog10TroughStylesheet(float $expected, float $input): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.self::XMLNS_XSL.'" xmlns:math="'.self::XMLNS_MATH.'">'.
+          '<xsl:value-of select="math:log10('.$input.')"/>'.
+          '</result>',
+        'Numeric/Math'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
   }
 }

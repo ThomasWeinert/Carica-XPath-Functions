@@ -16,5 +16,13 @@ namespace Carica\XSLTFunctions\Numeric {
     public static  function exp10(float $argument): float {
       return 10 ** $argument;
     }
+
+    public static function log(float $argument): float {
+       return log($argument);
+    }
+
+    public static function log10(float $argument): float {
+       return log10($argument);
+    }
   }
 }

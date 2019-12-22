@@ -24,4 +24,14 @@
     <func:result select="php:function($CALL, $MODULE, 'exp10', number($argument))"/>
   </func:function>
 
+  <func:function name="math:log">
+    <xsl:param name="argument"/>
+    <func:result select="php:function($CALL, $MODULE, 'log', number($argument))"/>
+  </func:function>
+
+  <func:function name="math:log10">
+    <xsl:param name="argument"/>
+    <func:result select="php:function($CALL, $MODULE, 'log10', number($argument))"/>
+  </func:function>
+
 </xsl:stylesheet>
