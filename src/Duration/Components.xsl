@@ -20,4 +20,9 @@
     <func:result select="php:function($CALL, $MODULE, 'monthsFromDuration', string($duration))"/>
   </func:function>
 
+  <func:function name="fn:days-from-duration">
+    <xsl:param name="duration"/>
+    <func:result select="php:function($CALL, $MODULE, 'daysFromDuration', string($duration))"/>
+  </func:function>
+
 </xsl:stylesheet>

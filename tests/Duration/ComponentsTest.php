@@ -62,5 +62,30 @@ namespace Carica\XSLTFunctions\Duration {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $duration
+     * @testWith
+     *   [3, "P3DT10H"]
+     *   [5, "P3DT55H"]
+     *   [0, "P3Y5M"]
+     */
+    public function testDaysFromDurationTroughStylesheet(
+      int $expected, string $duration
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:days-from-duration(\''.$duration.'\')"/>'.
+          '</result>',
+        'Duration/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
   }
 }

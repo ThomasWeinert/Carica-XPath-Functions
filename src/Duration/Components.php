@@ -7,10 +7,6 @@ namespace Carica\XSLTFunctions\Duration {
 
   abstract class Components {
 
-    /**
-     * @param string $duration
-     * @return int
-     */
     public static function yearsFromDuration(string $duration): int {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->y * ($interval->invert ? -1 : 1);
@@ -19,6 +15,11 @@ namespace Carica\XSLTFunctions\Duration {
     public static function  monthsFromDuration(string $duration): int {
       $interval = Duration::normalize(Duration::parse($duration));
       return $interval->m * ($interval->invert ? -1 : 1);
+    }
+
+    public static function  daysFromDuration(string $duration): int {
+      $interval = Duration::normalize(Duration::parse($duration));
+      return $interval->d * ($interval->invert ? -1 : 1);
     }
   }
 }

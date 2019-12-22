@@ -211,3 +211,4 @@ Output:
 | **Duration/Components** |
 | fn:years-from-duration() |
 | fn:months-from-duration() |
+| fn:days-from-duration() |
