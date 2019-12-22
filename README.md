@@ -38,6 +38,8 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 | fn:exp10() |
 | fn:log() |
 | fn:log10() |
+| fn:pow() |
+| fn:sqrt() |
 | **numeric/values** |
 | fn:round-half-to-even() |
 | **strings/comparsion** |

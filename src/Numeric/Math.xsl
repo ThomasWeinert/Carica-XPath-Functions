@@ -34,4 +34,15 @@
     <func:result select="php:function($CALL, $MODULE, 'log10', number($argument))"/>
   </func:function>
 
+  <func:function name="math:pow">
+    <xsl:param name="base"/>
+    <xsl:param name="exponent"/>
+    <func:result select="php:function($CALL, $MODULE, 'pow', number($base), number($exponent))"/>
+  </func:function>
+
+  <func:function name="math:sqrt">
+    <xsl:param name="input"/>
+    <func:result select="php:function($CALL, $MODULE, 'sqrt', number($input))"/>
+  </func:function>
+
 </xsl:stylesheet>

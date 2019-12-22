@@ -24,5 +24,13 @@ namespace Carica\XSLTFunctions\Numeric {
     public static function log10(float $argument): float {
        return log10($argument);
     }
+
+    public static function pow(float $base, float $exponent): float {
+      return $base ** $exponent;
+    }
+
+    public static function sqrt(float $input): float {
+       return sqrt($input);
+    }
   }
 }
