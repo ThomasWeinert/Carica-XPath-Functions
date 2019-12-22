@@ -21,37 +21,30 @@ The goal is to allow the same function calls as in Xpath/XSLT 2.0.
 
 ## Implemented Functions
 
-| context |
-| -------------- | 
+| Function | Notes |
+| :------- | ----- |
+| **context** |
 | fn:current-dateTime() | 
 | fn:current-date() | 
 | fn:current-time() | 
 | fn:implicit-timezone() | 
 | fn:default-collation() | 
 | fn:default-language() | 
-
-| numeric/math |
-| -------------- | 
+| **numeric/formatting** |
+| fn:format-integer()** | partially | 
+| **numeric/math** |
 | fn:pi() |
-
-| numeric/values |
-| -------------- | 
+| **numeric/values** |
 | fn:round-half-to-even() |
-  
-| strings/comparsion |
-| -------------- | 
+| **strings/comparsion** |
 | fn:compare() |  
 | fn:codepoint-equal() |  
 | fn:collation-key() |  
 | fn:contains-token() | 
-
-| strings/values |
-| -------------- | 
+| **strings/values** |
 | fn:upper-case() |  
 | fn:lower-case() |  
- 
-| strings/regexp |
-| -------------- | 
+| **strings/regexp** |
 | fn:matches() |  
 | fn:replace() |  
 | fn:tokenize() |  
