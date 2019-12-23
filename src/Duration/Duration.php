@@ -35,11 +35,15 @@ namespace Carica\XSLTFunctions\Duration {
         $this->_isNegative = ($matches['negative'] ?? '') === '-';
         $this->_years = (int)($matches['years'] ?? 0);
         $this->_months = (int)($matches['months'] ?? 0);
-        $this->_days= (int)($matches['days'] ?? 0);
+        $this->_days = (int)($matches['days'] ?? 0);
         $this->_hours = (int)($matches['hours'] ?? 0);
         $this->_minutes = (int)($matches['minutes'] ?? 0);
         $this->_seconds = (float)($matches['seconds'] ?? 0.0);
       }
+    }
+
+    public function isNegative(): bool {
+      return $this->_isNegative;
     }
 
     public function getYears(): int {
@@ -85,6 +89,19 @@ namespace Carica\XSLTFunctions\Duration {
         $duration->_months %= 12;
       }
       return $duration;
+    }
+
+    public function compareWith(Duration $duration): int {
+      if ($this->_isNegative !== $duration->_isNegative) {
+        return $this->_isNegative ? -1 : 1;
+      }
+      $properties = ['_years', '_months', '_days', '_hours', '_minutes', '_seconds'];
+      foreach ($properties as $property) {
+        if ($this->{$property} !== $duration->{$property}) {
+          return ($this->{$property} < $duration->{$property}) ? -1 : 1;
+        }
+      }
+      return 0;
     }
   }
 }

@@ -215,3 +215,6 @@ Output:
 | fn:hours-from-duration() |
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
+| **DateTime/Components** |
+| fn:datetime() |
+

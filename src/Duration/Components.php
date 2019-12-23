@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Carica\XSLTFunctions\Duration {
 
-  use DateInterval;
-
   abstract class Components {
 
     public static function yearsFromDuration(string $duration): int {

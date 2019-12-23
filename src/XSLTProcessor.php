@@ -9,6 +9,7 @@ namespace Carica\XSLTFunctions {
 
     private static $_modules = [
       'context' => Context::class,
+      'datetime/components' => DateTime\Components::class,
       'duration/components' => Duration\Components::class,
       'numeric/formatting' => Numeric\Formatting::class,
       'numeric/math' => Numeric\Math::class,
