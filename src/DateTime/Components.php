@@ -49,5 +49,13 @@ namespace Carica\XSLTFunctions\DateTime {
     public static function dayFromDateTime(string $dateTime): int {
       return (int)(new DateTimeImmutable($dateTime))->format('d');
     }
+
+    public static function hoursFromDateTime(string $dateTime): int {
+      return (int)(new DateTimeImmutable($dateTime))->format('H');
+    }
+
+    public static function minutesFromDateTime(string $dateTime): int {
+      return (int)(new DateTimeImmutable($dateTime))->format('i');
+    }
   }
 }

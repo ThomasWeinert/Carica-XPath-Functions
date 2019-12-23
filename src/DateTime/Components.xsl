@@ -31,4 +31,14 @@
     <func:result select="php:function($CALL, $MODULE, 'dayFromDateTime', string($dateTime))"/>
   </func:function>
 
+  <func:function name="fn:hours-from-dateTime">
+    <xsl:param name="dateTime"/>
+    <func:result select="php:function($CALL, $MODULE, 'hoursFromDateTime', string($dateTime))"/>
+  </func:function>
+
+  <func:function name="fn:minutes-from-dateTime">
+    <xsl:param name="dateTime"/>
+    <func:result select="php:function($CALL, $MODULE, 'minutesFromDateTime', string($dateTime))"/>
+  </func:function>
+
 </xsl:stylesheet>

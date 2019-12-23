@@ -113,5 +113,55 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $dateTime
+     * @testWith
+     *   [8, "1999-05-31T08:20:00-05:00"]
+     *   [21, "1999-12-31T21:20:00-05:00"]
+     *   [12, "1999-12-31T12:00:00"]
+     *   [0, "1999-12-31T24:00:00"]
+     */
+    public function testHoursFromDateTimeTroughStylesheet(
+      int $expected, string $dateTime
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:hours-from-dateTime(\''.$dateTime.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param int $expected
+     * @param string $dateTime
+     * @testWith
+     *   [20, "1999-05-31T13:20:00-05:00"]
+     *   [30, "1999-05-31T13:30:00+05:30"]
+     */
+    public function testMinutesFromDateTimeTroughStylesheet(
+      int $expected, string $dateTime
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:minutes-from-dateTime(\''.$dateTime.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
   }
 }

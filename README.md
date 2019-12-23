@@ -220,4 +220,6 @@ Output:
 | fn:year-from-dateTime() |
 | fn:month-from-dateTime() |
 | fn:day-from-dateTime() |
+| fn:hours-from-dateTime() |
+| fn:minutes-from-dateTime() |
 
