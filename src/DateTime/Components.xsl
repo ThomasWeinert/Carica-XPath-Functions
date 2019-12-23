@@ -21,4 +21,9 @@
     <func:result select="php:function($CALL, $MODULE, 'yearFromDateTime', string($dateTime))"/>
   </func:function>
 
+  <func:function name="fn:month-from-dateTime">
+    <xsl:param name="dateTime"/>
+    <func:result select="php:function($CALL, $MODULE, 'monthFromDateTime', string($dateTime))"/>
+  </func:function>
+
 </xsl:stylesheet>

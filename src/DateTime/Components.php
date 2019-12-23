@@ -41,5 +41,9 @@ namespace Carica\XSLTFunctions\DateTime {
     public static function yearFromDateTime(string $dateTime): int {
       return (int)(new DateTimeImmutable($dateTime))->format('Y');
     }
+
+    public static function monthFromDateTime(string $dateTime): int {
+      return (int)(new DateTimeImmutable($dateTime))->format('m');
+    }
   }
 }

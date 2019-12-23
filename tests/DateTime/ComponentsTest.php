@@ -65,5 +65,29 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $dateTime
+     * @testWith
+     *   [5, "1999-05-31T13:20:00-05:00"]
+     *   [12, "1999-12-31T19:20:00-05:00"]
+     */
+    public function testMonthFromDateTimeTroughStylesheet(
+      int $expected, string $dateTime
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:month-from-dateTime(\''.$dateTime.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
   }
 }

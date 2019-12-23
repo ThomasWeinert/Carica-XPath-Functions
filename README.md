@@ -217,4 +217,6 @@ Output:
 | fn:seconds-from-duration() |
 | **DateTime/Components** |
 | fn:dateTime() |
+| fn:year-from-dateTime() |
+| fn:month-from-dateTime() |
 
