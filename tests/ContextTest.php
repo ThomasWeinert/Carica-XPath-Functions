@@ -8,6 +8,9 @@ namespace Carica\XSLTFunctions {
 
   require_once __DIR__.'/TestCase.php';
 
+  /**
+   * @covers \Carica\XSLTFunctions\Context
+   */
   class ContextTest extends TestCase {
 
     public function testDefaultCollationTroughStylesheet(): void {

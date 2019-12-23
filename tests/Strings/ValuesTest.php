@@ -5,11 +5,10 @@ namespace Carica\XSLTFunctions\Strings {
   require_once __DIR__.'/../TestCase.php';
 
   use Carica\XSLTFunctions\TestCase;
-  use Carica\XSLTFunctions\XpathError;
   use Carica\XSLTFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Strings\RegExp
+   * @covers \Carica\XSLTFunctions\Strings\Values
    */
   class ValuesTest extends TestCase {
 

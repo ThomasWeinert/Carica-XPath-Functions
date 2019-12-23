@@ -8,7 +8,7 @@ namespace Carica\XSLTFunctions\Numeric {
   use Carica\XSLTFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Strings\RegExp
+   * @covers \Carica\XSLTFunctions\Numeric\Math
    */
   class MathTest extends TestCase {
 
