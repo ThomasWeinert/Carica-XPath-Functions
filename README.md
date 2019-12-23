@@ -219,4 +219,5 @@ Output:
 | fn:dateTime() |
 | fn:year-from-dateTime() |
 | fn:month-from-dateTime() |
+| fn:day-from-dateTime() |
 

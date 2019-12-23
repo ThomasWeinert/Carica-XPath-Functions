@@ -45,5 +45,9 @@ namespace Carica\XSLTFunctions\DateTime {
     public static function monthFromDateTime(string $dateTime): int {
       return (int)(new DateTimeImmutable($dateTime))->format('m');
     }
+
+    public static function dayFromDateTime(string $dateTime): int {
+      return (int)(new DateTimeImmutable($dateTime))->format('d');
+    }
   }
 }
