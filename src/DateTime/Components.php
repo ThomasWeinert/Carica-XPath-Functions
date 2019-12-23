@@ -61,5 +61,13 @@ namespace Carica\XSLTFunctions\DateTime {
     public static function secondsFromDateTime(string $dateTime): float {
       return (float)(new DateTimeImmutable($dateTime))->format('s.v');
     }
+
+    public static function timezoneFromDateTime(string $dateTime): ?string {
+      if (preg_match('((?:Z|[+-]\\d{2}:\\d{2})$)', $dateTime, $matches)) {
+        $offset = new Offset($matches[0]);
+        return (string)$offset->getDuration();
+      }
+      return NULL;
+    }
   }
 }

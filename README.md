@@ -223,4 +223,5 @@ Output:
 | fn:hours-from-dateTime() |
 | fn:minutes-from-dateTime() |
 | fn:seconds-from-dateTime() |
+| fn:timezone-from-dateTime() |
 

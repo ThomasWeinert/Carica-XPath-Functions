@@ -46,4 +46,9 @@
     <func:result select="php:function($CALL, $MODULE, 'secondsFromDateTime', string($dateTime))"/>
   </func:function>
 
+  <func:function name="fn:timezone-from-dateTime">
+    <xsl:param name="dateTime"/>
+    <func:result select="php:function($CALL, $MODULE, 'timezoneFromDateTime', string($dateTime))"/>
+  </func:function>
+
 </xsl:stylesheet>

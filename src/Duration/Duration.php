@@ -42,6 +42,37 @@ namespace Carica\XSLTFunctions\Duration {
       }
     }
 
+    public function __toString(): string {
+      $dateMap = [
+        '_years' => 'Y',
+        '_months' => 'M',
+        '_days' => 'D'
+      ];
+      $timeMap = [
+        '_hours' => 'H',
+        '_minutes' => 'M',
+      ];
+      $date = '';
+      foreach ($dateMap as $property => $unit) {
+        $date .= ($this->{$property} > 0) ? $this->{$property}.$unit : '';
+      }
+      $time = '';
+      foreach ($timeMap as $property => $unit) {
+        $time .= ($this->{$property} > 0) ? $this->{$property}.$unit : '';
+      }
+      if ($this->_seconds > 0) {
+        $time .= str_replace(
+          '.000',
+          '',
+          number_format($this->_seconds, 3, '.', '')
+        );
+      }
+      if ($date === '' && $time === '') {
+        return 'PT0S';
+      }
+      return ($this->_isNegative ? '-P' : 'P').$date.'T'.$time;
+    }
+
     public function isNegative(): bool {
       return $this->_isNegative;
     }
