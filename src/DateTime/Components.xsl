@@ -10,10 +10,15 @@
   <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="MODULE" select="'datetime/components'"/>
 
-  <func:function name="fn:datetime">
+  <func:function name="fn:dateTime">
     <xsl:param name="date"/>
     <xsl:param name="time"/>
     <func:result select="php:function($CALL, $MODULE, 'dateTime', string($date), string($time))"/>
+  </func:function>
+
+  <func:function name="fn:year-from-dateTime">
+    <xsl:param name="dateTime"/>
+    <func:result select="php:function($CALL, $MODULE, 'yearFromDateTime', string($dateTime))"/>
   </func:function>
 
 </xsl:stylesheet>

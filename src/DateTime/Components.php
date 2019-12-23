@@ -37,5 +37,9 @@ namespace Carica\XSLTFunctions\DateTime {
         $dateTime->format('Y-m-d\\TH:i:s.v')
       ).$offset;
     }
+
+    public static function yearFromDateTime(string $dateTime): int {
+      return (int)(new DateTimeImmutable($dateTime))->format('Y');
+    }
   }
 }
