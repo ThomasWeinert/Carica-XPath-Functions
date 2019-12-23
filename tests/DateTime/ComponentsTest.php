@@ -163,5 +163,30 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param float $expected
+     * @param string $dateTime
+     * @testWith
+     *   [0, "1999-05-31T13:20:00-05:00"]
+     *   [42, "1999-05-31T13:20:42"]
+     *   [12.5, "1999-05-31T13:20:12.500-05:00"]
+     */
+    public function testSecondsFromDateTimeTroughStylesheet(
+      float $expected, string $dateTime
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:seconds-from-dateTime(\''.$dateTime.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
   }
 }

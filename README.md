@@ -222,4 +222,5 @@ Output:
 | fn:day-from-dateTime() |
 | fn:hours-from-dateTime() |
 | fn:minutes-from-dateTime() |
+| fn:seconds-from-dateTime() |
 
