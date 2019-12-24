@@ -358,5 +358,28 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, (float)$result->documentElement->textContent);
     }
+
+    /**
+     * @param string $expected
+     * @param string $time
+     * @testWith
+     *   ["-PT5H", "13:20:00-05:00"]
+     */
+    public function testTimezoneFromTimeTroughStylesheet(
+      string $expected, string $time
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:timezone-from-time(\''.$time.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, $result->documentElement->textContent);
+    }
   }
 }

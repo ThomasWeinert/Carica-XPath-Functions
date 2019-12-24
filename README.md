@@ -230,4 +230,5 @@ Output:
 | fn:hours-from-time() |
 | fn:minutes-from-time() |
 | fn:seconds-from-time() |
+| fn:timezone-from-time() |
 

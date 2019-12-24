@@ -63,11 +63,7 @@ namespace Carica\XSLTFunctions\DateTime {
     }
 
     public static function timezoneFromDateTime(string $dateTime): ?string {
-      if (preg_match('((?:Z|[+-]\\d{2}:\\d{2})$)', $dateTime, $matches)) {
-        $offset = new Offset($matches[0]);
-        return (string)$offset->getDuration();
-      }
-      return NULL;
+      return self::timezoneFromStringEnd($dateTime);
     }
 
     public static function yearFromDate(string $date): int {
@@ -92,6 +88,18 @@ namespace Carica\XSLTFunctions\DateTime {
 
     public static function secondsFromTime(string $time): float {
       return (new Time($time))->getSecond();
+    }
+
+    public static function timezoneFromTime(string $time): ?string {
+      return self::timezoneFromStringEnd($time);
+    }
+
+    private static function timezoneFromStringEnd(string $input): ?string {
+      if (preg_match('((?:Z|[+-]\\d{2}:\\d{2})$)', $input, $matches)) {
+        $offset = new Offset($matches[0]);
+        return (string)$offset->getDuration();
+      }
+      return NULL;
     }
   }
 }
