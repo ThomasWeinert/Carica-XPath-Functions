@@ -69,5 +69,17 @@ namespace Carica\XSLTFunctions\DateTime {
       }
       return NULL;
     }
+
+    public static function yearFromDate(string $date): int {
+      return (new Date($date))->getYear();
+    }
+
+    public static function monthFromDate(string $date): int {
+      return (new Date($date))->getMonth();
+    }
+
+    public static function dayFromDate(string $date): int {
+      return (new Date($date))->getDay();
+    }
   }
 }

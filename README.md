@@ -224,4 +224,7 @@ Output:
 | fn:minutes-from-dateTime() |
 | fn:seconds-from-dateTime() |
 | fn:timezone-from-dateTime() |
+| fn:year-from-date() |
+| fn:month-from-date() |
+| fn:day-from-date() |
 

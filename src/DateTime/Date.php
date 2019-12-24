@@ -6,6 +6,7 @@ namespace Carica\XSLTFunctions\DateTime {
 
     private const PATTERN = '(
       ^
+      (?<negative>-)?
       (?<year>\\d{4})
       -
       (?<month>\\d{2})
@@ -19,9 +20,11 @@ namespace Carica\XSLTFunctions\DateTime {
     private $_month = 1;
     private $_day = 1;
     private $_offset;
+    private $_isNegative = FALSE;
 
     public function __construct(string $date) {
       if (preg_match(self::PATTERN, $date, $matches)) {
+        $this->_isNegative = ($matches['negative'] ?? '') === '-';
         $this->_year = (int)($matches['year'] ?? 0);
         $this->_month = (int)($matches['month'] ?? 0);
         $this->_day = (int)($matches['day'] ?? 0);
@@ -38,19 +41,23 @@ namespace Carica\XSLTFunctions\DateTime {
       if (NULL !== $this->_offset) {
         $result .= $this->_offset;
       }
-      return $result;
+      return ($this->_isNegative ? '-' : '').$result;
+    }
+
+    public function isNegative(): bool {
+      return $this->_isNegative;
     }
 
     public function getYear(): int {
-      return $this->_year;
+      return $this->_year * ($this->_isNegative ? -1 : 1);
     }
 
     public function getMonth(): int {
-      return $this->_month;
+      return $this->_month * ($this->_isNegative ? -1 : 1);
     }
 
     public function getDay(): int {
-      return $this->_day;
+      return $this->_day * ($this->_isNegative ? -1 : 1);
     }
 
     public function getOffset(): ?Offset {

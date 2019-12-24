@@ -18,6 +18,7 @@ namespace Carica\XSLTFunctions\DateTime {
      *   ["1999-12-31", "1999-12-31"]
      *   ["1999-12-31Z", "1999-12-31Z"]
      *   ["1999-12-31+02:00", "1999-12-31+02:00"]
+     *   ["-0002-06-01", "-0002-06-01"]
      */
     public function testParseAndCastToStringTroughStylesheet(
       string $expected, string $input

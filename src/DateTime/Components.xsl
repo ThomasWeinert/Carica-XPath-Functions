@@ -51,4 +51,19 @@
     <func:result select="php:function($CALL, $MODULE, 'timezoneFromDateTime', string($dateTime))"/>
   </func:function>
 
+  <func:function name="fn:year-from-date">
+    <xsl:param name="date"/>
+    <func:result select="php:function($CALL, $MODULE, 'yearFromDate', string($date))"/>
+  </func:function>
+
+  <func:function name="fn:month-from-date">
+    <xsl:param name="date"/>
+    <func:result select="php:function($CALL, $MODULE, 'monthFromDate', string($date))"/>
+  </func:function>
+
+  <func:function name="fn:day-from-date">
+    <xsl:param name="date"/>
+    <func:result select="php:function($CALL, $MODULE, 'dayFromDate', string($date))"/>
+  </func:function>
+
 </xsl:stylesheet>

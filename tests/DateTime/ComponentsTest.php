@@ -213,5 +213,78 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, $result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $date
+     * @testWith
+     *   [1999, "1999-05-31"]
+     *   [2000, "2000-01-01+05:00"]
+     *   [-2, "-0002-06-01"]
+     */
+    public function testYearFromDateTroughStylesheet(
+      int $expected, string $date
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:year-from-date(\''.$date.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param int $expected
+     * @param string $date
+     * @testWith
+     *   [5, "1999-05-31-05:00"]
+     *   [1, "2000-01-01+05:00"]
+     */
+    public function testMonthFromDateTroughStylesheet(
+      int $expected, string $date
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:month-from-date(\''.$date.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param int $expected
+     * @param string $date
+     * @testWith
+     *   [31, "1999-05-31-05:00"]
+     *   [1, "2000-01-01+05:00"]
+     */
+    public function testDayFromDateTroughStylesheet(
+      int $expected, string $date
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:day-from-date(\''.$date.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
   }
 }
