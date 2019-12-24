@@ -66,4 +66,19 @@
     <func:result select="php:function($CALL, $MODULE, 'dayFromDate', string($date))"/>
   </func:function>
 
+  <func:function name="fn:hours-from-time">
+    <xsl:param name="time"/>
+    <func:result select="php:function($CALL, $MODULE, 'hoursFromTime', string($time))"/>
+  </func:function>
+
+  <func:function name="fn:minutes-from-time">
+    <xsl:param name="time"/>
+    <func:result select="php:function($CALL, $MODULE, 'minutesFromTime', string($time))"/>
+  </func:function>
+
+  <func:function name="fn:seconds-from-time">
+    <xsl:param name="time"/>
+    <func:result select="php:function($CALL, $MODULE, 'secondsFromTime', string($time))"/>
+  </func:function>
+
 </xsl:stylesheet>

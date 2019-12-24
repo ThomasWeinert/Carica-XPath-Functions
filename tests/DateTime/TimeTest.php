@@ -19,6 +19,7 @@ namespace Carica\XSLTFunctions\DateTime {
      *   ["00:00:00", "24:00:00"]
      *   ["04:00:00Z", "04:00:00Z"]
      *   ["04:00:00+02:00", "04:00:00+02:00"]
+     *   ["13:20:10.500", "13:20:10.5"]
      */
     public function testParseAndCastToStringTroughStylesheet(
       string $expected, string $input

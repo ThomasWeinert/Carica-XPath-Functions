@@ -227,4 +227,7 @@ Output:
 | fn:year-from-date() |
 | fn:month-from-date() |
 | fn:day-from-date() |
+| fn:hours-from-time() |
+| fn:minutes-from-time() |
+| fn:seconds-from-time() |
 

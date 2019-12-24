@@ -81,5 +81,17 @@ namespace Carica\XSLTFunctions\DateTime {
     public static function dayFromDate(string $date): int {
       return (new Date($date))->getDay();
     }
+
+    public static function hoursFromTime(string $time): int {
+      return (new Time($time))->getHour();
+    }
+
+    public static function minutesFromTime(string $time): int {
+      return (new Time($time))->getMinute();
+    }
+
+    public static function secondsFromTime(string $time): float {
+      return (new Time($time))->getSecond();
+    }
   }
 }

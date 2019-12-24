@@ -27,7 +27,7 @@ namespace Carica\XSLTFunctions\DateTime {
           $this->_hour = 0;
         }
         $this->_minute = (int)($matches['minute'] ?? 0);
-        $this->_second = (int)($matches['second'] ?? 0);
+        $this->_second = (float)($matches['second'] ?? 0);
         if (isset($matches['offset'])) {
           $this->_offset = new Offset($matches['offset']);
         }
@@ -54,7 +54,7 @@ namespace Carica\XSLTFunctions\DateTime {
       return $this->_hour;
     }
 
-    public function getMonth(): int {
+    public function getMinute(): int {
       return $this->_minute;
     }
 

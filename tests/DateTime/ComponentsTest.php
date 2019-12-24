@@ -286,5 +286,77 @@ namespace Carica\XSLTFunctions\DateTime {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param int $expected
+     * @param string $time
+     * @testWith
+     *   [11, "11:23:00"]
+     *   [21, "21:23:00"]
+     *   [1, "01:23:00+05:00"]
+     *   [0, "24:00:00"]
+     */
+    public function testHoursFromTimeTroughStylesheet(
+      int $expected, string $time
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:hours-from-time(\''.$time.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param int $expected
+     * @param string $time
+     * @testWith
+     *   [0, "13:00:00Z"]
+     */
+    public function testMinutesFromTimeTroughStylesheet(
+      int $expected, string $time
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:minutes-from-time(\''.$time.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (int)$result->documentElement->textContent);
+    }
+
+    /**
+     * @param float $expected
+     * @param string $time
+     * @testWith
+     *   [10.5, "13:20:10.5"]
+     */
+    public function testSecondsFromTimeTroughStylesheet(
+      float $expected, string $time
+    ): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:seconds-from-time(\''.$time.'\')"/>'.
+          '</result>',
+        'DateTime/Components'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, (float)$result->documentElement->textContent);
+    }
   }
 }
