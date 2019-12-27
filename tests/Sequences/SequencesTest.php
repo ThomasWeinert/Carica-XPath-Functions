@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XSLTFunctions\Sequence {
+namespace Carica\XSLTFunctions\Sequences {
 
   require_once __DIR__.'/../TestCase.php';
 
@@ -8,9 +8,9 @@ namespace Carica\XSLTFunctions\Sequence {
   use Carica\XSLTFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Sequence\Parse
+   * @covers \Carica\XSLTFunctions\Sequences\Parse
    */
-  class SequenceTest extends TestCase {
+  class SequencesTest extends TestCase {
 
     public function testParseXMLTroughStylesheet(): void {
       $input = '<alpha>abcd</alpha>';
@@ -18,7 +18,7 @@ namespace Carica\XSLTFunctions\Sequence {
         '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
           '<xsl:copy-of select="fn:parse-xml(\''.htmlspecialchars($input).'\')"/>'.
           '</result>',
-        'Sequence/Parse'
+        'Sequences/Parse'
       );
 
       $processor = new XSLTProcessor();
@@ -36,7 +36,7 @@ namespace Carica\XSLTFunctions\Sequence {
         '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
           '<xsl:copy-of select="fn:parse-xml-fragment(\''.htmlspecialchars($input).'\')"/>'.
           '</result>',
-        'Sequence/Parse'
+        'Sequences/Parse'
       );
 
       $processor = new XSLTProcessor();

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Sequence {
+namespace Carica\XSLTFunctions\Sequences {
 
   use Carica\XSLTFunctions\XpathError;
 

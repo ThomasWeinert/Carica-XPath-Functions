@@ -8,7 +8,7 @@
   extension-element-prefixes="func php">
 
   <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'sequence/parse'"/>
+  <xsl:variable name="MODULE" select="'sequences/parse'"/>
 
   <func:function name="fn:parse-xml">
     <xsl:param name="input"/>
