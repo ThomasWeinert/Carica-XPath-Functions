@@ -15,6 +15,7 @@ namespace Carica\XSLTFunctions {
       'numeric/formatting' => Numeric\Formatting::class,
       'numeric/math' => Numeric\Math::class,
       'numeric/values' => Numeric\Values::class,
+      'sequence/parse' => Sequence\Parse::class,
       'strings/comparsion' => Strings\Comparsion::class,
       'strings/regexp' => Strings\RegExp::class,
       'strings/values' => Strings\Values::class

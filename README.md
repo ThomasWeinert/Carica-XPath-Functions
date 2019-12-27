@@ -235,4 +235,7 @@ Output:
 | fn:adjust-dateTime-to-timezone() |
 | fn:adjust-date-to-timezone() |
 | fn:adjust-time-to-timezone() |
+| **Sequence/Parse** |
+| fn:parse-xml() |  
+| fn:parse-xml-fragment() |  
 
