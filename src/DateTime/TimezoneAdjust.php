@@ -14,15 +14,42 @@ namespace Carica\XSLTFunctions\DateTime {
      * @throws XpathError
      */
     public static function adjustDateTimeToTimezone(string $dateTime, string $timezone): string {
-      if ($timezone !== '') {
-        return (string)(
-          (new DateTime($dateTime))->adjustTimezone(
-            new TimezoneDuration($timezone)
-          )
-        );
-      }
       return (string)(
-        (new DateTime($dateTime))->adjustTimezone()
+        (new DateTime($dateTime))->adjustTimezone(
+          ($timezone !== '') ? new TimezoneDuration($timezone) : NULL
+        )
+      );
+    }
+
+    /**
+     * @param string $date
+     * @param string $timezone
+     * @return string
+     * @throws XpathError
+     */
+    public static function adjustDateToTimezone(string $date, string $timezone): string {
+      return preg_replace(
+        '(T\\d+:\\d+:\\d+(\\.\\d+)?)',
+        '',
+        (new DateTime(Components::dateTime($date, '00:00:00')))->adjustTimezone(
+          ($timezone !== '') ? new TimezoneDuration($timezone) : NULL
+        )
+      );
+    }
+
+    /**
+     * @param string $time
+     * @param string $timezone
+     * @return string
+     * @throws XpathError
+     */
+    public static function adjustTimeToTimezone(string $time, string $timezone): string {
+      return preg_replace(
+        '(\\d+-\\d+-\\d+T)',
+        '',
+        (new DateTime(Components::dateTime('1972-12-31', $time)))->adjustTimezone(
+          ($timezone !== '') ? new TimezoneDuration($timezone) : NULL
+        )
       );
     }
   }

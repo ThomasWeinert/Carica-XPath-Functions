@@ -16,4 +16,16 @@
     <func:result select="php:function($CALL, $MODULE, 'adjustDateTimeToTimezone', string($dateTime), string($timezone))"/>
   </func:function>
 
+  <func:function name="fn:adjust-date-to-timezone">
+    <xsl:param name="date"/>
+    <xsl:param name="timezone" select="''"/>
+    <func:result select="php:function($CALL, $MODULE, 'adjustDateToTimezone', string($date), string($timezone))"/>
+  </func:function>
+
+  <func:function name="fn:adjust-time-to-timezone">
+    <xsl:param name="time"/>
+    <xsl:param name="timezone" select="''"/>
+    <func:result select="php:function($CALL, $MODULE, 'adjustTimeToTimezone', string($time), string($timezone))"/>
+  </func:function>
+
 </xsl:stylesheet>

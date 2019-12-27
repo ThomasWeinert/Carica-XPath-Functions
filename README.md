@@ -233,4 +233,6 @@ Output:
 | fn:timezone-from-time() |
 | **DateTime/TimezoneAdjust** |
 | fn:adjust-dateTime-to-timezone() |
+| fn:adjust-date-to-timezone() |
+| fn:adjust-time-to-timezone() |
 
