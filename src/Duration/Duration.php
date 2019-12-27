@@ -129,6 +129,9 @@ namespace Carica\XSLTFunctions\Duration {
       $properties = ['_years', '_months', '_days', '_hours', '_minutes', '_seconds'];
       foreach ($properties as $property) {
         if ($this->{$property} !== $duration->{$property}) {
+          if ($this->_isNegative) {
+            return ($this->{$property} < $duration->{$property}) ? 1 : -1;
+          }
           return ($this->{$property} < $duration->{$property}) ? -1 : 1;
         }
       }

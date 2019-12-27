@@ -231,4 +231,6 @@ Output:
 | fn:minutes-from-time() |
 | fn:seconds-from-time() |
 | fn:timezone-from-time() |
+| **DateTime/TimezoneAdjust** |
+| fn:adjust-dateTime-to-timezone() |
 

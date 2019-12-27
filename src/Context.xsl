@@ -23,7 +23,7 @@
   </func:function>
 
   <func:function name="fn:implicit-timezone">
-    <func:result select="php:function($CALL, $MODULE, 'implicitTimeZone')"/>
+    <func:result select="php:function($CALL, $MODULE, 'implicitTimezone')"/>
   </func:function>
 
   <func:function name="fn:default-collation">

@@ -117,9 +117,8 @@ namespace Carica\XSLTFunctions {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertRegExp(
-        '(^-?PT\\d?\\dH\\d?\\dM$)',
-        $result->documentElement->textContent
+      $this->assertSame(
+        'PT0S', $result->documentElement->textContent
       );
     }
 

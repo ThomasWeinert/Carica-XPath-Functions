@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Carica\XSLTFunctions\DateTime {
 
   use Carica\XSLTFunctions\XpathError;
-  use DateTimeImmutable;
 
   abstract class Components {
 
@@ -20,46 +19,42 @@ namespace Carica\XSLTFunctions\DateTime {
             'The two arguments to fn:dateTime have inconsistent timezones.'
           );
         }
-        $offset = $dateOffset;
+        $timezone = $dateOffset->asTimezoneDuration();
       } elseif ($dateOffset !== NULL) {
-        $offset = $dateOffset;
+        $timezone = $dateOffset->asTimezoneDuration();
       } elseif ($timeOffset !== NULL) {
-        $offset = $timeOffset;
+        $timezone = $timeOffset->asTimezoneDuration();
       } else {
-        $offset = '';
+        $timezone = NULL;
       }
-      $dateTime = new DateTimeImmutable(
-        $date->withoutOffset().'T'.$time->withoutOffset().($offset ?: 'Z')
+      $dateTime = new DateTime(
+        $date->withoutOffset().'T'.$time->withoutOffset(), $timezone
       );
-      return str_replace(
-        '.000',
-        '',
-        $dateTime->format('Y-m-d\\TH:i:s.v')
-      ).$offset;
+      return (string)$dateTime;
     }
 
     public static function yearFromDateTime(string $dateTime): int {
-      return (int)(new DateTimeImmutable($dateTime))->format('Y');
+      return (int)(new DateTime($dateTime))->format('Y');
     }
 
     public static function monthFromDateTime(string $dateTime): int {
-      return (int)(new DateTimeImmutable($dateTime))->format('m');
+      return (int)(new DateTime($dateTime))->format('m');
     }
 
     public static function dayFromDateTime(string $dateTime): int {
-      return (int)(new DateTimeImmutable($dateTime))->format('d');
+      return (int)(new DateTime($dateTime))->format('d');
     }
 
     public static function hoursFromDateTime(string $dateTime): int {
-      return (int)(new DateTimeImmutable($dateTime))->format('H');
+      return (int)(new DateTime($dateTime))->format('H');
     }
 
     public static function minutesFromDateTime(string $dateTime): int {
-      return (int)(new DateTimeImmutable($dateTime))->format('i');
+      return (int)(new DateTime($dateTime))->format('i');
     }
 
     public static function secondsFromDateTime(string $dateTime): float {
-      return (float)(new DateTimeImmutable($dateTime))->format('s.v');
+      return (float)(new DateTime($dateTime))->format('s.v');
     }
 
     public static function timezoneFromDateTime(string $dateTime): ?string {
@@ -97,7 +92,7 @@ namespace Carica\XSLTFunctions\DateTime {
     private static function timezoneFromStringEnd(string $input): ?string {
       if (preg_match('((?:Z|[+-]\\d{2}:\\d{2})$)', $input, $matches)) {
         $offset = new Offset($matches[0]);
-        return (string)$offset->getDuration();
+        return (string)$offset->asDuration();
       }
       return NULL;
     }

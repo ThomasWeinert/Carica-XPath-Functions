@@ -4,7 +4,6 @@ namespace Carica\XSLTFunctions {
 
   require_once __DIR__.'/../vendor/autoload.php';
 
-  use Carica\XSLTFunctions\Strings\Collators\CollatorFactory;
   use DOMDocument;
   use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
@@ -25,7 +24,7 @@ namespace Carica\XSLTFunctions {
 
     public function tearDown(): void {
       parent::tearDown();
-      CollatorFactory::reset();
+      Context::reset();
     }
 
     protected function prepareStylesheetDocument(string $template, string $import = NULL): DOMDocument {

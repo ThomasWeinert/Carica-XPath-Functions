@@ -3,6 +3,7 @@
 namespace Carica\XSLTFunctions\DateTime {
 
   use Carica\XSLTFunctions\Duration\Duration;
+  use Carica\XSLTFunctions\XpathError;
 
   class Offset {
 
@@ -54,15 +55,26 @@ namespace Carica\XSLTFunctions\DateTime {
       return $this->_minutes * ($this->_isNegative ? -1 : 1);
     }
 
-    public function getDuration(): Duration {
+    public function asDuration(): Duration {
       return new Duration(
         ($this->_isNegative ? '-' : '').'PT'.
         $this->_hours.'H'.$this->_minutes.'M'
       );
     }
 
+    /**
+     * @return TimezoneDuration
+     * @throws XpathError
+     */
+    public function asTimezoneDuration(): TimezoneDuration {
+      return new TimezoneDuration(
+        ($this->_isNegative ? '-' : '').'PT'.
+        $this->_hours.'H'.$this->_minutes.'M'
+      );
+    }
+
     public function compareWith(self $offset): int {
-      return $this->getDuration()->compareWith($offset->getDuration());
+      return $this->asDuration()->compareWith($offset->asDuration());
     }
   }
 }
