@@ -1,22 +1,25 @@
 # XSLT Functions
 
 This is project tries to add [Xpath 2/3 functions](https://www.w3.org/TR/xpath-functions-31) to PHPs XSLTProcessor.
-It does not aim for a complete implementation. Just for some useful features.
+A complete implementation is impossible because some of the syntax is not available in XSLT 1.0. 
+Still many useful features are possible.
 
 If you have a function that you would like to have added please open an issue.
 
 ## How it works:
 
-* Extend the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
+* Extends the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
 * Implements a callback for the XSLTProcessor to call specific PHP functions
-* Adds a stream wrapper to load XSLT templates that wrap callbacks as 
-  Xpath functions using EXSLT.  
+* Adds a stream wrapper to load XSLT templates that wrap callbacks to PHP as 
+  Xpath functions using EXSLT or implement the function directly.  
 
 # Usage   
    
 1. Define the namespace for the function
 2. Import a module into your XSLT
 3. Call the Xpath function
+
+Step 2 is the difference to XSLT 2/3. You need to import the module template with the functions you would like to use.
 
 ## Examples
 
@@ -204,9 +207,10 @@ Output:
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
 | **MapsAndArrays/JSON** |
-| fn:parse-json | as alias for fn:xml-to-json()  |  
+| fn:parse-json | as alias for fn:json-to-xml()  |  
 | fn:json-doc |   
-| fn:xml-to-json | without options |  
+| fn:json-to-xml | without options | 
+| fn:xml-to-json | without options, ignores namespace |  
 | **Numeric/Formatting** |
 | fn:format-integer() | partially | 
 | **Numeric/Math** |

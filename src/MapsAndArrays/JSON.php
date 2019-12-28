@@ -10,22 +10,35 @@ namespace Carica\XSLTFunctions\MapsAndArrays {
 
   abstract class JSON {
 
-    public static function xmlToJSON(string $jsonData): \DOMDocument {
+    public static function jsonDoc(string $href): \DOMDocument {
+      return self::jsonToXML(External::unparsedText($href));
+    }
+
+    public static function jsonToXML(string $jsonData): \DOMDocument {
       $document = new \DOMDocument('1.0', 'UTF-8');
       try {
         $json = json_decode($jsonData, FALSE, 512, JSON_THROW_ON_ERROR);
-        self::transferTo($document, $json);
+        self::appendJSONToXDM($document, $json);
       } catch (JsonException $e) {
         throw new XpathError('err:FOJS0001', 'JSON syntax error.');
       }
       return $document;
     }
 
-    public static function jsonDoc(string $href): \DOMDocument {
-      return self::xmlToJSON(External::unparsedText($href));
+    public static function xmlToJSON($node, \DOMNode $options = NULL): string {
+      if (is_array($node)) {
+        $node = $node[0];
+      }
+      if ($node instanceof \DOMDocument) {
+        $node = $node->documentElement;
+      }
+      if ($node instanceof \DOMElement) {
+        return json_encode(self::convertXDMToJSON($node), JSON_PRETTY_PRINT);
+      }
+      throw new XpathError('err:FOJS0006', 'Invalid XML representation of JSON');
     }
 
-    private static function transferTo(\DOMNode $parent, $value, string $key = NULL): void {
+    private static function appendJSONToXDM(\DOMNode $parent, $value, string $key = NULL): void {
       $document = $parent instanceof \DOMDocument ? $parent : $parent->ownerDocument;
       if (
         $document instanceof \DOMDocument &&
@@ -39,14 +52,14 @@ namespace Carica\XSLTFunctions\MapsAndArrays {
             $child = $document->createElementNS(Namespaces::XMLNS_FN, 'map')
           );
           foreach (get_object_vars($value) as $childKey => $childValue) {
-            self::transferTo($child, $childValue, $childKey);
+            self::appendJSONToXDM($child, $childValue, $childKey);
           }
         } elseif (is_array($value)) {
           $parent->appendChild(
             $child = $document->createElementNS(Namespaces::XMLNS_FN, 'array')
           );
           foreach ($value as $childValue) {
-            self::transferTo($child, $childValue);
+            self::appendJSONToXDM($child, $childValue);
           }
         } elseif (NULL === $value) {
           $parent->appendChild(
@@ -72,6 +85,37 @@ namespace Carica\XSLTFunctions\MapsAndArrays {
           $child->setAttribute('key', $key);
         }
       }
+    }
+
+    private static function convertXDMToJSON(\DOMElement $node) {
+      $document = $node instanceof \DOMDocument ? $node : $node->ownerDocument;
+      $xpath = new \DOMXPath($document);
+      switch ($node->localName) {
+      case 'array':
+        $result = [];
+        foreach ($xpath->evaluate('*', $node) as $childNode) {
+          $result[] = self::convertXDMToJSON($childNode);
+        }
+        break;
+      case 'map':
+        $result = new \stdClass();
+        foreach ($xpath->evaluate('*[string(@key) != ""]', $node) as $childNode) {
+          /** @var \DOMElement $childNode */
+          $result->{$childNode->getAttribute('key')} = self::convertXDMToJSON($childNode);
+        }
+        break;
+      case 'boolean':
+        return trim($node->textContent) === 'true';
+      case 'null':
+        return NULL;
+      case 'number':
+        return (float)$node->textContent;
+      case 'string':
+        return $node->textContent;
+      default:
+        throw new XpathError('err:FOJS0006', 'Invalid XML representation of JSON');
+      }
+      return $result;
     }
   }
 }
