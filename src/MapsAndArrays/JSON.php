@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace Carica\XSLTFunctions\MapsAndArrays {
 
   use Carica\XSLTFunctions\Namespaces;
+  use Carica\XSLTFunctions\Sequences\External;
   use Carica\XSLTFunctions\XpathError;
   use JsonException;
 
   abstract class JSON {
 
-    public static function parseJSON(string $jsonData) : \DOMDocument {
+    public static function parseJSON(string $jsonData): \DOMDocument {
       $document = new \DOMDocument('1.0', 'UTF-8');
       try {
         $json = json_decode($jsonData, FALSE, 512, JSON_THROW_ON_ERROR);
@@ -18,6 +19,10 @@ namespace Carica\XSLTFunctions\MapsAndArrays {
         throw new XpathError('err:FOJS0001', 'JSON syntax error.');
       }
       return $document;
+    }
+
+    public static function jsonDoc(string $href): \DOMDocument {
+      return self::parseJSON(External::unparsedText($href));
     }
 
     private static function transferTo(\DOMNode $parent, $value, string $key = NULL): void {

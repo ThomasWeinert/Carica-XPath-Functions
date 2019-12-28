@@ -65,5 +65,40 @@ namespace Carica\XSLTFunctions\Numeric {
         $result->saveXML()
       );
     }
+
+    public function testJsonDocTroughStylesheet(): void {
+      $input = htmlspecialchars(__DIR__.'/TestData/example.json');
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:copy-of select="fn:json-doc(\''.$input.'\')//*[@key=\'phoneNumbers\']"/>'.
+          '</result>',
+        'MapsAndArrays/JSON'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<?xml version="1.0"?>
+        <result>
+          <array xmlns="http://www.w3.org/2005/xpath-functions" key="phoneNumbers">
+            <map>
+              <string key="type">home</string>
+              <string key="number">212 555-1234</string>
+            </map>
+            <map>
+              <string key="type">office</string>
+              <string key="number">646 555-4567</string>
+            </map>
+            <map>
+              <string key="type">mobile</string>
+              <string key="number">123 456-7890</string>
+            </map>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }

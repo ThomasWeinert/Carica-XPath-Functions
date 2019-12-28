@@ -10,7 +10,7 @@ namespace Carica\XSLTFunctions\Sequences {
   /**
    * @covers \Carica\XSLTFunctions\Sequences\Parse
    */
-  class SequencesTest extends TestCase {
+  class ParseTest extends TestCase {
 
     public function testParseXMLTroughStylesheet(): void {
       $input = '<alpha>abcd</alpha>';

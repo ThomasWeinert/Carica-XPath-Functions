@@ -1,22 +1,22 @@
 # XSLT Functions
 
-This is project tries to add [Xpath 2.0 functions](https://www.w3.org/TR/xpath-functions-31) to PHPs XSLTProcessor.
+This is project tries to add [Xpath 2/3 functions](https://www.w3.org/TR/xpath-functions-31) to PHPs XSLTProcessor.
 It does not aim for a complete implementation. Just for some useful features.
 
 If you have a function that you would like to have added please open an issue.
 
-How it works:
+## How it works:
 
-1. Extend the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
-2. Implements a callback for the XSLTProcessor to call specific PHP functions
-3. Adds a stream wrapper to load XSLT templates that wrap callbacks as 
-   Xpath functions using EXSLT.
+* Extend the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
+* Implements a callback for the XSLTProcessor to call specific PHP functions
+* Adds a stream wrapper to load XSLT templates that wrap callbacks as 
+  Xpath functions using EXSLT.  
 
 # Usage   
    
 1. Define the namespace for the function
 2. Import a module into your XSLT
-2. Call the Xpath function
+3. Call the Xpath function
 
 ## Examples
 
@@ -176,45 +176,6 @@ Output:
 | fn:implicit-timezone() | 
 | fn:default-collation() | 
 | fn:default-language() | 
-| **Numeric/Formatting** |
-| fn:format-integer() | partially | 
-| **Numeric/Math** |
-| math:pi() |
-| math:exp() |
-| math:exp10() |
-| math:log() |
-| math:log10() |
-| math:pow() |
-| math:sqrt() |
-| math:sin() |
-| math:cos() |
-| math:tan() |
-| math:asin() |
-| math:acos() |
-| math:atan() |
-| math:atan2() |
-| **Numeric/Values** |
-| fn:round-half-to-even() |
-| **Strings/Comparsion** |
-| fn:compare() |  
-| fn:codepoint-equal() |  
-| fn:collation-key() |  
-| fn:contains-token() | 
-| **Strings/Values** |
-| fn:upper-case() |  
-| fn:lower-case() |  
-| **Strings/RegExp** |
-| fn:matches() |  
-| fn:replace() |  
-| fn:tokenize() |  
-| fn:analyze-string() |  
-| **Duration/Components** |
-| fn:years-from-duration() |
-| fn:months-from-duration() |
-| fn:days-from-duration() |
-| fn:hours-from-duration() |
-| fn:minutes-from-duration() |
-| fn:seconds-from-duration() |
 | **DateTime/Components** |
 | fn:dateTime() |
 | fn:year-from-dateTime() |
@@ -235,9 +196,51 @@ Output:
 | fn:adjust-dateTime-to-timezone() |
 | fn:adjust-date-to-timezone() |
 | fn:adjust-time-to-timezone() |
+| **Duration/Components** |
+| fn:years-from-duration() |
+| fn:months-from-duration() |
+| fn:days-from-duration() |
+| fn:hours-from-duration() |
+| fn:minutes-from-duration() |
+| fn:seconds-from-duration() |
+| **MapsAndArrays/JSON** |
+| fn:parse-json | without options |  
+| fn:json-doc |   
+| **Numeric/Formatting** |
+| fn:format-integer() | partially | 
+| **Numeric/Math** |
+| math:pi() |
+| math:exp() |
+| math:exp10() |
+| math:log() |
+| math:log10() |
+| math:pow() |
+| math:sqrt() |
+| math:sin() |
+| math:cos() |
+| math:tan() |
+| math:asin() |
+| math:acos() |
+| math:atan() |
+| math:atan2() |
+| **Numeric/Values** |
+| fn:round-half-to-even() |
+| **Sequences/External** |
+| fn:unparsed-text() | no relative url resolving, basic encoding handling| 
 | **Sequences/Parse** |
 | fn:parse-xml() |  
 | fn:parse-xml-fragment() |
-| **MapsAndArrays/JSON** |
-| fn:parse-json | without options |  
+| **Strings/Comparsion** |
+| fn:compare() |  
+| fn:codepoint-equal() |  
+| fn:collation-key() |  
+| fn:contains-token() | 
+| **Strings/Values** |
+| fn:upper-case() |  
+| fn:lower-case() |  
+| **Strings/RegExp** |
+| fn:matches() |  
+| fn:replace() |  
+| fn:tokenize() |  
+| fn:analyze-string() |  
 

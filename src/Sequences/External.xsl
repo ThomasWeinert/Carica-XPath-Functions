@@ -8,16 +8,11 @@
   extension-element-prefixes="func php">
 
   <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'mapsandarrays/json'"/>
+  <xsl:variable name="MODULE" select="'sequences/external'"/>
 
-  <func:function name="fn:parse-json">
-    <xsl:param name="data"/>
-    <func:result select="php:function($CALL, $MODULE, 'parseJSON', string($data))"/>
-  </func:function>
-
-  <func:function name="fn:json-doc">
+  <func:function name="fn:unparsed-text">
     <xsl:param name="href"/>
-    <func:result select="php:function($CALL, $MODULE, 'jsonDoc', string($href))"/>
+    <func:result select="php:function($CALL, $MODULE, 'unparsedText', string($href))"/>
   </func:function>
 
 </xsl:stylesheet>
