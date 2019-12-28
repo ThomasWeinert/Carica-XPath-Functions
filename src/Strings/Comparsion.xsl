@@ -27,14 +27,14 @@
   <func:function name="fn:collation-key">
     <xsl:param name="key"/>
     <xsl:param name="collation" select="''"/>
-    <func:result select="php:function($CALL, $MODULE, 'collation-key', string($key), string($collation))"/>
+    <func:result select="php:function($CALL, $MODULE, 'collationKey', string($key), string($collation))"/>
   </func:function>
 
   <func:function name="fn:contains-token">
     <xsl:param name="value"/>
     <xsl:param name="token"/>
     <xsl:param name="collation" select="''"/>
-    <func:result select="php:function($CALL, $MODULE, 'contains-token', string($key), string($collation))"/>
+    <func:result select="php:function($CALL, $MODULE, 'containsToken', string($value), string($token), string($collation))"/>
   </func:function>
 
 

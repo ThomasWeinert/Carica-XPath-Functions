@@ -63,5 +63,59 @@ namespace Carica\XSLTFunctions\Strings {
 
       $this->assertSame($expected, (int)$result->documentElement->textContent);
     }
+
+    /**
+     * @param string $expected
+     * @param string $input
+     * @param string $collation
+     * @testWith
+     *   ["TlBMKk5OMg==", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   ["TlBMKk5OMg==", "strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   ["TlBMKk5OMg==", "Strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   ["TlBMKk5OMgFCcAY=", "Straße", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   ["TlBMKk5OMgEL", "Strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   ["TlBMKk5OMgELAdwK", "Strasse", "http://www.w3.org/2013/collation/UCA?lang=de;strength=tertiary"]
+     */
+    public function testCollationKeyTroughStylesheetWithCollation(string $expected, string $input, string $collation): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:value-of select="fn:collation-key(\''.$input.'\', \''.$collation.'\')"/>'.
+          '</result>',
+        'Strings/Comparsion'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, base64_encode($result->documentElement->textContent));
+    }
+
+    /**
+     * @param bool $expected
+     * @param string $input
+     * @param string $token
+     * @param string $collation
+     * @testWith
+     *   [true, "andre", "http://www.w3.org/2013/collation/UCA?lang=de;strength=primary"]
+     *   [false, "andre", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   [true, "andré", "http://www.w3.org/2013/collation/UCA?lang=de;strength=secondary"]
+     *   [false, "andré", "http://www.w3.org/2013/collation/UCA?lang=de;strength=tertiary"]
+     */
+    public function testContainsTokenTroughStylesheet(bool $expected, string $token, string $collation): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:variable name="input">André Joan</xsl:variable>'.
+          '<xsl:value-of select="fn:contains-token($input, \''.$token.'\', \''.$collation.'\')"/>'.
+          '</result>',
+        'Strings/Comparsion'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, $result->documentElement->textContent === 'true');
+    }
   }
 }
