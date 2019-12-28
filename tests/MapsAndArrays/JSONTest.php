@@ -12,7 +12,7 @@ namespace Carica\XSLTFunctions\Numeric {
    */
   class JSONTest extends TestCase {
 
-    public function testParseJsonTroughStylesheet(): void {
+    public function testXMLtoJSONTroughStylesheet(): void {
       $input = htmlspecialchars(
         '{
           "_id":"53e3c6ed-9bfc-2730-e053-0100007f6afb",
@@ -30,7 +30,7 @@ namespace Carica\XSLTFunctions\Numeric {
       );
       $stylesheet = $this->prepareStylesheetDocument(
         '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
-          '<xsl:copy-of select="fn:parse-json(\''.$input.'\')"/>'.
+          '<xsl:copy-of select="fn:xml-to-json(\''.$input.'\')"/>'.
           '</result>',
         'MapsAndArrays/JSON'
       );

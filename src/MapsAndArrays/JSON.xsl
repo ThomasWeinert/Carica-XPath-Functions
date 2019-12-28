@@ -12,12 +12,18 @@
 
   <func:function name="fn:parse-json">
     <xsl:param name="data"/>
-    <func:result select="php:function($CALL, $MODULE, 'parseJSON', string($data))"/>
+    <!-- alias for fn:xml-to-json() -->
+    <func:result select="php:function($CALL, $MODULE, 'xmlToJSON', string($data))"/>
   </func:function>
 
   <func:function name="fn:json-doc">
     <xsl:param name="href"/>
     <func:result select="php:function($CALL, $MODULE, 'jsonDoc', string($href))"/>
+  </func:function>
+
+  <func:function name="fn:xml-to-json">
+    <xsl:param name="data"/>
+    <func:result select="php:function($CALL, $MODULE, 'xmlToJSON', string($data))"/>
   </func:function>
 
 </xsl:stylesheet>

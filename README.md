@@ -204,8 +204,9 @@ Output:
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
 | **MapsAndArrays/JSON** |
-| fn:parse-json | without options |  
+| fn:parse-json | as alias for fn:xml-to-json()  |  
 | fn:json-doc |   
+| fn:xml-to-json | without options |  
 | **Numeric/Formatting** |
 | fn:format-integer() | partially | 
 | **Numeric/Math** |
