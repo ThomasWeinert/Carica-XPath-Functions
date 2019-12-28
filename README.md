@@ -237,5 +237,7 @@ Output:
 | fn:adjust-time-to-timezone() |
 | **Sequences/Parse** |
 | fn:parse-xml() |  
-| fn:parse-xml-fragment() |  
+| fn:parse-xml-fragment() |
+| **MapsAndArrays/JSON** |
+| fn:parse-json | without options |  
 

@@ -4,6 +4,7 @@ namespace Carica\XSLTFunctions\Numeric {
 
   require_once __DIR__.'/../TestCase.php';
 
+  use Carica\XSLTFunctions\Namespaces;
   use Carica\XSLTFunctions\TestCase;
   use Carica\XSLTFunctions\XSLTProcessor;
 
@@ -12,7 +13,7 @@ namespace Carica\XSLTFunctions\Numeric {
    */
   class MathTest extends TestCase {
 
-    public const XMLNS_MATH = 'http://www.w3.org/2005/xpath-functions/math';
+    public const XMLNS_MATH = Namespaces::XMLNS_MATH;
 
     public function testPITroughStylesheet(): void {
       $stylesheet = $this->prepareStylesheetDocument(

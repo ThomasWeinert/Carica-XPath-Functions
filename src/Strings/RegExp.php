@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Carica\XSLTFunctions\Strings {
 
+  use Carica\XSLTFunctions\Namespaces;
   use Carica\XSLTFunctions\XpathError;
   use DOMDocument;
   use DOMElement;
@@ -10,8 +11,6 @@ namespace Carica\XSLTFunctions\Strings {
   use Exception;
 
   abstract class RegExp {
-
-    private const XMLNS_FUNCTIONS = 'http://www.w3.org/2005/xpath-functions';
 
     /**
      * Returns true if the supplied string matches a given regular expression.
@@ -69,11 +68,11 @@ namespace Carica\XSLTFunctions\Strings {
       }
       $document = new DOMDocument();
       $document->appendChild(
-        $document->createElementNS(self::XMLNS_FUNCTIONS, 'tokens')
+        $document->createElementNS(Namespaces::XMLNS_FN, 'tokens')
       );
       foreach (preg_split($pattern, $input) as $tokenString) {
         $token = $document->documentElement->appendChild(
-          $document->createElementNS(self::XMLNS_FUNCTIONS, 'token')
+          $document->createElementNS(Namespaces::XMLNS_FN, 'token')
         );
         $token->textContent = $tokenString;
       }
@@ -98,7 +97,7 @@ namespace Carica\XSLTFunctions\Strings {
       $pattern = self::createPatternString($pattern, $flags, FALSE);
       $document = new DOMDocument();
       $document->appendChild(
-        $document->createElementNS(self::XMLNS_FUNCTIONS, 'analyze-string-result')
+        $document->createElementNS(Namespaces::XMLNS_FN, 'analyze-string-result')
       );
       $offset = 0;
       preg_match_all($pattern, $input, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
@@ -106,13 +105,13 @@ namespace Carica\XSLTFunctions\Strings {
         [$matchContent, $matchOffset] = $matchGroup[0];
         if ($offset < $matchOffset) {
           $nonMatchNode = $document->documentElement->appendChild(
-            $document->createElementNS(self::XMLNS_FUNCTIONS, 'non-match')
+            $document->createElementNS(Namespaces::XMLNS_FN, 'non-match')
           );
           $nonMatchNode->textContent = substr($input, $offset, $matchOffset - $offset);
         }
         $offset = $matchOffset + strlen($matchContent);
         $matchNode = $document->documentElement->appendChild(
-          $document->createElementNS(self::XMLNS_FUNCTIONS, 'match')
+          $document->createElementNS(Namespaces::XMLNS_FN, 'match')
         );
         if (count($matchGroup) === 1) {
           $matchNode->textContent = $matchContent;
@@ -133,7 +132,7 @@ namespace Carica\XSLTFunctions\Strings {
             }
             $groupOffset = $subMatchOffset + strlen($subMatchContent);
             $matchNode->appendChild(
-              $matchGroupNode = $document->createElementNS(self::XMLNS_FUNCTIONS, 'group')
+              $matchGroupNode = $document->createElementNS(Namespaces::XMLNS_FN, 'group')
             );
             $matchGroupNode->setAttribute('nr', (string)$index++);
             $matchGroupNode->textContent = $subMatchContent;
@@ -142,7 +141,7 @@ namespace Carica\XSLTFunctions\Strings {
       }
       if ($offset < strlen($input)) {
         $nonMatchNode = $document->documentElement->appendChild(
-          $document->createElementNS(self::XMLNS_FUNCTIONS, 'non-match')
+          $document->createElementNS(Namespaces::XMLNS_FN, 'non-match')
         );
         $nonMatchNode->textContent = substr($input, $offset);
       }
