@@ -7,17 +7,17 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="func php">
 
-  <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'strings/values'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_STRINGS_VALUES" select="'Strings/Values'"/>
 
   <func:function name="fn:upper-case">
     <xsl:param name="input"/>
-    <func:result select="php:function($CALL, $MODULE, 'upperCase', string($input))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_STRINGS_VALUES, 'upperCase', string($input))"/>
   </func:function>
 
   <func:function name="fn:lower-case">
     <xsl:param name="input"/>
-    <func:result select="php:function($CALL, $MODULE, 'lowerCase', string($input))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_STRINGS_VALUES, 'lowerCase', string($input))"/>
   </func:function>
 
 </xsl:stylesheet>

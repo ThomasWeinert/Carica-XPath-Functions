@@ -8,11 +8,11 @@
   xmlns:math="http://www.w3.org/2005/xpath-functions/math"
   extension-element-prefixes="func php exslt_math">
 
-  <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'numeric/math'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_NUMERIC_MATH_NUMERIC_MATH" select="'Numeric/Math'"/>
 
   <func:function name="math:pi">
-    <func:result select="php:function($CALL, $MODULE, 'pi')"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_NUMERIC_MATH_NUMERIC_MATH, 'pi')"/>
   </func:function>
 
   <func:function name="math:exp">
@@ -22,7 +22,7 @@
 
   <func:function name="math:exp10">
     <xsl:param name="argument"/>
-    <func:result select="php:function($CALL, $MODULE, 'exp10', number($argument))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_NUMERIC_MATH_NUMERIC_MATH, 'exp10', number($argument))"/>
   </func:function>
 
   <func:function name="math:log">
@@ -32,7 +32,7 @@
 
   <func:function name="math:log10">
     <xsl:param name="argument"/>
-    <func:result select="php:function($CALL, $MODULE, 'log10', number($argument))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_NUMERIC_MATH_NUMERIC_MATH, 'log10', number($argument))"/>
   </func:function>
 
   <func:function name="math:pow">
@@ -43,7 +43,7 @@
 
   <func:function name="math:sqrt">
     <xsl:param name="input"/>
-    <func:result select="php:function($CALL, $MODULE, 'sqrt', number($input))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_NUMERIC_MATH_NUMERIC_MATH, 'sqrt', number($input))"/>
   </func:function>
 
   <func:function name="math:sin">

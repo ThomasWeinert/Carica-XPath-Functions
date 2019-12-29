@@ -5,6 +5,7 @@ namespace Carica\XSLTFunctions {
 
   abstract class Namespaces {
 
+    public const XMLNS_XSL = 'http://www.w3.org/1999/XSL/Transform';
     public const XMLNS_XS = 'http://www.w3.org/2001/XMLSchema';
     public const XMLNS_FN = 'http://www.w3.org/2005/xpath-functions';
     public const XMLNS_MATH = 'http://www.w3.org/2005/xpath-functions/math';

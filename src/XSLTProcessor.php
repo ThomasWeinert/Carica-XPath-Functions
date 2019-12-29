@@ -8,21 +8,21 @@ namespace Carica\XSLTFunctions {
   class XSLTProcessor extends \XSLTProcessor {
 
     private static $_modules = [
-      'context' => Context::class,
-      'datetime/components' => DateTime\Components::class,
-      'datetime/timezoneadjust' => DateTime\TimezoneAdjust::class,
-      'duration/components' => Duration\Components::class,
-      'mapsandarrays/arrays' => MapsAndArrays\Arrays::class,
-      'mapsandarrays/json' => MapsAndArrays\JSON::class,
-      'mapsandarrays/maps' => MapsAndArrays\Maps::class,
-      'numeric/formatting' => Numeric\Formatting::class,
-      'numeric/math' => Numeric\Math::class,
-      'numeric/values' => Numeric\Values::class,
-      'sequences/external' => Sequences\External::class,
-      'sequences/parse' => Sequences\Parse::class,
-      'strings/comparsion' => Strings\Comparsion::class,
-      'strings/regexp' => Strings\RegExp::class,
-      'strings/values' => Strings\Values::class
+      'Context' => Context::class,
+      'DateTime/Components' => DateTime\Components::class,
+      'DateTime/TimezoneAdjust' => DateTime\TimezoneAdjust::class,
+      'Duration/Components' => Duration\Components::class,
+      'MapsAndArrays/Arrays' => MapsAndArrays\Arrays::class,
+      'MapsAndArrays/JSON' => MapsAndArrays\JSON::class,
+      'MapsAndArrays/Maps' => MapsAndArrays\Maps::class,
+      'Numeric/Formatting' => Numeric\Formatting::class,
+      'Numeric/Math' => Numeric\Math::class,
+      'Numeric/Values' => Numeric\Values::class,
+      'Sequences/External' => Sequences\External::class,
+      'Sequences/Parse' => Sequences\Parse::class,
+      'Strings/Comparsion' => Strings\Comparsion::class,
+      'Strings/RegExp' => Strings\RegExp::class,
+      'Strings/Values' => Strings\Values::class
     ];
 
     public function __construct() {
@@ -48,11 +48,11 @@ namespace Carica\XSLTFunctions {
     }
 
     private static function getCallback(string $module, string $function): callable {
-      $module = strtolower($module);
-      if (!isset(self::$_modules[$module])) {
+      $moduleName = isset(self::$_modules[$module]) ? $module : strtolower($module);
+      if (!isset(self::$_modules[$moduleName])) {
         throw new BadMethodCallException("Invalid XSLT callback module: {$module}");
       }
-      $callback = self::$_modules[$module].'::'.$function;
+      $callback = self::$_modules[$moduleName].'::'.$function;
       if (!is_callable($callback)) {
         throw new BadMethodCallException("Invalid XSLT callback function: {$module} -> {$function}");
       }

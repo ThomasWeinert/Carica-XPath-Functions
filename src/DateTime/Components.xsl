@@ -7,83 +7,83 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="func php">
 
-  <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'datetime/components'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_DATETIME_COMPONENTS" select="'DateTime/Components'"/>
 
   <func:function name="fn:dateTime">
     <xsl:param name="date"/>
     <xsl:param name="time"/>
-    <func:result select="php:function($CALL, $MODULE, 'dateTime', string($date), string($time))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'dateTime', string($date), string($time))"/>
   </func:function>
 
   <func:function name="fn:year-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'yearFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'yearFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:month-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'monthFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'monthFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:day-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'dayFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'dayFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:hours-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'hoursFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'hoursFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:minutes-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'minutesFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'minutesFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:seconds-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'secondsFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'secondsFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:timezone-from-dateTime">
     <xsl:param name="dateTime"/>
-    <func:result select="php:function($CALL, $MODULE, 'timezoneFromDateTime', string($dateTime))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'timezoneFromDateTime', string($dateTime))"/>
   </func:function>
 
   <func:function name="fn:year-from-date">
     <xsl:param name="date"/>
-    <func:result select="php:function($CALL, $MODULE, 'yearFromDate', string($date))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'yearFromDate', string($date))"/>
   </func:function>
 
   <func:function name="fn:month-from-date">
     <xsl:param name="date"/>
-    <func:result select="php:function($CALL, $MODULE, 'monthFromDate', string($date))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'monthFromDate', string($date))"/>
   </func:function>
 
   <func:function name="fn:day-from-date">
     <xsl:param name="date"/>
-    <func:result select="php:function($CALL, $MODULE, 'dayFromDate', string($date))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'dayFromDate', string($date))"/>
   </func:function>
 
   <func:function name="fn:hours-from-time">
     <xsl:param name="time"/>
-    <func:result select="php:function($CALL, $MODULE, 'hoursFromTime', string($time))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'hoursFromTime', string($time))"/>
   </func:function>
 
   <func:function name="fn:minutes-from-time">
     <xsl:param name="time"/>
-    <func:result select="php:function($CALL, $MODULE, 'minutesFromTime', string($time))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'minutesFromTime', string($time))"/>
   </func:function>
 
   <func:function name="fn:seconds-from-time">
     <xsl:param name="time"/>
-    <func:result select="php:function($CALL, $MODULE, 'secondsFromTime', string($time))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'secondsFromTime', string($time))"/>
   </func:function>
 
   <func:function name="fn:timezone-from-time">
     <xsl:param name="time"/>
-    <func:result select="php:function($CALL, $MODULE, 'timezoneFromTime', string($time))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_DATETIME_COMPONENTS, 'timezoneFromTime', string($time))"/>
   </func:function>
 
 </xsl:stylesheet>

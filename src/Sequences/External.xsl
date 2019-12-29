@@ -7,12 +7,12 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="func php">
 
-  <xsl:variable name="CALL" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="MODULE" select="'sequences/external'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_SEQUENCES_EXTERNAL" select="'Sequences/External'"/>
 
   <func:function name="fn:unparsed-text">
     <xsl:param name="href"/>
-    <func:result select="php:function($CALL, $MODULE, 'unparsedText', string($href))"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedText', string($href))"/>
   </func:function>
 
 </xsl:stylesheet>

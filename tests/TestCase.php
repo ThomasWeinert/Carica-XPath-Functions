@@ -27,11 +27,11 @@ namespace Carica\XSLTFunctions {
       Context::reset();
     }
 
-    protected function prepareStylesheetDocument(string $template, string $import = NULL): DOMDocument {
+    protected function prepareStylesheetDocument(string $template, string ...$imports): DOMDocument {
       $stylesheet = new DOMDocument();
       $stylesheet->preserveWhiteSpace = FALSE;
       $stylesheet->loadXML(self::BASE_XSLT_TEMPLATE);
-      if (NULL !== $import) {
+      foreach ($imports as $import) {
         $stylesheet->documentElement->insertBefore(
           $importNode = $stylesheet->createElementNS('http://www.w3.org/1999/XSL/Transform', 'xsl:import'),
           $stylesheet->documentElement->firstChild
