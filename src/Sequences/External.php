@@ -7,6 +7,12 @@ namespace Carica\XSLTFunctions\Sequences {
 
   abstract class External {
 
+    public static function doc(string $href): \DOMDocument {
+      $document = new \DOMDocument();
+      $document->load($href);
+      return $document;
+    }
+
     public static function unparsedText(string $href, string $encoding = 'utf-8'): string {
       try {
         $data = file_get_contents($href);

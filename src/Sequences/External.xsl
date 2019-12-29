@@ -10,6 +10,11 @@
   <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_SEQUENCES_EXTERNAL" select="'Sequences/External'"/>
 
+  <func:function name="fn:doc">
+    <xsl:param name="href"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'doc', string($href))"/>
+  </func:function>
+
   <func:function name="fn:unparsed-text">
     <xsl:param name="href"/>
     <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedText', string($href))"/>
