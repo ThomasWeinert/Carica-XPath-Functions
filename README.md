@@ -207,7 +207,7 @@ Output:
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
 | **MapsAndArrays/JSON** |
-| fn:parse-json | as alias for fn:json-to-xml()  |  
+| fn:parse-json | returns document element from fn:json-to-xml()  |  
 | fn:json-doc |   
 | fn:json-to-xml | without options | 
 | fn:xml-to-json | without options, ignores namespace |  

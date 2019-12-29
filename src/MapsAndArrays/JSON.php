@@ -10,8 +10,8 @@ namespace Carica\XSLTFunctions\MapsAndArrays {
 
   abstract class JSON {
 
-    public static function jsonDoc(string $href): \DOMDocument {
-      return self::jsonToXML(External::unparsedText($href));
+    public static function jsonDoc(string $href): ?\DOMElement {
+      return self::jsonToXML(External::unparsedText($href))->documentElement;
     }
 
     public static function jsonToXML(string $jsonData): \DOMDocument {
