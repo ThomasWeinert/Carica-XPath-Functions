@@ -11,24 +11,22 @@
   <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_ARRAYS" select="'MapsAndArrays/Arrays'"/>
 
-  <func:function name="array:is-array">
-    <xsl:param name="array"/>
-    <func:result select="($array and local-name($array) = 'array')"/>
+  <func:function name="array:array-from-nodeset">
+    <xsl:param name="input"/>
+    <!-- if first child has no ancestor element (document, fragment, ...) use first child -->
+    <func:result select="($input|$input/*[count(./ancestor::*) = 0])[local-name() = 'array'][1]"/>
   </func:function>
 
-  <func:function name="array:array-size">
-    <xsl:param name="array"/>
-    <xsl:variable name="result">
-      <xsl:choose>
-        <xsl:when test="array:is-array($array)">
-          <xsl:value-of select="count($array/*)"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:text>0</xsl:text>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <func:result select="number($result)"/>
+  <func:function name="array:size">
+    <xsl:param name="input"/>
+    <func:result select="count(array:array-from-nodeset($input)/*)"/>
+  </func:function>
+
+  <func:function name="array:get">
+    <xsl:param name="input"/>
+    <xsl:param name="position"/>
+    <xsl:variable name="array" select="array:array-from-nodeset($input)"/>
+    <func:result select="$array/*[$position]"/>
   </func:function>
 
 </xsl:stylesheet>
