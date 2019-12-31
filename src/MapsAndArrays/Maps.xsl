@@ -40,7 +40,15 @@
   <func:function name="map:contains">
     <xsl:param name="input"/>
     <xsl:param name="key"/>
-    <func:result select="count(map:map-from-nodeset($input)/*[@key = string($key)]) &gt; 0"/>
+    <xsl:variable name="map" select="map:map-from-nodeset($input)"/>
+    <func:result select="count($map/*[@key = string($key)]) &gt; 0"/>
+  </func:function>
+
+  <func:function name="map:get">
+    <xsl:param name="input"/>
+    <xsl:param name="key"/>
+    <xsl:variable name="map" select="map:map-from-nodeset($input)"/>
+    <func:result select="$map/*[@key = string($key)]"/>
   </func:function>
 
 </xsl:stylesheet>

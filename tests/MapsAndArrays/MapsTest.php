@@ -89,5 +89,31 @@ namespace Carica\XSLTFunctions\Numeric {
 
       $this->assertSame($expected, $result->documentElement->textContent === 'true');
     }
+
+    /**
+     * @param string $expected
+     * @param string $key
+     * @testWith
+     *   ["John", "firstName"]
+     *   ["Smith", "lastName"]
+     *   ["", "non-existing"]
+     */
+    public function testGetTroughStylesheet(string $expected, string $key): void {
+      $fileName = __DIR__.'/TestData/example.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:map="'.Namespaces::XMLNS_MAP.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:value-of select="map:get($input, \''.$key.'\')"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame($expected, $result->documentElement->textContent);
+    }
   }
 }
