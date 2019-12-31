@@ -340,5 +340,35 @@ namespace Carica\XSLTFunctions\Numeric {
         $result->saveXML()
       );
     }
+
+    public function testCreateTroughStylesheet(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" xmlns:map="'.Namespaces::XMLNS_MAP.'">'.
+          '<xsl:variable name="map" select="map:create(map:entry(\'foo\', \'bar\'))"/>'.
+          '<xsl:copy-of select="array:create(\'string\', $map, 42, true(), false())"/>'.
+          '</result>',
+        'MapsAndArrays/Arrays',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array" xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>string</string>
+            <map>
+              <string key="foo">bar</string>
+            </map>
+            <number>42</number>
+            <boolean>true</boolean>
+            <boolean>false</boolean>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }

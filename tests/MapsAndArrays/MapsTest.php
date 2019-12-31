@@ -142,5 +142,63 @@ namespace Carica\XSLTFunctions\Numeric {
         $result->saveXML()
       );
     }
+
+    /**
+     * @param string $expected
+     * @param mixed $value
+     * @testWith
+     *   ["<string key='a-key'>string value</string>", "'string value'"]
+     *   ["<number key='a-key'>21</number>", 21]
+     *   ["<boolean key='a-key'>true</boolean>", "true()"]
+     *   ["<boolean key='a-key'>false</boolean>", "false()"]
+     */
+    public function testEntryTroughStylesheet(string $expected, $value): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:map="'.Namespaces::XMLNS_MAP.'" >'.
+          '<xsl:copy-of select="map:create(map:entry(\'a-key\', '.$value.'))"/>'.
+          '</result>',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+          <map xmlns="'.Namespaces::XMLNS_FN.'">
+           '.$expected.'
+          </map>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testMergeTroughStylesheet(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result 
+            xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
+            xmlns:map="'.Namespaces::XMLNS_MAP.'" 
+            xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
+          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21))"/>'.
+          '<xsl:variable name="m2" select="map:create(map:entry(\'two\', 42))"/>'.
+          '<xsl:copy-of select="map:merge(array:create($m1, $m2))"/>'.
+          '</result>',
+        'MapsAndArrays/Arrays',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+          <map xmlns="'.Namespaces::XMLNS_FN.'">
+          </map>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }

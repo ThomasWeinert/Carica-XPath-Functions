@@ -18,6 +18,72 @@
     <func:result select="($input|$input/*[count(./ancestor::*) = 0])[local-name() = 'array'][1]"/>
   </func:function>
 
+  <func:function name="array:create">
+    <xsl:param name="i1"/>
+    <xsl:param name="i2" select="/.."/>
+    <xsl:param name="i3" select="/.."/>
+    <xsl:param name="i4" select="/.."/>
+    <xsl:param name="i5" select="/.."/>
+    <xsl:param name="i6" select="/.."/>
+    <xsl:param name="i7" select="/.."/>
+    <xsl:param name="i8" select="/.."/>
+    <xsl:param name="i9" select="/.."/>
+    <xsl:param name="i10" select="/.."/>
+    <xsl:variable name="result">
+      <array xmlns="http://www.w3.org/2005/xpath-functions">
+        <xsl:call-template name="carica-output-item-as-xdm-array-element">
+          <xsl:with-param name="item" select="$i1"/>
+        </xsl:call-template>
+        <xsl:if test="exsl:object-type($i2) != 'null'">
+          <xsl:call-template name="carica-output-item-as-xdm-array-element">
+            <xsl:with-param name="item" select="$i2"/>
+          </xsl:call-template>
+          <xsl:if test="exsl:object-type($i3) != 'null'">
+            <xsl:call-template name="carica-output-item-as-xdm-array-element">
+              <xsl:with-param name="item" select="$i3"/>
+            </xsl:call-template>
+            <xsl:if test="exsl:object-type($i4) != 'null'">
+              <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                <xsl:with-param name="item" select="$i4"/>
+              </xsl:call-template>
+              <xsl:if test="exsl:object-type($i5) != 'null'">
+                <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                  <xsl:with-param name="item" select="$i5"/>
+                </xsl:call-template>
+                <xsl:if test="exsl:object-type($i6) != 'null'">
+                  <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                    <xsl:with-param name="item" select="$i6"/>
+                  </xsl:call-template>
+                  <xsl:if test="exsl:object-type($i7) != 'null'">
+                    <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                      <xsl:with-param name="item" select="$i7"/>
+                    </xsl:call-template>
+                    <xsl:if test="exsl:object-type($i8) != 'null'">
+                      <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                        <xsl:with-param name="item" select="$i8"/>
+                      </xsl:call-template>
+                      <xsl:if test="exsl:object-type($i9) != 'null'">
+                        <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                          <xsl:with-param name="item" select="$i9"/>
+                        </xsl:call-template>
+                        <xsl:if test="exsl:object-type($i10) != 'null'">
+                          <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                            <xsl:with-param name="item" select="$i10"/>
+                          </xsl:call-template>
+                        </xsl:if>
+                      </xsl:if>
+                    </xsl:if>
+                  </xsl:if>
+                </xsl:if>
+              </xsl:if>
+            </xsl:if>
+          </xsl:if>
+        </xsl:if>
+      </array>
+    </xsl:variable>
+    <func:result select="exsl:node-set($result)/fn:array"/>
+  </func:function>
+
   <func:function name="array:size">
     <xsl:param name="input"/>
     <func:result select="count(array:array-from-nodeset($input)/*)"/>
@@ -150,21 +216,21 @@
   <func:function name="array:join">
     <xsl:param name="a1"/>
     <xsl:param name="a2"/>
-    <xsl:param name="a3" select="false()"/>
-    <xsl:param name="a4" select="false()"/>
-    <xsl:param name="a5" select="false()"/>
-    <xsl:param name="a6" select="false()"/>
-    <xsl:param name="a7" select="false()"/>
-    <xsl:param name="a8" select="false()"/>
-    <xsl:param name="a9" select="false()"/>
-    <xsl:param name="a10" select="false()"/>
+    <xsl:param name="a3" select="/.."/>
+    <xsl:param name="a4" select="/.."/>
+    <xsl:param name="a5" select="/.."/>
+    <xsl:param name="a6" select="/.."/>
+    <xsl:param name="a7" select="/.."/>
+    <xsl:param name="a8" select="/.."/>
+    <xsl:param name="a9" select="/.."/>
+    <xsl:param name="a10" select="/.."/>
     <xsl:variable name="current" select="array:array-from-nodeset($a1)"/>
     <xsl:variable name="result">
       <array xmlns="http://www.w3.org/2005/xpath-functions">
         <xsl:for-each select="$current/*">
           <xsl:copy-of select="."/>
         </xsl:for-each>
-        <xsl:if test="$a2">
+        <xsl:if test="$a2 and exsl:object-type($a2) = 'node-set'">
           <xsl:for-each select="array:join($a2, $a3, $a4, $a5, $a6, $a7, $a8, $a9, $a10)/*">
             <xsl:copy-of select="."/>
           </xsl:for-each>
@@ -219,7 +285,11 @@
         <null/>
       </xsl:when>
       <xsl:when test="$type = 'node-set' and contains('array map string number boolean null', local-name($item))">
-        <xsl:copy-of select="$item"/>
+        <xsl:for-each select="$item">
+          <xsl:element name="{local-name()}" namespace="http://www.w3.org/2005/xpath-functions">
+            <xsl:copy-of select="./node()"/>
+          </xsl:element>
+        </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
         <string>

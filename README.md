@@ -212,6 +212,7 @@ Output:
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
 | **MapsAndArrays/Arrays** |
+| array:create() | replacement for `[]` syntax, max 10 arguments
 | array:size() |
 | array:get() |
 | array:put() |
@@ -230,9 +231,13 @@ Output:
 | fn:json-to-xml | without options | 
 | fn:xml-to-json | without options, ignores namespace |
 | **MapsAndArrays/Maps** |
+| map:create() | replacement for `{}` syntax, max 10 arguments
 | map:size() |  
 | map:keys() |  
-| map:contains() |  
+| map:contains() |
+| map:get() |
+| map:find() |  
+| map:entry() |
 | **Numeric/Formatting** |
 | fn:format-integer() | partially | 
 | **Numeric/Math** |

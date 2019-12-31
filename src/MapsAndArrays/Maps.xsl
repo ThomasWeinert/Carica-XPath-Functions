@@ -13,6 +13,65 @@
   <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_MAPS" select="'MapsAndArrays/Maps'"/>
 
+  <func:function name="map:create">
+    <xsl:param name="i1"/>
+    <xsl:param name="i2" select="/.."/>
+    <xsl:param name="i3" select="/.."/>
+    <xsl:param name="i4" select="/.."/>
+    <xsl:param name="i5" select="/.."/>
+    <xsl:param name="i6" select="/.."/>
+    <xsl:param name="i7" select="/.."/>
+    <xsl:param name="i8" select="/.."/>
+    <xsl:param name="i9" select="/.."/>
+    <xsl:param name="i10" select="/.."/>
+    <xsl:param name="options" select="/.."/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_MAPS, 'create', $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10)"/>
+  </func:function>
+
+  <func:function name="map:entry">
+    <xsl:param name="key"/>
+    <xsl:param name="item"/>
+    <xsl:variable name="result">
+      <xsl:variable name="type" select="exsl:object-type($item)"/>
+      <xsl:choose xmlns="http://www.w3.org/2005/xpath-functions">
+        <xsl:when test="$type = 'RTF'">
+          <xsl:copy-of select="map:entry($key, exsl:node-set($value)/*[1])"/>
+        </xsl:when>
+        <xsl:when test="$type = 'number'">
+          <number key="{$key}">
+            <xsl:value-of select="$item"/>
+          </number>
+        </xsl:when>
+        <xsl:when test="$type = 'boolean'">
+          <boolean key="{$key}">
+            <xsl:value-of select="$item"/>
+          </boolean>
+        </xsl:when>
+        <xsl:when test="$type = 'null'">
+          <null key="{$key}"/>
+        </xsl:when>
+        <xsl:when test="$type = 'node-set' and contains('array map string number boolean null', local-name($item))">
+          <xsl:element name="{local-name()}" namespace="http://www.w3.org/2005/xpath-functions">
+            <xsl:attribute name="key"><xsl:value-of select="$key"/></xsl:attribute>
+            <xsl:copy-of select="./node()"/>
+          </xsl:element>
+        </xsl:when>
+        <xsl:otherwise>
+          <string key="{$key}">
+            <xsl:value-of select="$item"/>
+          </string>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <func:result select="exsl:node-set($result)/fn:*"/>
+  </func:function>
+
+  <func:function name="map:merge">
+    <xsl:param name="maps"/>
+    <xsl:param name="options" select="/.."/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_MAPS, 'merge', $maps, $options)"/>
+  </func:function>
+
   <func:function name="map:map-from-nodeset">
     <xsl:param name="input"/>
     <!-- if first child has no ancestor element (document, fragment, ...) use first child -->
@@ -58,7 +117,7 @@
     <xsl:variable name="result">
       <array xmlns="http://www.w3.org/2005/xpath-functions">
         <xsl:for-each select="$map//*[@key = string($key)]">
-          <xsl:element name="{local-name()}">
+          <xsl:element name="{local-name()}" namespace="http://www.w3.org/2005/xpath-functions">
             <xsl:copy-of select="./node()"/>
           </xsl:element>
         </xsl:for-each>
