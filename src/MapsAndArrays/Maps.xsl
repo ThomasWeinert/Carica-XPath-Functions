@@ -51,4 +51,20 @@
     <func:result select="$map/*[@key = string($key)]"/>
   </func:function>
 
+  <func:function name="map:find">
+    <xsl:param name="input"/>
+    <xsl:param name="key"/>
+    <xsl:variable name="map" select="map:map-from-nodeset($input)"/>
+    <xsl:variable name="result">
+      <array xmlns="http://www.w3.org/2005/xpath-functions">
+        <xsl:for-each select="$map//*[@key = string($key)]">
+          <xsl:element name="{local-name()}">
+            <xsl:copy-of select="./node()"/>
+          </xsl:element>
+        </xsl:for-each>
+      </array>
+    </xsl:variable>
+    <func:result select="exsl:node-set($result)/fn:array"/>
+  </func:function>
+
 </xsl:stylesheet>
