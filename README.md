@@ -21,6 +21,11 @@ If you have a function that you would like to have added please open an issue.
 
 Step 2 is the difference to XSLT 2/3. You need to import the module template with the functions you would like to use.
 
+## Compromises
+
+Xpath/XSLT 1.0 does not of the extensive type system of their successors. So most of the functions
+return more basic types. Arrays and maps are emulated with XDM nodes, sequences as XDM arrays.
+
 ## Examples
 
 ### Use String Comparsion
@@ -206,7 +211,7 @@ Output:
 | fn:hours-from-duration() |
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
-| **MapsAndArrays/JSON** |
+| **MapsAndArrays/Arrays** |
 | array:size() |
 | array:get() |
 | array:put() |
@@ -219,10 +224,15 @@ Output:
 | array:join() | up to 10 array arguments |
 | array:reverse() |
 | array:flatten() |
+| **MapsAndArrays/JSON** |
 | fn:parse-json | returns document element from fn:json-to-xml()  |  
 | fn:json-doc |   
 | fn:json-to-xml | without options | 
-| fn:xml-to-json | without options, ignores namespace |  
+| fn:xml-to-json | without options, ignores namespace |
+| **MapsAndArrays/Maps** |
+| map:size() |  
+| map:keys() |  
+| map:contains() |  
 | **Numeric/Formatting** |
 | fn:format-integer() | partially | 
 | **Numeric/Math** |
