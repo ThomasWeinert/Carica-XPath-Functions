@@ -193,8 +193,10 @@ namespace Carica\XSLTFunctions\Numeric {
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
       $this->assertXmlStringEqualsXmlString(
-        '<result xmlns:map="http://www.w3.org/2005/xpath-functions/map">
+        '<result xmlns:array="'.Namespaces::XMLNS_ARRAY.'" xmlns:map="'.Namespaces::XMLNS_MAP.'">
           <map xmlns="'.Namespaces::XMLNS_FN.'">
+            <number key="one">21</number>
+            <number key="two">42</number>
           </map>
         </result>',
         $result->saveXML()

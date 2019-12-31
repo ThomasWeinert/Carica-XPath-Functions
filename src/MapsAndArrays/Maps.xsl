@@ -24,7 +24,6 @@
     <xsl:param name="i8" select="/.."/>
     <xsl:param name="i9" select="/.."/>
     <xsl:param name="i10" select="/.."/>
-    <xsl:param name="options" select="/.."/>
     <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_MAPS, 'create', $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10)"/>
   </func:function>
 
