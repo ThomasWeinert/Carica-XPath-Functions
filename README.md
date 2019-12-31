@@ -207,6 +207,18 @@ Output:
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
 | **MapsAndArrays/JSON** |
+| array:size() |
+| array:get() |
+| array:put() |
+| array:append() |
+| array:subarray() |
+| array:remove() |
+| array:insert-before() |
+| array:head() |
+| array:tail() |
+| array:join() | up to 10 array arguments |
+| array:reverse() |
+| array:flatten() |
 | fn:parse-json | returns document element from fn:json-to-xml()  |  
 | fn:json-doc |   
 | fn:json-to-xml | without options | 

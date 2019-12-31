@@ -74,5 +74,271 @@ namespace Carica\XSLTFunctions\Numeric {
 
       $this->assertSame($expected, $result->documentElement->textContent);
     }
+
+    public function testPutStringTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:put($input, 2, \'Berta\')"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <string>Berta</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testInsertBeforeTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:insert-before($input, 2, 42)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <number>42</number>
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testSubArrayTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:subarray($input, 2)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testSubArrayWithLengthTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:subarray($input, 2, 1)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Bob</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testRemoveTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:remove($input, 2)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testReverseTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:reverse($input)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Charlie</string>
+            <string>Bob</string>
+            <string>Alice</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testHeadTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:value-of select="array:head($input)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertSame('Alice', $result->documentElement->textContent);
+    }
+
+    public function testTailTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:tail($input)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testJoinTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:join($input, $input, $input)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <string>Bob</string>
+            <string>Charlie</string>
+            <string>Alice</string>
+            <string>Bob</string>
+            <string>Charlie</string>
+            <string>Alice</string>
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testFlattenTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array-nested.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:flatten($input)"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <string>Aaron</string>
+            <string>Bob</string>
+            <string>Berta</string>
+            <string>Brodi</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }
