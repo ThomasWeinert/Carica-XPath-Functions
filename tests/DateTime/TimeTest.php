@@ -1,13 +1,13 @@
 <?php
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XSLTFunctions\TestCase;
+  use Carica\XpathFunctions\TestCase;
 
   /**
-   * @covers \Carica\XSLTFunctions\DateTime\Time
+   * @covers \Carica\XpathFunctions\DateTime\Time
    */
   class TimeTest extends TestCase {
 

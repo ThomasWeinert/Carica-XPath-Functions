@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Strings\Collators {
+namespace Carica\XpathFunctions\Strings\Collators {
 
   use Collator;
 

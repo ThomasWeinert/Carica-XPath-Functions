@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Strings {
+namespace Carica\XpathFunctions\Strings {
 
-  use Carica\XSLTFunctions\Namespaces;
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\Namespaces;
+  use Carica\XpathFunctions\XpathError;
   use DOMDocument;
   use DOMElement;
   use ErrorException;

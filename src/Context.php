@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions {
+namespace Carica\XpathFunctions {
 
-  use Carica\XSLTFunctions\DateTime\TimezoneDuration;
-  use Carica\XSLTFunctions\Duration\Duration;
-  use Carica\XSLTFunctions\Strings\Collators\CollatorFactory;
+  use Carica\XpathFunctions\DateTime\TimezoneDuration;
+  use Carica\XpathFunctions\Duration\Duration;
+  use Carica\XpathFunctions\Strings\Collators\CollatorFactory;
   use DateTime;
   use Locale;
 

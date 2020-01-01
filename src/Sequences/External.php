@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Sequences {
+namespace Carica\XpathFunctions\Sequences {
 
-  use Carica\XSLTFunctions\Namespaces;
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\Namespaces;
+  use Carica\XpathFunctions\XpathError;
 
   abstract class External {
 

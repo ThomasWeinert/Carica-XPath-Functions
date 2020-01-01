@@ -1,9 +1,9 @@
 <?php
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
-  use Carica\XSLTFunctions\Duration\Duration;
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\Duration\Duration;
+  use Carica\XpathFunctions\XpathError;
 
   class Offset {
 

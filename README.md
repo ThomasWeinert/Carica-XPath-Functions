@@ -8,7 +8,7 @@ If you have a function that you would like to have added please open an issue.
 
 ## How it works:
 
-* Extends the `XSLTProcessor` with `Carica\XSLTFunctions\XSLTProcessor`
+* Extends the `XSLTProcessor` with `Carica\XpathFunctions\XSLTProcessor`
 * Implements a callback for the XSLTProcessor to call specific PHP functions
 * Adds a stream wrapper to load XSLT templates that wrap callbacks to PHP as 
   Xpath functions using EXSLT or implement the function directly.  
@@ -32,7 +32,7 @@ return more basic types. Arrays and maps are emulated with XDM nodes, sequences 
 
 ```php
 // import extended XSLTProcessor
-use Carica\XSLTFunctions\XSLTProcessor;
+use Carica\XpathFunctions\XSLTProcessor;
 
 $xslt = <<<'XSLT'
 <?xml version="1.0"?>
@@ -114,7 +114,7 @@ Output:
    
 ```php
 // import extended XSLTProcessor
-use Carica\XSLTFunctions\XSLTProcessor;
+use Carica\XpathFunctions\XSLTProcessor;
 
 $xslt = <<<'XSLT'
 <?xml version="1.0"?>

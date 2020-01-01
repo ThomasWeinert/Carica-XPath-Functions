@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XSLTFunctions {
+namespace Carica\XpathFunctions {
 
   class XpathError extends \Exception {
 

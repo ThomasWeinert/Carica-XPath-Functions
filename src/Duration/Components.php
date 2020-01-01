@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Duration {
+namespace Carica\XpathFunctions\Duration {
 
   abstract class Components {
 

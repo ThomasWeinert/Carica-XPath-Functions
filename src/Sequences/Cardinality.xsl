@@ -10,7 +10,7 @@
 
   <xsl:import href="xpath-functions://MapsAndArrays/Arrays"/>
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XSLTFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XpathFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_SEQUENCES_CARDINALITY" select="'Sequences/Cardinality'"/>
 
   <func:function name="fn:zero-or-one">

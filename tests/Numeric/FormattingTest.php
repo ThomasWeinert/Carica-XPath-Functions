@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XSLTFunctions\Numeric {
+namespace Carica\XpathFunctions\Numeric {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XSLTFunctions\TestCase;
-  use Carica\XSLTFunctions\XSLTProcessor;
+  use Carica\XpathFunctions\TestCase;
+  use Carica\XpathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Numeric\Formatting
+   * @covers \Carica\XpathFunctions\Numeric\Formatting
    */
   class FormattingTest extends TestCase {
 

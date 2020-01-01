@@ -1,6 +1,6 @@
 <?php
 
-use Carica\XSLTFunctions\XSLTProcessor;
+use Carica\XpathFunctions\XSLTProcessor;
 
 require __DIR__.'/../../vendor/autoload.php';
 

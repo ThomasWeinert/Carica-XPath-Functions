@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XSLTFunctions\Sequences {
+namespace Carica\XpathFunctions\Sequences {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XSLTFunctions\TestCase;
-  use Carica\XSLTFunctions\XSLTProcessor;
+  use Carica\XpathFunctions\TestCase;
+  use Carica\XpathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Sequences\Cardinality
+   * @covers \Carica\XpathFunctions\Sequences\Cardinality
    */
   class CardinalityTest extends TestCase {
 

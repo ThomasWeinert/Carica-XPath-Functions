@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Numeric {
+namespace Carica\XpathFunctions\Numeric {
 
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\XpathError;
   use NumberFormatter;
 
   abstract class Formatting {

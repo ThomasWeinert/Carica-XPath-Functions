@@ -2,7 +2,7 @@
 require __DIR__.'/../../vendor/autoload.php';
 
 // import extended XSLTProcessor
-use Carica\XSLTFunctions\XSLTProcessor;
+use Carica\XpathFunctions\XSLTProcessor;
 
 $xslt = <<<'XSLT'
 <?xml version="1.0"?>

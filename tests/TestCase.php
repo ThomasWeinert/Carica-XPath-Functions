@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XSLTFunctions {
+namespace Carica\XpathFunctions {
 
   require_once __DIR__.'/../vendor/autoload.php';
 

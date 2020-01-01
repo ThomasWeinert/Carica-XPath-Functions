@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
   class Time {
 

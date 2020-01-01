@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XSLTFunctions\Duration {
+namespace Carica\XpathFunctions\Duration {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XSLTFunctions\TestCase;
-  use Carica\XSLTFunctions\XSLTProcessor;
+  use Carica\XpathFunctions\TestCase;
+  use Carica\XpathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XSLTFunctions\Duration\Components
+   * @covers \Carica\XpathFunctions\Duration\Components
    */
   class ComponentsTest extends TestCase {
 

@@ -1,6 +1,6 @@
 {
-  "name": "carica/xslt-functions",
-  "description": "Provides XSLT2 like functions for PHPs ext/xslt",
+  "name": "carica/xpath-functions",
+  "description": "Provides XPath 2/3 like functions for PHPs ext/xslt",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Carica\\XSLTFunctions\\": "src/"
+      "Carica\\XPathFunctions\\": "src/"
     }
   }
 }

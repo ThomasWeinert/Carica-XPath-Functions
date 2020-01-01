@@ -1,9 +1,9 @@
 <?php
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
-  use Carica\XSLTFunctions\Context;
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\Context;
+  use Carica\XpathFunctions\XpathError;
   use DateTimeImmutable as PHPDateTime;
   use DateTimeZone as PHPDateTimeZone;
 

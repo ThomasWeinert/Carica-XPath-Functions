@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XSLTFunctions\TestCase;
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\TestCase;
+  use Carica\XpathFunctions\XpathError;
 
   /**
-   * @covers \Carica\XSLTFunctions\DateTime\Time
+   * @covers \Carica\XpathFunctions\DateTime\Time
    */
   class TimezoneDurationTest extends TestCase {
 

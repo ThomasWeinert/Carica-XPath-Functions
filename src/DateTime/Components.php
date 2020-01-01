@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\DateTime {
+namespace Carica\XpathFunctions\DateTime {
 
-  use Carica\XSLTFunctions\XpathError;
+  use Carica\XpathFunctions\XpathError;
 
   abstract class Components {
 

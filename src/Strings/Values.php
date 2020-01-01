@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XSLTFunctions\Strings {
+namespace Carica\XpathFunctions\Strings {
 
   abstract class Values {
 
