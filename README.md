@@ -261,6 +261,7 @@ Output:
 | fn:round-half-to-even() |
 | **Sequences/External** |
 | fn:unparsed-text() | no relative url resolving, basic encoding handling| 
+| fn:unparsed-text-lines() | no relative url resolving, basic encoding handling| 
 | **Sequences/Parse** |
 | fn:parse-xml() |  
 | fn:parse-xml-fragment() |

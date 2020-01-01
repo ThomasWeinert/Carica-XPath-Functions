@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Carica\XSLTFunctions\Sequences {
 
+  use Carica\XSLTFunctions\Namespaces;
   use Carica\XSLTFunctions\XpathError;
 
   abstract class External {
@@ -24,6 +25,23 @@ namespace Carica\XSLTFunctions\Sequences {
         return $converter->convert($data, FALSE);
       }
       return $data;
+    }
+
+    public static function unparsedTextLines(string $href, string $encoding = 'utf-8'): \DOMNode {
+      $lines = preg_split(
+        '(\r\n|\r|\n)',
+        rtrim(self::unparsedText($href, $encoding))
+      );
+      $document = new \DOMDocument();
+      $document->appendChild(
+        $array = $document->createElementNS(Namespaces::XMLNS_FN, 'array')
+      );
+      foreach ($lines as $line) {
+        $array->appendChild(
+          $document->createElementNS(Namespaces::XMLNS_FN, 'string')
+        )->textContent = $line;
+      }
+      return $document->documentElement;
     }
   }
 }

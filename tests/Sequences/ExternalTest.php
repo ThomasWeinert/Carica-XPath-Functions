@@ -29,5 +29,30 @@ namespace Carica\XSLTFunctions\Sequences {
         '<result>Hello World!</result>', $result->saveXML()
       );
     }
+
+    public function testUnparsedTextLinesTroughStylesheet(): void {
+      $href = __DIR__.'/TestData/names.txt';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'.
+          '<xsl:copy-of select="fn:unparsed-text-lines(\''.htmlspecialchars($href).'\')"/>'.
+          '</result>',
+        'Sequences/External'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXMLStringEqualsXMLString(
+        '<result>
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }

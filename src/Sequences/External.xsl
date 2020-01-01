@@ -20,4 +20,9 @@
     <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedText', string($href))"/>
   </func:function>
 
+  <func:function name="fn:unparsed-text-lines">
+    <xsl:param name="href"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedTextLines', string($href))"/>
+  </func:function>
+
 </xsl:stylesheet>
