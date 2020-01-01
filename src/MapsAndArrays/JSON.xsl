@@ -14,7 +14,7 @@
   <func:function name="fn:parse-json">
     <xsl:param name="data"/>
     <!-- alias for fn:xml-to-json() -->
-    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_JSON, 'xmlToJSON', string($data))/*"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_JSON, 'jsonToXML', string($data))/*"/>
   </func:function>
 
   <func:function name="fn:json-doc">
