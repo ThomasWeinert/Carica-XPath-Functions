@@ -259,6 +259,10 @@ Output:
 | math:atan2() |
 | **Numeric/Values** |
 | fn:round-half-to-even() |
+| **Sequences/Cardinality** |
+| fn:zero-or-one() |
+| fn:one-or-more() |
+| fn:exactly-one() |
 | **Sequences/External** |
 | fn:unparsed-text() | no relative url resolving, basic encoding handling| 
 | fn:unparsed-text-lines() | no relative url resolving, basic encoding handling| 
