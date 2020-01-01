@@ -202,5 +202,60 @@ namespace Carica\XSLTFunctions\Numeric {
         $result->saveXML()
       );
     }
+
+    public function testPutTroughStylesheet(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result 
+            xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
+            xmlns:map="'.Namespaces::XMLNS_MAP.'" 
+            xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
+          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
+          '<xsl:copy-of select="map:put($m1, \'one\', 42)"/>'.
+          '</result>',
+        'MapsAndArrays/Arrays',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="'.Namespaces::XMLNS_ARRAY.'" xmlns:map="'.Namespaces::XMLNS_MAP.'">
+          <map xmlns="'.Namespaces::XMLNS_FN.'">
+            <number key="two">42</number>
+            <number key="one">42</number>
+          </map>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
+    public function testRemoveTroughStylesheet(): void {
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result 
+            xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
+            xmlns:map="'.Namespaces::XMLNS_MAP.'" 
+            xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
+          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
+          '<xsl:copy-of select="map:remove($m1, \'one\')"/>'.
+          '</result>',
+        'MapsAndArrays/Arrays',
+        'MapsAndArrays/Maps'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="'.Namespaces::XMLNS_ARRAY.'" xmlns:map="'.Namespaces::XMLNS_MAP.'">
+          <map xmlns="'.Namespaces::XMLNS_FN.'">
+            <number key="two">42</number>
+          </map>
+        </result>',
+        $result->saveXML()
+      );
+    }
   }
 }

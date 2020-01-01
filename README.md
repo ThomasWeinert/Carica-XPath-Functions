@@ -236,6 +236,8 @@ Output:
 | map:keys() |  
 | map:contains() |
 | map:get() |
+| map:put() |
+| map:remove() |
 | map:find() |  
 | map:entry() |
 | **Numeric/Formatting** |

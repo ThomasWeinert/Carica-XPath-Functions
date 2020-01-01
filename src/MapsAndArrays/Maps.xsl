@@ -125,4 +125,36 @@
     <func:result select="exsl:node-set($result)/fn:array"/>
   </func:function>
 
+  <func:function name="map:put">
+    <xsl:param name="input"/>
+    <xsl:param name="key"/>
+    <xsl:param name="value"/>
+    <xsl:variable name="map" select="map:map-from-nodeset($input)"/>
+    <xsl:variable name="result">
+      <map xmlns="http://www.w3.org/2005/xpath-functions">
+        <xsl:for-each select="map:remove($map, $key)/*">
+          <xsl:copy-of select="."/>
+        </xsl:for-each>
+        <xsl:copy-of select="map:entry($key, $value)"/>
+      </map>
+    </xsl:variable>
+    <func:result select="exsl:node-set($result)/fn:map"/>
+  </func:function>
+
+  <func:function name="map:remove">
+    <xsl:param name="input"/>
+    <xsl:param name="key"/>
+    <xsl:variable name="map" select="map:map-from-nodeset($input)"/>
+    <xsl:variable name="result">
+      <map xmlns="http://www.w3.org/2005/xpath-functions">
+        <xsl:for-each select="$map/*">
+          <xsl:if test="string(@key) != string($key)">
+            <xsl:copy-of select="."/>
+          </xsl:if>
+        </xsl:for-each>
+      </map>
+    </xsl:variable>
+    <func:result select="exsl:node-set($result)/fn:map"/>
+  </func:function>
+
 </xsl:stylesheet>
