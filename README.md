@@ -1,8 +1,7 @@
-# XSLT Functions
+# Carica XPath Functions
 
 This is project tries to add [Xpath 2/3 functions](https://www.w3.org/TR/xpath-functions-31) to PHPs XSLTProcessor.
-A complete implementation is impossible because some of the syntax is not available in XSLT 1.0. 
-Still many useful features are possible.
+A complete implementation isn't possible - some of the syntax is not available. But let's see how much can be done.
 
 If you have a function that you would like to have added please open an issue.
 
@@ -12,6 +11,10 @@ If you have a function that you would like to have added please open an issue.
 * Implements a callback for the XSLTProcessor to call specific PHP functions
 * Adds a stream wrapper to load XSLT templates that wrap callbacks to PHP as 
   Xpath functions using EXSLT or implement the function directly.  
+
+# Install 
+
+`composer require carica/xpath-functions`
 
 # Usage   
    
