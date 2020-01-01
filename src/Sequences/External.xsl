@@ -17,12 +17,14 @@
 
   <func:function name="fn:unparsed-text">
     <xsl:param name="href"/>
-    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedText', string($href))"/>
+    <xsl:param name="encoding" select="''"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedText', string($href), string($encoding))"/>
   </func:function>
 
   <func:function name="fn:unparsed-text-lines">
     <xsl:param name="href"/>
-    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedTextLines', string($href))"/>
+    <xsl:param name="encoding" select="''"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_SEQUENCES_EXTERNAL, 'unparsedTextLines', string($href), string($encoding))"/>
   </func:function>
 
 </xsl:stylesheet>
