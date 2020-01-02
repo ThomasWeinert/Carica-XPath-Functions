@@ -81,7 +81,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
                 $values[$key] = $entry;
                 break;
               case self::DUPLICATES_REJECT:
-                new XpathError('err:FOJS0003', 'JSON duplicate keys.');
+                new XpathError(Namespaces::XMLNS_ERR.'#FOJS0003', 'JSON duplicate keys.');
                 break;
               case self::DUPLICATES_COMBINE:
                 throw new \LogicException('Not implemented yet.');

@@ -4,17 +4,17 @@ namespace Carica\XpathFunctions {
 
   class XpathError extends \Exception {
 
-    private $_identifier;
+    private $_uri;
     private $_context;
 
-    public function __construct(string $identifier, string $message = '', $context = NULL) {
-      parent::__construct($identifier.', '.$message);
-      $this->_identifier = $identifier;
+    public function __construct(string $uri, string $description = '', $context = NULL) {
+      parent::__construct($uri.(trim($description) !== '' ? ', '.$description : ''));
+      $this->_uri = $uri;
       $this->_context = $context;
     }
 
-    public function getIdentifier(): string {
-      return $this->_identifier;
+    public function getURI(): string {
+      return $this->_uri;
     }
 
     public function getContext() {

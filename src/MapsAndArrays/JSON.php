@@ -20,7 +20,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
         $json = json_decode($jsonData, FALSE, 512, JSON_THROW_ON_ERROR);
         self::appendJSONToXDM($document, $json);
       } catch (JsonException $e) {
-        throw new XpathError('err:FOJS0001', 'JSON syntax error.');
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FOJS0001', 'JSON syntax error.');
       }
       return $document;
     }
@@ -35,7 +35,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
       if ($node instanceof \DOMElement) {
         return json_encode(self::convertXDMToJSON($node), JSON_PRETTY_PRINT);
       }
-      throw new XpathError('err:FOJS0006', 'Invalid XML representation of JSON');
+      throw new XpathError(Namespaces::XMLNS_ERR.'#FOJS0006', 'Invalid XML representation of JSON');
     }
 
     private static function appendJSONToXDM(\DOMNode $parent, $value, string $key = NULL): void {
@@ -113,7 +113,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
       case 'string':
         return $node->textContent;
       default:
-        throw new XpathError('err:FOJS0006', 'Invalid XML representation of JSON');
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FOJS0006', 'Invalid XML representation of JSON');
       }
       return $result;
     }

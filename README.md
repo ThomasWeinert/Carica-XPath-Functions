@@ -214,6 +214,8 @@ Output:
 | fn:hours-from-duration() |
 | fn:minutes-from-duration() |
 | fn:seconds-from-duration() |
+| **Errors** |
+| fn:error() | expects URI as first argument (not QName) |
 | **MapsAndArrays/Arrays** |
 | array:create() | replacement for `[]` syntax, max 10 arguments
 | array:size() |

@@ -60,7 +60,7 @@ namespace Carica\XpathFunctions {
       try {
         $trigger();
       } /** @noinspection PhpRedundantCatchClauseInspection */ catch (XpathError $exception) {
-        $this->assertSame($expected, $exception->getIdentifier());
+        $this->assertSame($expected, $exception->getURI());
         throw $exception;
       }
     }

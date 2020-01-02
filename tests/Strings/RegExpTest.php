@@ -4,6 +4,7 @@ namespace Carica\XpathFunctions\Strings {
 
   require_once __DIR__.'/../TestCase.php';
 
+  use Carica\XpathFunctions\Namespaces;
   use Carica\XpathFunctions\TestCase;
   use Carica\XpathFunctions\XpathError;
   use Carica\XpathFunctions\XSLTProcessor;
@@ -79,7 +80,7 @@ namespace Carica\XpathFunctions\Strings {
      */
     public function testMatchesWithEmptyPatternExpectingException(): void {
       $this->assertXpathErrorTriggeredBy(
-        'err:FORX0002',
+        Namespaces::XMLNS_ERR.'#FORX0002',
         static function() {
           RegExp::replace('','', '');
         }
@@ -91,7 +92,7 @@ namespace Carica\XpathFunctions\Strings {
      */
     public function testMatchesWithInvalidPatternExpectingException(): void {
       $this->assertXpathErrorTriggeredBy(
-        'err:FORX0002',
+        Namespaces::XMLNS_ERR.'#FORX0002',
         static function() {
           RegExp::replace('','(', '');
         }
@@ -139,7 +140,7 @@ namespace Carica\XpathFunctions\Strings {
      */
     public function testReplaceWithInvalidReplacementExpectingException(string $replacement): void {
       $this->assertXpathErrorTriggeredBy(
-        'err:FORX0004',
+        Namespaces::XMLNS_ERR.'#FORX0004',
         static function() use ($replacement) {
           RegExp::replace('', '(.+)', $replacement);
         }

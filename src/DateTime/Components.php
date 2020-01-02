@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Carica\XpathFunctions\DateTime {
 
+  use Carica\XpathFunctions\Namespaces;
   use Carica\XpathFunctions\XpathError;
 
   abstract class Components {
@@ -15,7 +16,7 @@ namespace Carica\XpathFunctions\DateTime {
       if ($dateOffset !== NULL && $timeOffset !== NULL) {
         if ($dateOffset->compareWith($timeOffset) !== 0) {
           throw new XpathError(
-            'err:FORG0008',
+            Namespaces::XMLNS_ERR.'#FORG0008',
             'The two arguments to fn:dateTime have inconsistent timezones.'
           );
         }

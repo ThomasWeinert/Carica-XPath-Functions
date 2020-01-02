@@ -164,11 +164,11 @@ namespace Carica\XpathFunctions\Strings {
      */
     private static function createPatternString(string $pattern, string $flags, $allowEmptyMatch = TRUE): string {
       if (empty($pattern)) {
-        throw new XpathError('err:FORX0002', 'Invalid regular expression.');
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FORX0002', 'Invalid regular expression.');
       }
-      if (preg_match('([^smixq])Du', $flags, $matches)) {
+      if (preg_match('([^smixq])u', $flags, $matches)) {
         throw new XpathError(
-          'err:FORX0001', 'Invalid regular expression flags: '.$matches[0].'.'
+          Namespaces::XMLNS_ERR.'#FORX0001', 'Invalid regular expression flags: '.$matches[0].'.'
         );
       }
       if (FALSE !== strpos($flags, 'q')) {
@@ -182,13 +182,13 @@ namespace Carica\XpathFunctions\Strings {
         }
       } catch (Exception $e) {
         throw new XpathError(
-          'err:FORX0002',
+          Namespaces::XMLNS_ERR.'#FORX0002',
           'Invalid regular expression.'
         );
       }
       if (!$allowEmptyMatch && preg_match($patternString, '')) {
         throw new XpathError(
-          'err:FORX0003', 'Regular expression matches zero-length string.'
+          Namespaces::XMLNS_ERR.'#FORX0003', 'Regular expression matches zero-length string.'
         );
       }
       return $patternString;
@@ -207,7 +207,7 @@ namespace Carica\XpathFunctions\Strings {
       $s = preg_replace('(\\\\\\\\|\\\\\\$|\\$\\d)', '*', $replacement);
       if (FALSE !== strpos($s, '\\') || FALSE !== strpos($s, '$')) {
         throw new XpathError(
-          'err:FORX0004', 'Invalid replacement string.'
+          Namespaces::XMLNS_ERR.'#FORX0004', 'Invalid replacement string.'
         );
       }
       return TRUE;

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Carica\XpathFunctions\Numeric {
 
+  use Carica\XpathFunctions\Namespaces;
   use Carica\XpathFunctions\XpathError;
   use NumberFormatter;
 
@@ -32,7 +33,7 @@ namespace Carica\XpathFunctions\Numeric {
       }
       $formatter = NumberFormatter::create($language, NumberFormatter::DECIMAL);
       if (!$formatter->setPattern($pattern)) {
-        throw new XpathError('err:FODF1310', 'Invalid decimal format picture string.');
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FODF1310', 'Invalid decimal format picture string.');
       }
       return $formatter;
     }

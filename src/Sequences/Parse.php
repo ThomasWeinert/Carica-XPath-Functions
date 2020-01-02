@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Carica\XpathFunctions\Sequences {
 
+  use Carica\XpathFunctions\Namespaces;
   use Carica\XpathFunctions\XpathError;
 
   abstract class Parse {
@@ -14,7 +15,7 @@ namespace Carica\XpathFunctions\Sequences {
           return $document;
       } catch (\Throwable $e) {
         throw new XpathError(
-          'err:FODC0006',
+          Namespaces::XMLNS_ERR.'#FODC0006',
           'String passed to fn:parse-xml is not a well-formed XML document.'
         );
       }
@@ -29,7 +30,7 @@ namespace Carica\XpathFunctions\Sequences {
           return $document;
       } catch (\Throwable $e) {
         throw new XpathError(
-          'err:FODC0006',
+          Namespaces::XMLNS_ERR.'#FODC0006',
           'String passed to fn:parse-xml is not a well-formed XML document.'
         );
       }

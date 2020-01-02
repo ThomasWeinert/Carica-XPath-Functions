@@ -3,6 +3,7 @@
 namespace Carica\XpathFunctions\DateTime {
 
   use Carica\XpathFunctions\Duration\Duration;
+  use Carica\XpathFunctions\Namespaces;
   use Carica\XpathFunctions\XpathError;
 
   class TimezoneDuration extends Duration {
@@ -13,7 +14,7 @@ namespace Carica\XpathFunctions\DateTime {
         $this->compareWith(new Duration('PT14H')) > 0 ||
         $this->compareWith(new Duration('-PT14H')) < 0
       ) {
-        throw new XpathError('err:FODT0003', 'Invalid timezone value.');
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FODT0003', 'Invalid timezone value.');
       }
     }
 

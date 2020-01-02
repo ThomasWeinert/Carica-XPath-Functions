@@ -24,7 +24,7 @@ namespace Carica\XpathFunctions\Sequences {
       try {
         $data = file_get_contents($href);
       } catch (\Throwable $e) {
-        throw new XpathError('err:FOUT1170', 'Invalid $href argument to fn:unparsed-text(): '.$href);
+        throw new XpathError(Namespaces::XMLNS_ERR.'#FOUT1170', 'Invalid $href argument to fn:unparsed-text(): '.$href);
       }
       if ($sourceEncoding = self::mapEncodingStringToConstant($encoding)) {
         $converter = new \UConverter(\UConverter::UTF8, $sourceEncoding);
