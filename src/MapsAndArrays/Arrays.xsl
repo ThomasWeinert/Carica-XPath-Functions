@@ -18,7 +18,7 @@
     <func:result select="($input|$input/*[count(./ancestor::*) = 0])[local-name() = 'array'][1]"/>
   </func:function>
 
-  <func:function name="array:create">
+  <func:function name="array:array">
     <xsl:param name="i1"/>
     <xsl:param name="i2" select="/.."/>
     <xsl:param name="i3" select="/.."/>

@@ -27,7 +27,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
       'array', 'boolean', 'map', 'number', 'null', 'string'
     ];
 
-    public static function create(...$arguments): \DOMNode {
+    public static function createMap(...$arguments): \DOMNode {
       $document = new \DOMDocument('1.0', 'UTF-8');
       $document->appendChild(
         $map = $document->createElementNS(Namespaces::XMLNS_FN, 'map')
@@ -93,7 +93,7 @@ namespace Carica\XpathFunctions\MapsAndArrays {
           }
         }
       }
-      return self::create(...array_values($values));
+      return self::createMap(...array_values($values));
     }
 
     private static function getNodeFromArgument($argument): ?DOMElement {

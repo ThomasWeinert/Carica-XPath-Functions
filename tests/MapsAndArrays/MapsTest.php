@@ -155,7 +155,7 @@ namespace Carica\XpathFunctions\Numeric {
     public function testEntryTroughStylesheet(string $expected, $value): void {
       $stylesheet = $this->prepareStylesheetDocument(
         '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:map="'.Namespaces::XMLNS_MAP.'" >'.
-          '<xsl:copy-of select="map:create(map:entry(\'a-key\', '.$value.'))"/>'.
+          '<xsl:copy-of select="map:map(map:entry(\'a-key\', '.$value.'))"/>'.
           '</result>',
         'MapsAndArrays/Maps'
       );
@@ -180,9 +180,9 @@ namespace Carica\XpathFunctions\Numeric {
             xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
             xmlns:map="'.Namespaces::XMLNS_MAP.'" 
             xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
-          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21))"/>'.
-          '<xsl:variable name="m2" select="map:create(map:entry(\'two\', 42))"/>'.
-          '<xsl:copy-of select="map:merge(array:create($m1, $m2))"/>'.
+          '<xsl:variable name="m1" select="map:map(map:entry(\'one\', 21))"/>'.
+          '<xsl:variable name="m2" select="map:map(map:entry(\'two\', 42))"/>'.
+          '<xsl:copy-of select="map:merge(array:array($m1, $m2))"/>'.
           '</result>',
         'MapsAndArrays/Arrays',
         'MapsAndArrays/Maps'
@@ -209,7 +209,7 @@ namespace Carica\XpathFunctions\Numeric {
             xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
             xmlns:map="'.Namespaces::XMLNS_MAP.'" 
             xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
-          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
+          '<xsl:variable name="m1" select="map:map(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
           '<xsl:copy-of select="map:put($m1, \'one\', 42)"/>'.
           '</result>',
         'MapsAndArrays/Arrays',
@@ -237,7 +237,7 @@ namespace Carica\XpathFunctions\Numeric {
             xmlns:xsl="'.Namespaces::XMLNS_XSL.'" 
             xmlns:map="'.Namespaces::XMLNS_MAP.'" 
             xmlns:array="'.Namespaces::XMLNS_ARRAY.'">'.
-          '<xsl:variable name="m1" select="map:create(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
+          '<xsl:variable name="m1" select="map:map(map:entry(\'one\', 21), map:entry(\'two\', 42))"/>'.
           '<xsl:copy-of select="map:remove($m1, \'one\')"/>'.
           '</result>',
         'MapsAndArrays/Arrays',

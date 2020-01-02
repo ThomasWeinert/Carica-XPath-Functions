@@ -344,8 +344,8 @@ namespace Carica\XpathFunctions\Numeric {
     public function testCreateTroughStylesheet(): void {
       $stylesheet = $this->prepareStylesheetDocument(
         '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" xmlns:map="'.Namespaces::XMLNS_MAP.'">'.
-          '<xsl:variable name="map" select="map:create(map:entry(\'foo\', \'bar\'))"/>'.
-          '<xsl:copy-of select="array:create(\'string\', $map, 42, true(), false())"/>'.
+          '<xsl:variable name="map" select="map:map(map:entry(\'foo\', \'bar\'))"/>'.
+          '<xsl:copy-of select="array:array(\'string\', $map, 42, true(), false())"/>'.
           '</result>',
         'MapsAndArrays/Arrays',
         'MapsAndArrays/Maps'

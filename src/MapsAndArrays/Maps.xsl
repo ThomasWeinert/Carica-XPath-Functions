@@ -13,7 +13,7 @@
   <xsl:variable name="CARICA_CALLBACK" select="'Carica\XpathFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_MAPS" select="'MapsAndArrays/Maps'"/>
 
-  <func:function name="map:create">
+  <func:function name="map:map">
     <xsl:param name="i1"/>
     <xsl:param name="i2" select="/.."/>
     <xsl:param name="i3" select="/.."/>
@@ -24,7 +24,7 @@
     <xsl:param name="i8" select="/.."/>
     <xsl:param name="i9" select="/.."/>
     <xsl:param name="i10" select="/.."/>
-    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_MAPS, 'create', $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10)"/>
+    <func:result select="php:function($CARICA_CALLBACK, $CARICA_MAPS_AND_ARRAYS_MAPS, 'createMap', $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10)"/>
   </func:function>
 
   <func:function name="map:entry">

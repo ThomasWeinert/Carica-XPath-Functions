@@ -217,7 +217,7 @@ Output:
 | **Errors** |
 | fn:error() | expects URI as first argument (not QName) |
 | **MapsAndArrays/Arrays** |
-| array:create() | replacement for `[]` syntax, max 10 arguments
+| array:array() | replacement for `[]` syntax, max 10 arguments
 | array:size() |
 | array:get() |
 | array:put() |
@@ -236,7 +236,7 @@ Output:
 | fn:json-to-xml | without options | 
 | fn:xml-to-json | without options, ignores namespace |
 | **MapsAndArrays/Maps** |
-| map:create() | replacement for `{}` syntax, max 10 arguments
+| map:map() | replacement for `{}` syntax, max 10 arguments
 | map:size() |  
 | map:keys() |  
 | map:contains() |
