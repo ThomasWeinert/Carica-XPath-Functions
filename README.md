@@ -224,7 +224,7 @@ Output:
 | array:append() |
 | array:subarray() |
 | array:remove() |
-| array:insert-before() |
+| array:insert-before() | max 10 item arguments
 | array:head() |
 | array:tail() |
 | array:join() | up to 10 array arguments |
@@ -271,6 +271,14 @@ Output:
 | **Sequences/External** |
 | fn:unparsed-text() | no relative url resolving, basic encoding handling| 
 | fn:unparsed-text-lines() | no relative url resolving, basic encoding handling| 
+| **Sequences/Operations** |
+| fn:empty() |
+| fn:head() |
+| fn:tail() |
+| fn:insert-before() | max 10 item arguments
+| fn:remove() |
+| fn:reverse() |
+| fn:subsequence() |
 | **Sequences/Parse** |
 | fn:parse-xml() |  
 | fn:parse-xml-fragment() |

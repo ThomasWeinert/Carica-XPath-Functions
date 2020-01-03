@@ -13,5 +13,7 @@ namespace Carica\XpathFunctions {
     public const XMLNS_ARRAY = 'http://www.w3.org/2005/xpath-functions/array';
     public const XMLNS_ERR = 'http://www.w3.org/2005/xqt-errors';
     public const XMLNS_OUTPUT = 'http://www.w3.org/2010/xslt-xquery-serialization';
+
+    public const XMLNS_CARICA = 'urn:carica:xpath-functions';
   }
 }

@@ -172,15 +172,69 @@
   <func:function name="array:insert-before">
     <xsl:param name="input"/>
     <xsl:param name="position"/>
-    <xsl:param name="member"/>
+    <xsl:param name="i1"/>
+    <xsl:param name="i2" select="/.."/>
+    <xsl:param name="i3" select="/.."/>
+    <xsl:param name="i4" select="/.."/>
+    <xsl:param name="i5" select="/.."/>
+    <xsl:param name="i6" select="/.."/>
+    <xsl:param name="i7" select="/.."/>
+    <xsl:param name="i8" select="/.."/>
+    <xsl:param name="i9" select="/.."/>
+    <xsl:param name="i10" select="/.."/>
     <xsl:variable name="array" select="array:array-from-nodeset($input)"/>
     <xsl:variable name="result">
       <array xmlns="http://www.w3.org/2005/xpath-functions">
         <xsl:for-each select="$array/*">
           <xsl:if test="position() = $position">
             <xsl:call-template name="carica-output-item-as-xdm-array-element">
-              <xsl:with-param name="item" select="$member"/>
+              <xsl:with-param name="item" select="$i1"/>
             </xsl:call-template>
+            <xsl:if test="exsl:object-type($i2) != 'null'">
+              <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                <xsl:with-param name="item" select="$i2"/>
+              </xsl:call-template>
+              <xsl:if test="exsl:object-type($i3) != 'null'">
+                <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                  <xsl:with-param name="item" select="$i3"/>
+                </xsl:call-template>
+                <xsl:if test="exsl:object-type($i4) != 'null'">
+                  <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                    <xsl:with-param name="item" select="$i4"/>
+                  </xsl:call-template>
+                  <xsl:if test="exsl:object-type($i5) != 'null'">
+                    <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                      <xsl:with-param name="item" select="$i5"/>
+                    </xsl:call-template>
+                    <xsl:if test="exsl:object-type($i6) != 'null'">
+                      <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                        <xsl:with-param name="item" select="$i6"/>
+                      </xsl:call-template>
+                      <xsl:if test="exsl:object-type($i7) != 'null'">
+                        <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                          <xsl:with-param name="item" select="$i7"/>
+                        </xsl:call-template>
+                        <xsl:if test="exsl:object-type($i8) != 'null'">
+                          <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                            <xsl:with-param name="item" select="$i8"/>
+                          </xsl:call-template>
+                          <xsl:if test="exsl:object-type($i9) != 'null'">
+                            <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                              <xsl:with-param name="item" select="$i9"/>
+                            </xsl:call-template>
+                            <xsl:if test="exsl:object-type($i10) != 'null'">
+                              <xsl:call-template name="carica-output-item-as-xdm-array-element">
+                                <xsl:with-param name="item" select="$i10"/>
+                              </xsl:call-template>
+                            </xsl:if>
+                          </xsl:if>
+                        </xsl:if>
+                      </xsl:if>
+                    </xsl:if>
+                  </xsl:if>
+                </xsl:if>
+              </xsl:if>
+            </xsl:if>
           </xsl:if>
           <xsl:copy-of select="."/>
         </xsl:for-each>

@@ -130,6 +130,36 @@ namespace Carica\XpathFunctions\Numeric {
       );
     }
 
+    public function testInsertBeforeWithMultipleItemsTroughStylesheet(): void {
+      $fileName = __DIR__.'/TestData/array.json';
+      $stylesheet = $this->prepareStylesheetDocument(
+        '<result xmlns:xsl="'.Namespaces::XMLNS_XSL.'" xmlns:array="'.Namespaces::XMLNS_ARRAY.'" >'.
+          '<xsl:variable name="input" select="fn:json-doc(\''.$fileName.'\')"/>'.
+          '<xsl:copy-of select="array:insert-before($input, 2, 21, 42, \'test\')"/>'.
+          '</result>',
+        'MapsAndArrays/JSON',
+        'MapsAndArrays/Arrays'
+      );
+
+      $processor = new XSLTProcessor();
+      $processor->importStylesheet($stylesheet);
+      $result = $processor->transformToDoc($this->prepareInputDocument());
+
+      $this->assertXmlStringEqualsXmlString(
+        '<result xmlns:array="http://www.w3.org/2005/xpath-functions/array">
+          <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <string>Alice</string>
+            <number>21</number>
+            <number>42</number>
+            <string>test</string>
+            <string>Bob</string>
+            <string>Charlie</string>
+          </array>
+        </result>',
+        $result->saveXML()
+      );
+    }
+
     public function testSubArrayTroughStylesheet(): void {
       $fileName = __DIR__.'/TestData/array.json';
       $stylesheet = $this->prepareStylesheetDocument(
