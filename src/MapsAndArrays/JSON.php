@@ -74,7 +74,7 @@ namespace Carica\XPathFunctions\MapsAndArrays {
           $parent->appendChild(
             $child = $document->createElementNS(Namespaces::XMLNS_FN, 'number')
           );
-          $child->textContent = $value;
+          $child->textContent = (string)$value;
         } elseif (is_string($value)) {
           $parent->appendChild(
             $child = $document->createElementNS(Namespaces::XMLNS_FN, 'string')

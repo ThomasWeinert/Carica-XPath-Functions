@@ -73,7 +73,6 @@ namespace Carica\XPathFunctions\DateTime {
       if (
         $this->_withTimezone ||
         (
-          $this->_offset !== NULL &&
           (string)($this->_offset->asDuration()) !== Context::implicitTimezone()
         )
       ) {
@@ -82,8 +81,15 @@ namespace Carica\XPathFunctions\DateTime {
       return (string)$result;
     }
 
-    public function getTimeZone(): PHPDateTimeZone {
-      return $this->_internal->getTimezone();
+    public function getTimeZone(): \IntlTimeZone {
+      $timezone = \IntlTimeZone::fromDateTimeZone(
+        $this->_internal->getTimezone()
+      );
+      return $timezone ?: \IntlTimeZone::createTimeZone('UTC');
+    }
+
+    public function getTimestamp(): int {
+      return $this->_internal->getTimestamp();
     }
   }
 }

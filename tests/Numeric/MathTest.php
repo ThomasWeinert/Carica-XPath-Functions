@@ -27,7 +27,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame(M_PI, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        M_PI,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
 
     /**
@@ -51,7 +55,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame($expected, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        $expected,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
 
     /**
@@ -75,7 +83,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame($expected, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        $expected,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
 
     /**
@@ -97,7 +109,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame($expected, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        $expected,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
 
     /**
@@ -120,7 +136,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame($expected, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        $expected,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
 
     /**
@@ -169,7 +189,11 @@ namespace Carica\XPathFunctions\Numeric {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertSame($expected, (float)$result->documentElement->textContent);
+      $this->assertEqualsWithDelta(
+        $expected,
+        (float)$result->documentElement->textContent,
+        0.00000001
+      );
     }
   }
 }

@@ -63,7 +63,7 @@ namespace Carica\XPathFunctions {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertRegExp(
+      $this->assertMatchesRegularExpression(
         '(^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?(?:Z|[+-]\\d{2}:\\d{2})$)',
         $result->documentElement->textContent
       );
@@ -81,7 +81,7 @@ namespace Carica\XPathFunctions {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertRegExp(
+      $this->assertMatchesRegularExpression(
         '(^\\d{4}-\\d{2}-\\d{2}$)',
         $result->documentElement->textContent
       );
@@ -99,7 +99,7 @@ namespace Carica\XPathFunctions {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertRegExp(
+      $this->assertMatchesRegularExpression(
         '(^\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?(?:Z|[+-]\\d{2}:\\d{2})$)',
         $result->documentElement->textContent
       );
@@ -134,7 +134,7 @@ namespace Carica\XPathFunctions {
       $processor->importStylesheet($stylesheet);
       $result = $processor->transformToDoc($this->prepareInputDocument());
 
-      $this->assertRegExp(
+      $this->assertMatchesRegularExpression(
         '(^[a-z]{2,3}_[A-Z]{2,3}$)',
         $result->documentElement->textContent
       );

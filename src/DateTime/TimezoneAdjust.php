@@ -31,7 +31,7 @@ namespace Carica\XPathFunctions\DateTime {
       return preg_replace(
         '(T\\d+:\\d+:\\d+(\\.\\d+)?)',
         '',
-        (new DateTime(Components::dateTime($date, '00:00:00')))->adjustTimezone(
+        (string)(new DateTime(Components::dateTime($date, '00:00:00')))->adjustTimezone(
           ($timezone !== '') ? new TimezoneDuration($timezone) : NULL
         )
       );
@@ -47,7 +47,7 @@ namespace Carica\XPathFunctions\DateTime {
       return preg_replace(
         '(\\d+-\\d+-\\d+T)',
         '',
-        (new DateTime(Components::dateTime('1972-12-31', $time)))->adjustTimezone(
+        (string)(new DateTime(Components::dateTime('1972-12-31', $time)))->adjustTimezone(
           ($timezone !== '') ? new TimezoneDuration($timezone) : NULL
         )
       );
