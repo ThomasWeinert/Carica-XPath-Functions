@@ -5,7 +5,7 @@ namespace Carica\XPathFunctions {
   require_once __DIR__.'/TestCase.php';
 
   /**
-   * @covers \Carica\XpathFunctions\XpathError
+   * @covers \Carica\XPathFunctions\XpathError
    */
   class XpathErrorTest extends TestCase {
 

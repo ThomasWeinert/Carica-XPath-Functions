@@ -1,23 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
-  use Carica\XpathFunctions\DateTime\TimezoneDuration;
-  use Carica\XpathFunctions\Duration\Duration;
-  use Carica\XpathFunctions\Strings\Collators\CollatorFactory;
+  use Carica\XPathFunctions\DateTime\TimezoneDuration;
+  use Carica\XPathFunctions\Strings\Collators\CollatorFactory;
   use DateTime;
+  use DateTimeInterface;
   use Locale;
 
   abstract class Context {
 
     /**
-     * @var Duration
+     * @var TimezoneDuration | NULL
      */
-    private static $_implicitTimezone;
+    private static TimezoneDuration | NULL $_implicitTimezone = NULL;
 
     public static function currentDateTime() : string {
-      return (new DateTime())->format(DateTime::RFC3339_EXTENDED);
+      return (new DateTime())->format(DateTimeInterface::RFC3339_EXTENDED);
     }
 
     public static function currentDate() : string {

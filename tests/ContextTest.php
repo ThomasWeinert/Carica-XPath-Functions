@@ -1,15 +1,15 @@
 <?php
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
-  use Carica\XpathFunctions\Strings\Collators\CaseInsensitiveASCIICollator;
-  use Carica\XpathFunctions\Strings\Collators\CollatorFactory;
-  use Carica\XpathFunctions\Strings\Collators\UnicodeCodepointCollator;
+  use Carica\XPathFunctions\Strings\Collators\CaseInsensitiveASCIICollator;
+  use Carica\XPathFunctions\Strings\Collators\CollatorFactory;
+  use Carica\XPathFunctions\Strings\Collators\UnicodeCodepointCollator;
 
   require_once __DIR__.'/TestCase.php';
 
   /**
-   * @covers \Carica\XpathFunctions\Context
+   * @covers \Carica\XPathFunctions\Context
    */
   class ContextTest extends TestCase {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XpathFunctions\Numeric {
+namespace Carica\XPathFunctions\Numeric {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\TestCase;
-  use Carica\XpathFunctions\XSLTProcessor;
+  use Carica\XPathFunctions\TestCase;
+  use Carica\XPathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XpathFunctions\MapsAndArrays\JSON
+   * @covers \Carica\XPathFunctions\MapsAndArrays\JSON
    */
   class JSONTest extends TestCase {
 

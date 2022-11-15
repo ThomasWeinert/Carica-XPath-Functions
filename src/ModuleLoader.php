@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
   class ModuleLoader {
 
@@ -12,11 +12,11 @@ namespace Carica\XpathFunctions {
      * Register the stream wrapper for the given protocol, if it is not registered yet.
      *
      * @param string $protocol
-     * @param string $path
+     * @param string|null $path
      */
-    public static function register(string $protocol, string $path): void {
+    public static function register(string $protocol, string $path = NULL): void {
       if (!in_array($protocol, stream_get_wrappers(), TRUE)) {
-        self::$_paths[$protocol] = $path;
+        self::$_paths[$protocol] = $path ?: __DIR__;
         stream_wrapper_register($protocol, __CLASS__);
       }
     }

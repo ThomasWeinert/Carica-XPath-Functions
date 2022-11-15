@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
   use BadMethodCallException;
 
@@ -10,6 +10,7 @@ namespace Carica\XpathFunctions {
     private static $_modules = [
       'Context' => Context::class,
       'DateTime/Components' => DateTime\Components::class,
+      'DateTime/Format' => DateTime\Format::class,
       'DateTime/TimezoneAdjust' => DateTime\TimezoneAdjust::class,
       'Duration/Components' => Duration\Components::class,
       'Errors' => Errors::class,
@@ -28,7 +29,7 @@ namespace Carica\XpathFunctions {
     ];
 
     public function __construct() {
-      self::attachXpathFunctions($this);
+      self::attachXPathFunctions($this);
     }
 
     public static function handleFunctionCall(string $module, string $function, ...$arguments) {
@@ -44,7 +45,7 @@ namespace Carica\XpathFunctions {
       parent::registerPHPFunctions($restrict);
     }
 
-    private static function attachXpathFunctions(\XSLTProcessor $processor): void {
+    private static function attachXPathFunctions(\XSLTProcessor $processor): void {
       $processor->registerPHPFunctions([__CLASS__.'::handleFunctionCall']);
       ModuleLoader::register('xpath-functions', __DIR__);
     }

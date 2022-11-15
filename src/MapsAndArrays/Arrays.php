@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\MapsAndArrays {
+namespace Carica\XPathFunctions\MapsAndArrays {
 
   abstract class Arrays {
   }

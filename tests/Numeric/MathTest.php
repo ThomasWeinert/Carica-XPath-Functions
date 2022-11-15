@@ -1,15 +1,15 @@
 <?php
 
-namespace Carica\XpathFunctions\Numeric {
+namespace Carica\XPathFunctions\Numeric {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\Namespaces;
-  use Carica\XpathFunctions\TestCase;
-  use Carica\XpathFunctions\XSLTProcessor;
+  use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\TestCase;
+  use Carica\XPathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XpathFunctions\Numeric\Math
+   * @covers \Carica\XPathFunctions\Numeric\Math
    */
   class MathTest extends TestCase {
 

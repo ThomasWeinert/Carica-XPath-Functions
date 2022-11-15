@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\Numeric {
+namespace Carica\XPathFunctions\Numeric {
 
   abstract class Values {
 

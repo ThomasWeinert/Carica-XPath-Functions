@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\Sequences {
+namespace Carica\XPathFunctions\Sequences {
 
-  use Carica\XpathFunctions\Namespaces;
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\XpathError;
 
   abstract class Parse {
 

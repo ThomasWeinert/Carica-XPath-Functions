@@ -1,16 +1,16 @@
 <?php
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\Context;
-  use Carica\XpathFunctions\TestCase;
-  use Carica\XpathFunctions\XpathError;
-  use Carica\XpathFunctions\XSLTProcessor;
+  use Carica\XPathFunctions\Context;
+  use Carica\XPathFunctions\TestCase;
+  use Carica\XPathFunctions\XpathError;
+  use Carica\XPathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XpathFunctions\DateTime\Components
+   * @covers \Carica\XPathFunctions\DateTime\Components
    */
   class TimezoneAdjustTest extends TestCase {
 

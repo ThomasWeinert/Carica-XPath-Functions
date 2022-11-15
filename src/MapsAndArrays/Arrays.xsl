@@ -9,7 +9,7 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="exsl func array php">
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XpathFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_ARRAYS" select="'MapsAndArrays/Arrays'"/>
 
   <func:function name="array:array-from-nodeset">

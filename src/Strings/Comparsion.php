@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\Strings {
+namespace Carica\XPathFunctions\Strings {
 
-  use Carica\XpathFunctions\Strings\Collators\CollatorFactory;
+  use Carica\XPathFunctions\Strings\Collators\CollatorFactory;
 
   abstract class Comparsion {
 

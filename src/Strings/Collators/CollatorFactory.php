@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\Strings\Collators {
+namespace Carica\XPathFunctions\Strings\Collators {
 
-  use Carica\XpathFunctions\Strings\XpathCollator;
+  use Carica\XPathFunctions\Strings\XpathCollator;
 
   abstract class CollatorFactory {
 

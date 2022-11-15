@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
   class XpathValue {
 

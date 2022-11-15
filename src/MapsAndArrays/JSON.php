@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\MapsAndArrays {
+namespace Carica\XPathFunctions\MapsAndArrays {
 
-  use Carica\XpathFunctions\Namespaces;
-  use Carica\XpathFunctions\Sequences\External;
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\Sequences\External;
+  use Carica\XPathFunctions\XpathError;
   use JsonException;
 
   abstract class JSON {

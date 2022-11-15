@@ -1,27 +1,29 @@
 <?php
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
-  use Carica\XpathFunctions\Context;
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\Context;
+  use Carica\XPathFunctions\XpathError;
   use DateTimeImmutable as PHPDateTime;
   use DateTimeZone as PHPDateTimeZone;
 
   class DateTime {
 
-    private $_internal;
+    private PHPDateTime $_internal;
     /**
      * @var Offset
      */
-    private $_offset;
-    private $_withTimezone = FALSE;
+    private Offset $_offset;
+    private bool $_withTimezone;
 
     /**
      * @param string $dateTime
      * @param TimezoneDuration|NULL $timezone
      * @throws XpathError
      */
-    public function __construct($dateTime = 'now', TimezoneDuration $timezone = NULL) {
+    public function __construct(
+      string $dateTime = 'now', TimezoneDuration $timezone = NULL
+    ) {
       if (preg_match('((?:Z|[+-]\\d\\d:\\d\\d)$)', $dateTime, $matches)) {
         $this->_offset = new Offset($matches[0]);
         $this->_withTimezone = TRUE;
@@ -35,10 +37,19 @@ namespace Carica\XpathFunctions\DateTime {
       $this->_internal = new PHPDateTime($dateTime, new PHPDateTimeZone($this->_offset));
     }
 
+    /**
+     * @param string $template
+     * @return string
+     */
     public function format(string $template): string {
       return $this->_internal->format($template);
     }
 
+    /**
+     * @param TimezoneDuration|NULL $targetTimezone
+     * @return self
+     * @throws XpathError
+     */
     public function adjustTimezone(TimezoneDuration $targetTimezone = NULL): self {
       if (NULL === $targetTimezone) {
         $targetTimezone = new TimezoneDuration(Context::implicitTimezone());
@@ -69,6 +80,10 @@ namespace Carica\XpathFunctions\DateTime {
         $result .= $this->_offset;
       }
       return (string)$result;
+    }
+
+    public function getTimeZone(): PHPDateTimeZone {
+      return $this->_internal->getTimezone();
     }
   }
 }

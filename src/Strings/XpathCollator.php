@@ -1,6 +1,6 @@
 <?php
 
-namespace Carica\XpathFunctions\Strings {
+namespace Carica\XPathFunctions\Strings {
 
   interface XpathCollator {
 

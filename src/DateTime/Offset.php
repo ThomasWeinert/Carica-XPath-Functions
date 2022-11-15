@@ -1,9 +1,9 @@
 <?php
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
-  use Carica\XpathFunctions\Duration\Duration;
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\Duration\Duration;
+  use Carica\XPathFunctions\XpathError;
 
   class Offset {
 
@@ -60,6 +60,10 @@ namespace Carica\XpathFunctions\DateTime {
         ($this->_isNegative ? '-' : '').'PT'.
         $this->_hours.'H'.$this->_minutes.'M'
       );
+    }
+
+    public function asInteger(): int {
+      return $this->getHours() * 60 + $this->getMinutes();
     }
 
     /**

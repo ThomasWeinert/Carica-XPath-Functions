@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XpathFunctions\Strings {
+namespace Carica\XPathFunctions\Strings {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\TestCase;
-  use Carica\XpathFunctions\XSLTProcessor;
+  use Carica\XPathFunctions\TestCase;
+  use Carica\XPathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XpathFunctions\Strings\Values
+   * @covers \Carica\XPathFunctions\Strings\Values
    */
   class ValuesTest extends TestCase {
 

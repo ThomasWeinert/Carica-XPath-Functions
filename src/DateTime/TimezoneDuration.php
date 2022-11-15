@@ -1,13 +1,17 @@
 <?php
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
-  use Carica\XpathFunctions\Duration\Duration;
-  use Carica\XpathFunctions\Namespaces;
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\Duration\Duration;
+  use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\XpathError;
 
   class TimezoneDuration extends Duration {
 
+    /**
+     * @param string $duration
+     * @throws XpathError
+     */
     public function __construct(string $duration) {
       parent::__construct($duration);
       if (

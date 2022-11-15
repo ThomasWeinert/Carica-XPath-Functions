@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions {
+namespace Carica\XPathFunctions {
 
   abstract class Namespaces {
 

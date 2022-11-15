@@ -1,14 +1,14 @@
 <?php
 
-namespace Carica\XpathFunctions\Strings\Collators {
+namespace Carica\XPathFunctions\Strings\Collators {
 
   require_once __DIR__.'/../../TestCase.php';
 
-  use Carica\XpathFunctions\TestCase;
+  use Carica\XPathFunctions\TestCase;
   use Locale;
 
   /**
-   * @covers Carica\XpathFunctions\Strings\Collators\CollatorFactory
+   * @covers Carica\XPathFunctions\Strings\Collators\CollatorFactory
    */
   class CollatorFactoryTest extends TestCase {
 

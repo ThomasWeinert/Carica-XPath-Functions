@@ -1,16 +1,16 @@
 <?php
 
-namespace Carica\XpathFunctions\Strings {
+namespace Carica\XPathFunctions\Strings {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\Namespaces;
-  use Carica\XpathFunctions\TestCase;
-  use Carica\XpathFunctions\XpathError;
-  use Carica\XpathFunctions\XSLTProcessor;
+  use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\TestCase;
+  use Carica\XPathFunctions\XpathError;
+  use Carica\XPathFunctions\XSLTProcessor;
 
   /**
-   * @covers \Carica\XpathFunctions\Strings\RegExp
+   * @covers \Carica\XPathFunctions\Strings\RegExp
    */
   class RegExpTest extends TestCase {
 

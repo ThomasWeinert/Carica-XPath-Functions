@@ -1,13 +1,13 @@
 <?php
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
   require_once __DIR__.'/../TestCase.php';
 
-  use Carica\XpathFunctions\TestCase;
+  use Carica\XPathFunctions\TestCase;
 
   /**
-   * @covers \Carica\XpathFunctions\DateTime\Date
+   * @covers \Carica\XPathFunctions\DateTime\Date
    */
   class DateTest extends TestCase {
 
@@ -20,7 +20,7 @@ namespace Carica\XpathFunctions\DateTime {
      *   ["1999-12-31+02:00", "1999-12-31+02:00"]
      *   ["-0002-06-01", "-0002-06-01"]
      */
-    public function testParseAndCastToStringTroughStylesheet(
+    public function testParseAndCastToString(
       string $expected, string $input
     ): void {
       $date = new Date($input);

@@ -8,7 +8,7 @@
   xmlns:math="http://www.w3.org/2005/xpath-functions/math"
   extension-element-prefixes="func php exslt_math">
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XpathFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
   <xsl:variable name="CARICA_NUMERIC_MATH_NUMERIC_MATH" select="'Numeric/Math'"/>
 
   <func:function name="math:pi">

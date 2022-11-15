@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Carica\XpathFunctions\DateTime {
+namespace Carica\XPathFunctions\DateTime {
 
-  use Carica\XpathFunctions\XpathError;
+  use Carica\XPathFunctions\XpathError;
 
   abstract class TimezoneAdjust {
 
