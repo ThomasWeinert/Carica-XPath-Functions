@@ -5,6 +5,7 @@ namespace Carica\XPathFunctions\DateTime {
 
   use Carica\XPathFunctions\Context;
   use Carica\XPathFunctions\Namespaces;
+  use Carica\XPathFunctions\Numeric\Formatting as NumericFormatting;
   use Carica\XPathFunctions\XpathError;
   use DateTime as PHPDateTime;
   use IntlDateFormatter;
@@ -63,19 +64,18 @@ namespace Carica\XPathFunctions\DateTime {
       }
       return preg_replace_callback(
         '(\\[{2}|]{2}|\\[[^\\]]+])',
-        static function ($match) use ($date): string {
+        static function ($match) use ($date, $language): string {
           if ($match[0] === '[[' || $match[0] === ']]') {
             return $match[0][0];
           }
-          var_dump($match);
-          return self::interpretVariableMarker($match[0], $date);
+          return self::interpretVariableMarker($match[0], $date, $language);
         },
         $picture
       );
     }
 
     private static function interpretVariableMarker(
-      string $marker, Date $date
+      string $marker, Date $date, string $language
     ): string {
       $matched = preg_match(
         '(^\\[
@@ -99,13 +99,30 @@ namespace Carica\XPathFunctions\DateTime {
           'Invalid date/time formatting parameters.'
         );
       }
+      $modifier = $matches['modifier'] ?? '';
+      $secondaryModifier = $matches['secondary_modifier'] ?? 'a';
+      $minimumWidth = (int)($matches['minimum_width'] ?? -1);
+      $maximumWidth = (int)($matches['maximum_width'] ?? -1);
+      $value = NULL;
       switch ($matches['component']) {
       case 'Y':
-        return (string)$date->getYear();
+        $value = $date->getYear();
+        break;
       case 'M':
-        return (string)$date->getMonth();
+        $value = $date->getMonth();
+        break;
       case 'D':
-        return (string)$date->getDay();
+        $value = $date->getDay();
+        break;
+      }
+      if ($value) {
+        if ($modifier === 'w' || $modifier === 'W' || $modifier === 'Ww') {
+          // get as word
+        } else {
+          return NumericFormatting::formatInteger(
+            $value, $modifier, $language
+          );
+        }
       }
       return '';
     }

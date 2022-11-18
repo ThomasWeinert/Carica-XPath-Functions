@@ -40,7 +40,9 @@ namespace Carica\XPathFunctions\DateTime {
      * @param string $expected
      * @param string $input
      * @testWith
-     *   ["12/31/99", "1999-12-31", "[Y]-[M]-[D]"]
+     *   ["1978-1-3", "1978-01-03", "[Y]-[M]-[D]"]
+     *   ["1978-01-03", "1978-01-03", "[Y01]-[M01]-[D01]"]
+     *   ["MCMLXXVIII-I-III", "1978-01-03", "[YI]-[MI]-[DI]"]
      */
     public function testFormatDateWithPictureString(
       string $expected,
