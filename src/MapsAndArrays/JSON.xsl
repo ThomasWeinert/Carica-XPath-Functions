@@ -8,7 +8,7 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="func exsl php">
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\Callbacks::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_JSON" select="'MapsAndArrays/JSON'"/>
 
   <func:function name="fn:parse-json">

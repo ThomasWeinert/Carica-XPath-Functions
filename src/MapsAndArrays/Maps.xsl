@@ -10,7 +10,7 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="exsl func array map php">
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\Callbacks::handleFunctionCall'"/>
   <xsl:variable name="CARICA_MAPS_AND_ARRAYS_MAPS" select="'MapsAndArrays/Maps'"/>
 
   <func:function name="map:map">

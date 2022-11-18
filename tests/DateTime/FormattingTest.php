@@ -7,9 +7,9 @@ namespace Carica\XPathFunctions\DateTime {
   use Carica\XPathFunctions\TestCase;
 
   /**
-   * @covers \Carica\XPathFunctions\DateTime\Format
+   * @covers \Carica\XPathFunctions\DateTime\Formatting
    */
-  class FormatTest extends TestCase {
+  class FormattingTest extends TestCase {
 
     /**
      * @param string $expected
@@ -28,7 +28,29 @@ namespace Carica\XPathFunctions\DateTime {
     ): void {
       $this->assertSame(
         $expected,
-        Format::formatDate(
+        Formatting::formatDate(
+          $input,
+          $picture,
+          $language
+        )
+      );
+    }
+
+    /**
+     * @param string $expected
+     * @param string $input
+     * @testWith
+     *   ["12/31/99", "1999-12-31", "[Y]-[M]-[D]"]
+     */
+    public function testFormatDateWithPictureString(
+      string $expected,
+      string $input,
+      string $picture = 'SHORT',
+      string $language = 'en'
+    ) {
+      $this->assertSame(
+        $expected,
+        Formatting::formatDate(
           $input,
           $picture,
           $language
@@ -53,7 +75,7 @@ namespace Carica\XPathFunctions\DateTime {
     ): void {
       $this->assertSame(
         $expected,
-        Format::formatDateTime(
+        Formatting::formatDateTime(
           $input,
           $picture,
           $language

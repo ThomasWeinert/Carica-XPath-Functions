@@ -7,8 +7,8 @@
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
   extension-element-prefixes="func php">
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
-  <xsl:variable name="CARICA_DATETIME_FORMAT" select="'DateTime/Format'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\Callbacks::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_DATETIME_FORMATTING" select="'DateTime/Formatting'"/>
 
   <func:function name="fn:format-date">
     <xsl:param name="date"/>

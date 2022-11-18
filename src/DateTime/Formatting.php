@@ -10,7 +10,7 @@ namespace Carica\XPathFunctions\DateTime {
   use IntlDateFormatter;
   use IntlTimeZone;
 
-  abstract class Format {
+  abstract class Formatting {
 
     private static $_FORMATS = [
       'SHORT' => IntlDateFormatter::SHORT,
@@ -47,18 +47,67 @@ namespace Carica\XPathFunctions\DateTime {
         return '';
       }
       $date = new Date($dateString);
-      $formatter = self::getDateTimeFormatter(
-        self::$_FORMATS[$picture] ?: IntlDateFormatter::SHORT,
-        IntlDateFormatter::NONE,
-        self::getTimezoneFromOffset(
+      if ($format = self::$_FORMATS[$picture] ?? false) {
+        $formatter = self::getDateTimeFormatter(
+          $format,
+          IntlDateFormatter::NONE,
+          self::getTimezoneFromOffset(
+            $place,
+            $date->getOffset()?->asInteger()
+          ),
+          $language,
           $place,
-          $date->getOffset()?->asInteger()
-        ),
-        $language,
-        $place,
-        $calendar,
+          $calendar,
+        );
+        return $formatter->format(new PHPDateTime((string)$date)) ?: '';
+      }
+      return preg_replace_callback(
+        '(\\[{2}|]{2}|\\[[^\\]]+])',
+        static function ($match) use ($date): string {
+          if ($match[0] === '[[' || $match[0] === ']]') {
+            return $match[0][0];
+          }
+          var_dump($match);
+          return self::interpretVariableMarker($match[0], $date);
+        },
+        $picture
       );
-      return $formatter->format(new PHPDateTime((string)$date)) ?: '';
+    }
+
+    private static function interpretVariableMarker(
+      string $marker, Date $date
+    ): string {
+      $matched = preg_match(
+        '(^\\[
+          (?<component>[a-zA-Z])
+          (?:
+            (?<modifier>
+              (?:\\p{Nd}|\\#|[^\\p{N}\\p{L}])+|
+              [aAiIwW]|
+              Ww
+            )
+            (?<secondary_modifier>[atco])?
+          )?
+          (?:,(?<minimum_width>[\d*]+)(?:-(?<maximum_width>[\d*]+))?)?
+        ])x',
+        $marker,
+        $matches
+      );
+      if (!$matched) {
+        throw new XpathError(
+          Namespaces::XMLNS_ERR.'#FOFD1340',
+          'Invalid date/time formatting parameters.'
+        );
+      }
+      switch ($matches['component']) {
+      case 'Y':
+        return (string)$date->getYear();
+      case 'M':
+        return (string)$date->getMonth();
+      case 'D':
+        return (string)$date->getDay();
+      }
+      return '';
     }
 
     /**

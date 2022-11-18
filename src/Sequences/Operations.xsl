@@ -9,7 +9,7 @@
 
   <xsl:import href="xpath-functions://MapsAndArrays/Arrays"/>
 
-  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\XSLTProcessor::handleFunctionCall'"/>
+  <xsl:variable name="CARICA_CALLBACK" select="'Carica\XPathFunctions\Callbacks::handleFunctionCall'"/>
   <xsl:variable name="CARICA_SEQUENCES_OPERATIONS" select="'Sequences/Operations'"/>
 
   <func:function name="fn:empty">
