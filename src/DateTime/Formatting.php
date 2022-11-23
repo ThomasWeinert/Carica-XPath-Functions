@@ -7,21 +7,44 @@ namespace Carica\XPathFunctions\DateTime {
   use Carica\XPathFunctions\Namespaces;
   use Carica\XPathFunctions\Numeric\Formatting as NumericFormatting;
   use Carica\XPathFunctions\XpathError;
-  use DateTime as PHPDateTime;
   use IntlDateFormatter;
   use IntlTimeZone;
 
   abstract class Formatting {
 
     private static $_FORMATS = [
-      'SHORT' => IntlDateFormatter::SHORT,
-      'MEDIUM' => IntlDateFormatter::MEDIUM,
-      'LONG' => IntlDateFormatter::LONG,
-      'FULL' => IntlDateFormatter::FULL,
-      'RELATIVE_SHORT' => IntlDateFormatter::RELATIVE_SHORT,
-      'RELATIVE_MEDIUM' => IntlDateFormatter::RELATIVE_MEDIUM,
-      'RELATIVE_LONG' => IntlDateFormatter::RELATIVE_LONG,
-      'RELATIVE_FULL' => IntlDateFormatter::RELATIVE_FULL,
+      'SHORT' => [
+        'date' => IntlDateFormatter::SHORT,
+        'time' => IntlDateFormatter::SHORT,
+      ],
+      'MEDIUM' => [
+        'date' => IntlDateFormatter::MEDIUM,
+        'time' => IntlDateFormatter::MEDIUM,
+      ],
+      'LONG' => [
+        'date' => IntlDateFormatter::LONG,
+        'time' => IntlDateFormatter::LONG,
+      ],
+      'FULL' => [
+        'date' => IntlDateFormatter::FULL,
+        'time' => IntlDateFormatter::FULL,
+      ],
+      'RELATIVE_SHORT' => [
+        'date' => IntlDateFormatter::RELATIVE_SHORT,
+        'time' => IntlDateFormatter::RELATIVE_SHORT,
+      ],
+      'RELATIVE_MEDIUM' => [
+        'date' => IntlDateFormatter::RELATIVE_MEDIUM,
+        'time' => IntlDateFormatter::RELATIVE_MEDIUM,
+      ],
+      'RELATIVE_LONG' => [
+        'date' => IntlDateFormatter::RELATIVE_LONG,
+        'time' => IntlDateFormatter::RELATIVE_LONG,
+      ],
+      'RELATIVE_FULL' => [
+        'date' => IntlDateFormatter::RELATIVE_FULL,
+        'time' => IntlDateFormatter::RELATIVE_FULL,
+      ],
     ];
 
     private static $_CALENDARS = [
@@ -50,7 +73,7 @@ namespace Carica\XPathFunctions\DateTime {
       $date = new Date($dateString);
       if ($format = self::$_FORMATS[$picture] ?? false) {
         $formatter = self::getDateTimeFormatter(
-          $format,
+          $format['date'] ?? IntlDateFormatter::SHORT,
           IntlDateFormatter::NONE,
           self::getTimezoneFromOffset(
             $place,
@@ -60,22 +83,24 @@ namespace Carica\XPathFunctions\DateTime {
           $place,
           $calendar,
         );
-        return $formatter->format(new PHPDateTime((string)$date)) ?: '';
+        return $formatter->format($date->asPHPDateTime()) ?: '';
       }
       return preg_replace_callback(
         '(\\[{2}|]{2}|\\[[^\\]]+])',
-        static function ($match) use ($date, $language): string {
+        static function ($match) use ($date, $language, $place): string {
           if ($match[0] === '[[' || $match[0] === ']]') {
             return $match[0][0];
           }
-          return self::interpretVariableMarker($match[0], $date, $language);
+          return self::interpretVariableMarker(
+            $match[0], $date, $language, $place
+          );
         },
         $picture
       );
     }
 
     private static function interpretVariableMarker(
-      string $marker, Date $date, string $language
+      string $marker, Date|DateTime $date, string $language, string $place
     ): string {
       $matched = preg_match(
         '(^\\[
@@ -83,8 +108,9 @@ namespace Carica\XPathFunctions\DateTime {
           (?:
             (?<modifier>
               (?:\\p{Nd}|\\#|[^\\p{N}\\p{L}])+|
-              [aAiIwW]|
-              Ww
+              [aAiIwWnN]|
+              Ww|
+              Nn
             )
             (?<secondary_modifier>[atco])?
           )?
@@ -103,20 +129,69 @@ namespace Carica\XPathFunctions\DateTime {
       $secondaryModifier = $matches['secondary_modifier'] ?? 'a';
       $minimumWidth = (int)($matches['minimum_width'] ?? -1);
       $maximumWidth = (int)($matches['maximum_width'] ?? -1);
+      $useComponentTitle = ($modifier === 'n' || $modifier === 'N' || $modifier === 'Nn');
       $value = NULL;
+      $format = '';
       switch ($matches['component']) {
       case 'Y':
+        // year (absolute value)
         $value = $date->getYear();
         break;
       case 'M':
+        // month in year
         $value = $date->getMonth();
+        $format = 'LLLL';
         break;
       case 'D':
+        // day in month
+        $value = $date->getDay();
+        break;
+      case 'd':
+        // day in year
+        $value = $date->getDay();
+        break;
+      case 'F':
+        // day of week
+        $value = $date->getDay();
+        break;
+      case 'W':
+        // week in year
+        $value = $date->getDay();
+        break;
+      case 'w':
+        // week in month
+        $value = $date->getDay();
+        break;
+      case 'Z':
+        // timezone 	01:01
+        $value = $date->getDay();
+        break;
+      case 'z':
+        // timezone 	same as Z, but modified where appropriate to include a prefix as a
+        // time offset using GMT, for example GMT+1 or GMT-05:00. For this component there
+        // is a fixed prefix of GMT, or a localized variation thereof for the chosen language,
+        // and the remainder of the value is formatted as for specifier Z. 	01:01
+        $value = $date->getDay();
+        break;
+      case 'C':
+        // calendar: the name or abbreviation of a calendar name
+        $value = $date->getDay();
+        break;
+      case 'E':
+        // era: the name of a baseline for the numbering of years, for example the reign of a
+        // monarch
         $value = $date->getDay();
         break;
       }
+
       if ($value) {
-        if ($modifier === 'w' || $modifier === 'W' || $modifier === 'Ww') {
+        if ($useComponentTitle) {
+          // get as capitalized word
+          $locale = self::getLocale($language, $place);
+          $calendar = \IntlCalendar::createInstance(
+            $date->getOffset(),
+            $locale
+          );
           // get as word
         } else {
           return NumericFormatting::formatInteger(
@@ -147,15 +222,29 @@ namespace Carica\XPathFunctions\DateTime {
         return '';
       }
       $dateTime = new DateTime($dateTimeString);
-      $formatter = self::getDateTimeFormatter(
-        self::$_FORMATS[$picture] ?: IntlDateFormatter::SHORT,
-        self::$_FORMATS[$picture] ?: IntlDateFormatter::SHORT,
-        $dateTime->getTimeZone(),
-        $language,
-        $place,
-        $calendar,
+      if ($format = self::$_FORMATS[$picture] ?? false) {
+        $formatter = self::getDateTimeFormatter(
+          $format['date'] ?? IntlDateFormatter::SHORT,
+          $format['time'] ?? IntlDateFormatter::SHORT,
+          $dateTime->getTimeZone(),
+          $language,
+          $place,
+          $calendar,
+        );
+        return $formatter->format($dateTime->asPHPDateTime()) ?: '';
+      }
+      return preg_replace_callback(
+        '(\\[{2}|]{2}|\\[[^\\]]+])',
+        static function ($match) use ($dateTime, $language, $place): string {
+          if ($match[0] === '[[' || $match[0] === ']]') {
+            return $match[0][0];
+          }
+          return self::interpretVariableMarker(
+            $match[0], $dateTime, $language, $place
+          );
+        },
+        $picture
       );
-      return $formatter->format($dateTime->getTimestamp()) ?: '';
     }
 
     /**

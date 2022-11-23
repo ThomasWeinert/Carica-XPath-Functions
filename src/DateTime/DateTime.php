@@ -31,10 +31,10 @@ namespace Carica\XPathFunctions\DateTime {
         $this->_offset = $timezone->asOffset();
         $this->_withTimezone = TRUE;
       } else {
-        $this->_offset = (new TimezoneDuration(Context::implicitTimezone()))->asOffset();
+        $this->_offset = Context::implicitTimezone()->asOffset();
         $this->_withTimezone = FALSE;
       }
-      $this->_internal = new PHPDateTime($dateTime, new PHPDateTimeZone($this->_offset));
+      $this->_internal = new PHPDateTime($dateTime, $this->_offset->asPHPTimezone());
     }
 
     /**
@@ -52,7 +52,7 @@ namespace Carica\XPathFunctions\DateTime {
      */
     public function adjustTimezone(TimezoneDuration $targetTimezone = NULL): self {
       if (NULL === $targetTimezone) {
-        $targetTimezone = new TimezoneDuration(Context::implicitTimezone());
+        $targetTimezone = Context::implicitTimezone();
       }
       $targetOffset = $targetTimezone->asOffset();
       if ($this->_withTimezone) {
@@ -68,12 +68,24 @@ namespace Carica\XPathFunctions\DateTime {
       return $adjusted;
     }
 
+    public function getYear(): int {
+      return (int)$this->_internal->format('Y');
+    }
+
+    public function getMonth(): int {
+      return (int)$this->_internal->format('m');
+    }
+
+    public function getDay(): int {
+      return (int)$this->_internal->format('d');
+    }
+
     public function __toString():string {
       $result = str_replace('.000', '', $this->format('Y-m-d\\TH:i:s.v'));
       if (
         $this->_withTimezone ||
         (
-          (string)($this->_offset->asDuration()) !== Context::implicitTimezone()
+          (string)($this->_offset->asDuration()) !== (string)Context::implicitTimezone()
         )
       ) {
         $result .= $this->_offset;
@@ -88,8 +100,8 @@ namespace Carica\XPathFunctions\DateTime {
       return $timezone ?: \IntlTimeZone::createTimeZone('UTC');
     }
 
-    public function getTimestamp(): int {
-      return $this->_internal->getTimestamp();
+    public function asPHPDateTime(): PHPDateTime {
+      return $this->_internal;
     }
   }
 }

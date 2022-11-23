@@ -2,6 +2,8 @@
 
 namespace Carica\XPathFunctions\DateTime {
 
+  use Carica\XPathFunctions\Context;
+
   class Date {
 
     private const PATTERN = '(
@@ -53,11 +55,27 @@ namespace Carica\XPathFunctions\DateTime {
     }
 
     public function getMonth(): int {
-      return $this->_month * ($this->_isNegative ? -1 : 1);
+      return $this->_month;
     }
 
     public function getDay(): int {
-      return $this->_day * ($this->_isNegative ? -1 : 1);
+      return $this->_day;
+    }
+
+    public function asPHPDateTime(): \DateTimeInterface {
+      $dateString = sprintf(
+        '%1$04d-%2$02d-%3$02d',
+        $this->_year,
+        $this->_month,
+        $this->_day
+      );
+      return \DateTimeImmutable::createFromFormat(
+        'Y-m-d|',
+        $dateString,
+        $this->_offset
+          ? $this->_offset->asPHPTimezone()
+          : Context::implicitTimezone()->asPHPTimezone()
+      );
     }
 
     public function getOffset(): ?Offset {

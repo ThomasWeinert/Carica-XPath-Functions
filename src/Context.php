@@ -29,10 +29,10 @@ namespace Carica\XPathFunctions {
     }
 
     /**
-     * @return string
+     * @return TimezoneDuration
      * @throws XpathError
      */
-    public static function implicitTimezone() : string {
+    public static function implicitTimezone() : TimezoneDuration {
       if (NULL === self::$_implicitTimezone) {
         self::$_implicitTimezone = new TimezoneDuration(
             preg_replace(
@@ -42,7 +42,7 @@ namespace Carica\XPathFunctions {
           )
         );
       }
-      return (string)self::$_implicitTimezone;
+      return self::$_implicitTimezone;
     }
 
     public static function setImplicitTimezone(TimezoneDuration $duration): void {

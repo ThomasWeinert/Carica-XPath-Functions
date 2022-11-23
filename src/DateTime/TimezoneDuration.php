@@ -33,5 +33,9 @@ namespace Carica\XPathFunctions\DateTime {
       );
     }
 
+    public function asPHPTimezone(): \DateTimeZone {
+      return new \DateTimeZone($this->asOffset());
+    }
+
   }
 }

@@ -80,5 +80,16 @@ namespace Carica\XPathFunctions\DateTime {
     public function compareWith(self $offset): int {
       return $this->asDuration()->compareWith($offset->asDuration());
     }
+
+    public function asPHPTimezone(): \DateTimeZone {
+      return new \DateTimeZone(
+        sprintf(
+          '%1$s%2$.02d%3$.02d',
+          $this->_isNegative ? '-' : '+',
+          $this->_hours,
+          $this->_minutes
+        )
+      );
+    }
   }
 }
