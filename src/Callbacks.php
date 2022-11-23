@@ -32,7 +32,18 @@ namespace Carica\XPathFunctions {
       string $module, string $function, ...$arguments
     ): mixed {
       $call = self::getCallback($module, $function);
-      return $call(...$arguments);
+      $result = $call(...$arguments);
+      if (
+        is_object($result) &&
+        !(
+          $result instanceof \DOMNode ||
+          $result instanceof \DOMNodeList
+        ) &&
+        (method_exists($result, '__toString'))
+      ) {
+        return $result->__toString();
+      }
+      return $result;
     }
 
     private static function getCallback(string $module, string $function): callable {
